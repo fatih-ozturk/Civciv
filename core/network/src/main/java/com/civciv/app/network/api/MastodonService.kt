@@ -32,8 +32,15 @@ interface MastodonService {
         @Query("category") category: String,
     )
 
+    @GET(MASTODON_SERVER_LANGUAGES)
+    fun getMastodonLanguages(
+        @Query("language") language: String,
+        @Query("category") category: String,
+    )
+
     companion object {
         const val MASTODON_CATEGORIES = "https://api.joinmastodon.org/categories"
         const val MASTODON_SERVERS = "https://api.joinmastodon.org/servers"
+        const val MASTODON_SERVER_LANGUAGES = "https://api.joinmastodon.org/languages"
     }
 }

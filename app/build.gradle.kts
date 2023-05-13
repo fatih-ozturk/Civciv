@@ -66,8 +66,9 @@ dependencies {
     implementation(project(":core:model"))
 
     implementation(project(":feature:home"))
-    implementation(project(":feature:auth"))
-    implementation(project(":feature:login"))
+    implementation(project(":feature:auth:graph"))
+    implementation(project(":feature:auth:login"))
+    implementation(project(":feature:auth:serverlist"))
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.activity.compose)

@@ -38,7 +38,8 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.civciv.app.auth.navigation.authGraph
+import com.civciv.app.auth.graph.authGraph
+import com.civciv.app.auth.login.navigation.navigateToLogin
 import com.civciv.app.home.navigation.homeGraph
 import com.civciv.app.home.navigation.homeNavigationRoute
 
@@ -89,7 +90,11 @@ fun CivcivNavHost(
         startDestination = startDestination,
     ) {
         homeGraph()
-        authGraph()
+        authGraph(
+            onLoginClicked = {
+                navController.navigateToLogin()
+            },
+        )
     }
 }
 
