@@ -15,12 +15,15 @@
  */
 package com.civciv.app.network.model
 
-import android.os.Parcelable
+import com.civciv.app.model.MastodonCategory
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class MastodonCategoryResponse(
     @SerializedName("category") val category: String,
     @SerializedName("servers_count") val serversCount: Int,
-) : Parcelable
+)
+
+fun MastodonCategoryResponse.asExternalModel(): MastodonCategory = MastodonCategory(
+    category = category,
+    serversCount = serversCount,
+)

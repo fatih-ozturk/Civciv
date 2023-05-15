@@ -13,21 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("civciv.android.feature")
-    id("civciv.android.library.compose")
-}
+package com.civciv.app.model
 
-android {
-    namespace = "com.civciv.app.auth.login"
-}
-
-dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:model"))
-
-    implementation(libs.accompanist.navigation)
-    implementation(libs.androidx.browser)
-}
+data class MastodonServer(
+    val domain: String,
+    val description: String,
+    val totalUser: Int,
+    val languages: List<String?>,
+    val categories: List<String?>,
+    val thumbnail: String,
+)

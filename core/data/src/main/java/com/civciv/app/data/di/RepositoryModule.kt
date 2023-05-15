@@ -19,6 +19,8 @@ import com.civciv.app.data.repository.AccountRepository
 import com.civciv.app.data.repository.AccountRepositoryImpl
 import com.civciv.app.data.repository.AuthRepository
 import com.civciv.app.data.repository.AuthRepositoryImpl
+import com.civciv.app.data.repository.MastodonRepository
+import com.civciv.app.data.repository.MastodonRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -37,4 +39,9 @@ abstract class RepositoryModule {
     abstract fun bindAuthRepository(
         authRepositoryImpl: AuthRepositoryImpl,
     ): AuthRepository
+
+    @Binds
+    abstract fun bindMastodonRepository(
+        mastodonRepositoryImpl: MastodonRepositoryImpl,
+    ): MastodonRepository
 }

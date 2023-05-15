@@ -13,21 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("civciv.android.feature")
-    id("civciv.android.library.compose")
-}
+package com.civciv.app.domain.usecase.serverlist
 
-android {
-    namespace = "com.civciv.app.auth.login"
-}
+import com.civciv.app.data.repository.MastodonRepository
+import com.civciv.app.model.MastodonServer
+import javax.inject.Inject
 
-dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:model"))
+class GetMastodonServerListUseCase @Inject constructor(
+    private val mastodonRepository: MastodonRepository,
+) {
 
-    implementation(libs.accompanist.navigation)
-    implementation(libs.androidx.browser)
+    suspend operator fun invoke(
+        language: String,
+        category: String,
+    ): Result<List<MastodonServer>> =
+        mastodonRepository.getServerList(language, category)
 }

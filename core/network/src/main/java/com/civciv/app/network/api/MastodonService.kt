@@ -16,6 +16,8 @@
 package com.civciv.app.network.api
 
 import com.civciv.app.network.model.MastodonCategoryResponse
+import com.civciv.app.network.model.MastodonLanguageResponse
+import com.civciv.app.network.model.MastodonServerResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -23,20 +25,17 @@ interface MastodonService {
 
     @GET(MASTODON_CATEGORIES)
     fun getMastodonCategories(
-        @Query("language") language: String,
+        @Query("language") language: String?,
     ): List<MastodonCategoryResponse>
 
     @GET(MASTODON_SERVERS)
     fun getMastodonServers(
-        @Query("language") language: String,
-        @Query("category") category: String,
-    )
+        @Query("language") language: String?,
+        @Query("category") category: String?,
+    ): List<MastodonServerResponse>
 
     @GET(MASTODON_SERVER_LANGUAGES)
-    fun getMastodonLanguages(
-        @Query("language") language: String,
-        @Query("category") category: String,
-    )
+    fun getMastodonLanguages(): List<MastodonLanguageResponse>
 
     companion object {
         const val MASTODON_CATEGORIES = "https://api.joinmastodon.org/categories"

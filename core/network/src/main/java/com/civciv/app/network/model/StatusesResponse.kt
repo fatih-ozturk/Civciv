@@ -13,21 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("civciv.android.feature")
-    id("civciv.android.library.compose")
-}
+package com.civciv.app.network.model
 
-android {
-    namespace = "com.civciv.app.auth.login"
-}
+import com.google.gson.annotations.SerializedName
 
-dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:model"))
-
-    implementation(libs.accompanist.navigation)
-    implementation(libs.androidx.browser)
-}
+data class StatusesResponse(
+    @SerializedName("max_characters") val maxCharacters: Int,
+    @SerializedName("max_media_attachments") val maxMediaAttachments: Int,
+    @SerializedName("characters_reserved_per_url") val charactersReservedPerUrl: Int,
+)

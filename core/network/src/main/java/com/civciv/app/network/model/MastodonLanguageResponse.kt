@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("civciv.android.feature")
-    id("civciv.android.library.compose")
-}
+package com.civciv.app.network.model
 
-android {
-    namespace = "com.civciv.app.auth.login"
-}
+import com.civciv.app.model.MastodonLanguage
+import com.google.gson.annotations.SerializedName
 
-dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:model"))
+data class MastodonLanguageResponse(
+    @SerializedName("locale") val locale: String,
+    @SerializedName("language") val language: String?,
+    @SerializedName("servers_count") val serversCount: Int,
+)
 
-    implementation(libs.accompanist.navigation)
-    implementation(libs.androidx.browser)
+fun MastodonLanguageResponse.asExternalModel(): MastodonLanguage {
+    return MastodonLanguage(
+        locale = locale,
+        serversCount = serversCount,
+    )
 }

@@ -16,8 +16,15 @@
 package com.civciv.app.auth.serverlist
 
 import androidx.lifecycle.ViewModel
+import com.civciv.app.domain.usecase.serverlist.GetMastodonCategoryListUseCase
+import com.civciv.app.domain.usecase.serverlist.GetMastodonLanguageListUseCase
+import com.civciv.app.domain.usecase.serverlist.GetMastodonServerListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ServerListViewModel @Inject constructor() : ViewModel()
+class ServerListViewModel @Inject constructor(
+    getMastodonServerListUseCase: GetMastodonServerListUseCase,
+    getMastodonLanguageListUseCase: GetMastodonLanguageListUseCase,
+    getMastodonCategoryListUseCase: GetMastodonCategoryListUseCase,
+) : ViewModel()

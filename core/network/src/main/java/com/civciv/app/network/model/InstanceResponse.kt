@@ -29,24 +29,3 @@ data class InstanceResponse(
     @SerializedName("configuration") val configuration: ConfigurationResponse,
     @SerializedName("rules") val rules: List<InstanceRulesResponse>?,
 )
-
-data class InstanceRulesResponse(
-    @SerializedName("id") val id: String,
-    @SerializedName("text") val text: String,
-)
-
-data class InstanceStatsResponse(
-    @SerializedName("user_count") val userCount: String,
-    @SerializedName("status_count") val statusCount: String,
-    @SerializedName("domain_count") val domainCount: String,
-)
-
-data class ConfigurationResponse(
-    @SerializedName("statuses") val statuses: StatusesResponse,
-)
-
-data class StatusesResponse(
-    @SerializedName("max_characters") val maxCharacters: Int,
-    @SerializedName("max_media_attachments") val maxMediaAttachments: Int,
-    @SerializedName("characters_reserved_per_url") val charactersReservedPerUrl: Int,
-)

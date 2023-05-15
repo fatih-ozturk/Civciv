@@ -17,6 +17,7 @@ package com.civciv.app.network.di
 
 import com.civciv.app.network.api.AccountsService
 import com.civciv.app.network.api.AuthService
+import com.civciv.app.network.api.MastodonService
 import com.civciv.app.network.utils.Constants
 import com.civciv.app.network.utils.DomainInterceptor
 import com.google.gson.Gson
@@ -29,6 +30,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -73,11 +75,17 @@ object NetworkModule {
     @Provides
     fun provideAccountsService(
         retrofit: Retrofit,
-    ): AccountsService = retrofit.create(AccountsService::class.java)
+    ): AccountsService = retrofit.create()
 
     @Singleton
     @Provides
     fun provideAuthService(
         retrofit: Retrofit,
-    ): AuthService = retrofit.create(AuthService::class.java)
+    ): AuthService = retrofit.create()
+
+    @Singleton
+    @Provides
+    fun provideMastodonService(
+        retrofit: Retrofit,
+    ): MastodonService = retrofit.create()
 }

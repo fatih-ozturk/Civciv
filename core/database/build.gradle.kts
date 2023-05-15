@@ -17,7 +17,6 @@ plugins {
     id("civciv.android.library")
     id("civciv.android.room")
     id("civciv.android.hilt")
-    id("kotlin-parcelize")
 }
 
 android {

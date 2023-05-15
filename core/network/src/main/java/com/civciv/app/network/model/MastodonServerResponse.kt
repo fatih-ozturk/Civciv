@@ -15,6 +15,7 @@
  */
 package com.civciv.app.network.model
 
+import com.civciv.app.model.MastodonServer
 import com.google.gson.annotations.SerializedName
 
 data class MastodonServerResponse(
@@ -32,3 +33,14 @@ data class MastodonServerResponse(
     @SerializedName("total_users") val totalUsers: Int,
     @SerializedName("category") val category: String,
 )
+
+fun MastodonServerResponse.asExternalModel(): MastodonServer {
+    return MastodonServer(
+        domain = domain,
+        description = description,
+        totalUser = totalUsers,
+        languages = languages,
+        categories = categories,
+        thumbnail = proxiedThumbnail,
+    )
+}

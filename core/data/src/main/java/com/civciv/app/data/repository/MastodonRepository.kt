@@ -13,21 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("civciv.android.feature")
-    id("civciv.android.library.compose")
-}
+package com.civciv.app.data.repository
 
-android {
-    namespace = "com.civciv.app.auth.login"
-}
+import com.civciv.app.model.MastodonCategory
+import com.civciv.app.model.MastodonLanguage
+import com.civciv.app.model.MastodonServer
 
-dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:model"))
+interface MastodonRepository {
 
-    implementation(libs.accompanist.navigation)
-    implementation(libs.androidx.browser)
+    suspend fun getServerList(language: String?, category: String?): Result<List<MastodonServer>>
+    suspend fun getLanguageList(): Result<List<MastodonLanguage>>
+    suspend fun getCategoryList(language: String?): Result<List<MastodonCategory>>
 }
