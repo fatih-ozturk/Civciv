@@ -18,10 +18,15 @@ package com.civciv.app.data.repository
 import com.civciv.app.model.MastodonCategory
 import com.civciv.app.model.MastodonLanguage
 import com.civciv.app.model.MastodonServer
+import kotlinx.coroutines.flow.Flow
 
 interface MastodonRepository {
 
-    suspend fun getServerList(language: String?, category: String?): Result<List<MastodonServer>>
-    suspend fun getLanguageList(): Result<List<MastodonLanguage>>
-    suspend fun getCategoryList(language: String?): Result<List<MastodonCategory>>
+    suspend fun getServerList(
+        language: String?,
+        category: String?,
+    ): List<MastodonServer>
+
+    fun getLanguageList(): Flow<List<MastodonLanguage>>
+    suspend fun getCategoryList(language: String?): List<MastodonCategory>
 }

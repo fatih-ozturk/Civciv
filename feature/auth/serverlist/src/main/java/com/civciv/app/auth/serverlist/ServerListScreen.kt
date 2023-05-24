@@ -16,7 +16,29 @@
 package com.civciv.app.auth.serverlist
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-internal fun ServerListScreen() {
+internal fun ServerListScreen(
+    viewModel: ServerListViewModel = hiltViewModel(),
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    ServerList(uiState)
+}
+
+@Composable
+internal fun ServerList(
+    uiState: ServerListUiState,
+) {
+    when (uiState) {
+        ServerListUiState.Error,
+        ServerListUiState.Loading,
+        -> Unit
+
+        is ServerListUiState.ServerList -> {
+            TODO()
+        }
+    }
 }

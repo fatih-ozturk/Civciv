@@ -22,6 +22,7 @@ import javax.inject.Inject
 class AuthenticateAppUseCase @Inject constructor(
     private val authRepository: AuthRepository,
 ) {
+
     suspend operator fun invoke(domain: String): Result<ApplicationCredentials> =
         authRepository.getAuthCredentials(domain)
 }

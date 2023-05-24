@@ -18,22 +18,24 @@ package com.civciv.app.auth.graph
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
 import com.civciv.app.auth.login.navigation.loginScreen
-import com.civciv.app.auth.login.navigation.loginScreenRoute
 import com.civciv.app.auth.serverlist.navigation.serverListScreen
 import com.civciv.app.auth.welcome.navigation.welcomeScreen
+import com.civciv.app.auth.welcome.navigation.welcomeScreenRoute
 
 const val authGraph = "authGraph"
 
 fun NavGraphBuilder.authGraph(
     onLoginClicked: () -> Unit = { },
+    onServerListClicked: () -> Unit = { },
 ) {
     navigation(
         route = authGraph,
-        startDestination = loginScreenRoute,
+        startDestination = welcomeScreenRoute,
     ) {
         loginScreen()
         welcomeScreen(
             onLoginClicked = onLoginClicked,
+            onServerListClicked = onServerListClicked,
         )
         serverListScreen()
     }

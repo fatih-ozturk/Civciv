@@ -24,8 +24,8 @@ class GetMastodonServerListUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(
-        language: String,
-        category: String,
-    ): Result<List<MastodonServer>> =
+        language: String? = null,
+        category: String? = null,
+    ): List<MastodonServer> =
         mastodonRepository.getServerList(language, category)
 }

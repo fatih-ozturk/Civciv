@@ -40,6 +40,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.civciv.app.auth.graph.authGraph
 import com.civciv.app.auth.login.navigation.navigateToLogin
+import com.civciv.app.auth.serverlist.navigation.navigateToServerList
 import com.civciv.app.home.navigation.homeGraph
 import com.civciv.app.home.navigation.homeNavigationRoute
 
@@ -93,6 +94,9 @@ fun CivcivNavHost(
         authGraph(
             onLoginClicked = {
                 navController.navigateToLogin()
+            },
+            onServerListClicked = {
+                navController.navigateToServerList()
             },
         )
     }

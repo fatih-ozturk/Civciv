@@ -17,11 +17,13 @@ package com.civciv.app.domain.usecase.serverlist
 
 import com.civciv.app.data.repository.MastodonRepository
 import com.civciv.app.model.MastodonLanguage
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetMastodonLanguageListUseCase @Inject constructor(
     private val mastodonRepository: MastodonRepository,
 ) {
-    suspend operator fun invoke(): Result<List<MastodonLanguage>> =
+
+    operator fun invoke(): Flow<List<MastodonLanguage>> =
         mastodonRepository.getLanguageList()
 }

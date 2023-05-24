@@ -43,8 +43,11 @@ object NetworkModule {
         okHttp: OkHttpClient,
         gson: Gson,
     ): Retrofit {
-        return Retrofit.Builder().client(okHttp).baseUrl(Constants.DOMAIN_PLACEHOLDER)
-            .addConverterFactory(GsonConverterFactory.create(gson)).build()
+        return Retrofit.Builder()
+            .client(okHttp)
+            .baseUrl(Constants.DOMAIN_PLACEHOLDER)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
     }
 
     @Singleton

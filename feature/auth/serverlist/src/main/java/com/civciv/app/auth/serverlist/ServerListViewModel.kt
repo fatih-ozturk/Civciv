@@ -16,10 +16,18 @@
 package com.civciv.app.auth.serverlist
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.civciv.app.domain.usecase.serverlist.GetMastodonCategoryListUseCase
 import com.civciv.app.domain.usecase.serverlist.GetMastodonLanguageListUseCase
 import com.civciv.app.domain.usecase.serverlist.GetMastodonServerListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,4 +35,31 @@ class ServerListViewModel @Inject constructor(
     getMastodonServerListUseCase: GetMastodonServerListUseCase,
     getMastodonLanguageListUseCase: GetMastodonLanguageListUseCase,
     getMastodonCategoryListUseCase: GetMastodonCategoryListUseCase,
-) : ViewModel()
+) : ViewModel() {
+
+    private val selectedLanguage: MutableStateFlow<String?> = MutableStateFlow(null)
+
+    private val selectedCategory: MutableStateFlow<String?> = MutableStateFlow(null)
+
+    val uiState: StateFlow<ServerListUiState> = combine(
+        selectedLanguage,
+        selectedCategory,
+        getMastodonLanguageListUseCase(),
+    ) { selectedLanguage, selectedCategory, languageList ->
+
+        val categoryList = getMastodonCategoryListUseCase(language = selectedLanguage)
+        val serverList = getMastodonServerListUseCase(
+            language = selectedLanguage,
+            category = selectedCategory,
+        )
+        return@combine ServerListUiState.ServerList(serverList, languageList, categoryList)
+    }
+        .catch {
+            Timber.e(it)
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = ServerListUiState.Loading,
+        )
+}

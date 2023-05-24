@@ -13,17 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.domain.usecase.serverlist
+package com.civciv.app.auth.serverlist
 
-import com.civciv.app.data.repository.MastodonRepository
 import com.civciv.app.model.MastodonCategory
-import javax.inject.Inject
+import com.civciv.app.model.MastodonLanguage
+import com.civciv.app.model.MastodonServer
 
-class GetMastodonCategoryListUseCase @Inject constructor(
-    private val mastodonRepository: MastodonRepository,
-) {
+sealed interface ServerListUiState {
 
-    suspend operator fun invoke(
-        language: String? = null,
-    ): List<MastodonCategory> = mastodonRepository.getCategoryList(language)
+    object Loading : ServerListUiState
+
+    data class ServerList(
+        val serverList: List<MastodonServer>,
+        val languageList: List<MastodonLanguage> = listOf(),
+        val categoryList: List<MastodonCategory>,
+    ) : ServerListUiState
+
+    object Error : ServerListUiState
 }

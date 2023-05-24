@@ -18,28 +18,35 @@ package com.civciv.app.network.api
 import com.civciv.app.network.model.MastodonCategoryResponse
 import com.civciv.app.network.model.MastodonLanguageResponse
 import com.civciv.app.network.model.MastodonServerResponse
+import com.civciv.app.network.utils.Constants
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface MastodonService {
 
     @GET(MASTODON_CATEGORIES)
-    fun getMastodonCategories(
+    suspend fun getMastodonCategories(
+        @Header(Constants.DOMAIN_PLACEHOLDER) domain: String = MASTODON_BASE_URL,
         @Query("language") language: String?,
     ): List<MastodonCategoryResponse>
 
     @GET(MASTODON_SERVERS)
-    fun getMastodonServers(
+    suspend fun getMastodonServers(
+        @Header(Constants.DOMAIN_PLACEHOLDER) domain: String = MASTODON_BASE_URL,
         @Query("language") language: String?,
         @Query("category") category: String?,
     ): List<MastodonServerResponse>
 
     @GET(MASTODON_SERVER_LANGUAGES)
-    fun getMastodonLanguages(): List<MastodonLanguageResponse>
+    suspend fun getMastodonLanguages(
+        @Header(Constants.DOMAIN_PLACEHOLDER) domain: String = MASTODON_BASE_URL,
+    ): List<MastodonLanguageResponse>
 
     companion object {
-        const val MASTODON_CATEGORIES = "https://api.joinmastodon.org/categories"
-        const val MASTODON_SERVERS = "https://api.joinmastodon.org/servers"
-        const val MASTODON_SERVER_LANGUAGES = "https://api.joinmastodon.org/languages"
+        const val MASTODON_CATEGORIES = "categories"
+        const val MASTODON_SERVERS = "servers"
+        const val MASTODON_SERVER_LANGUAGES = "languages"
+        const val MASTODON_BASE_URL = "api.joinmastodon.org"
     }
 }

@@ -23,5 +23,6 @@ import javax.inject.Inject
 class GetActiveUserUseCase @Inject constructor(
     private val accountRepository: AccountRepository,
 ) {
+
     operator fun invoke(): Flow<Result<Account>> = accountRepository.getActiveAccount()
 }

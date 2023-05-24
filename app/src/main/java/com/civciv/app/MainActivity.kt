@@ -18,8 +18,8 @@ package com.civciv.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.civciv.app.designsystem.theme.CivcivTheme
 import com.civciv.app.ui.CivcivApp
-import com.civciv.app.ui.theme.CivcivTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -23,6 +23,8 @@ import com.civciv.app.network.model.MastodonCategoryResponse
 import com.civciv.app.network.model.MastodonLanguageResponse
 import com.civciv.app.network.model.MastodonServerResponse
 import com.civciv.app.network.model.asExternalModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class MastodonRepositoryImpl @Inject constructor(
@@ -32,32 +34,23 @@ class MastodonRepositoryImpl @Inject constructor(
     override suspend fun getServerList(
         language: String?,
         category: String?,
-    ): Result<List<MastodonServer>> {
-        return try {
-            val serverList = mastodonService.getMastodonServers(language, category)
-            Result.success(serverList.map(MastodonServerResponse::asExternalModel))
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    ): List<MastodonServer> {
+        val serverList =
+            mastodonService.getMastodonServers(language = language, category = category)
+        return serverList.map(MastodonServerResponse::asExternalModel)
     }
 
-    override suspend fun getLanguageList(): Result<List<MastodonLanguage>> {
-        return try {
+    override fun getLanguageList(): Flow<List<MastodonLanguage>> {
+        return flow {
             val languageList = mastodonService.getMastodonLanguages()
-            Result.success(languageList.map(MastodonLanguageResponse::asExternalModel))
-        } catch (e: Exception) {
-            Result.failure(e)
+            emit(languageList.map(MastodonLanguageResponse::asExternalModel))
         }
     }
 
     override suspend fun getCategoryList(
         language: String?,
-    ): Result<List<MastodonCategory>> {
-        return try {
-            val categoryList = mastodonService.getMastodonCategories(language)
-            Result.success(categoryList.map(MastodonCategoryResponse::asExternalModel))
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    ): List<MastodonCategory> {
+        val categoryList = mastodonService.getMastodonCategories(language = language)
+        return categoryList.map(MastodonCategoryResponse::asExternalModel)
     }
 }

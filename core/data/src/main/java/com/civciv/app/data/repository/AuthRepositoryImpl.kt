@@ -25,6 +25,7 @@ class AuthRepositoryImpl @Inject constructor(
     private val authService: AuthService,
     @Named("civciv-redirect-uri") private val redirectUri: String,
 ) : AuthRepository {
+
     override suspend fun getAuthCredentials(domain: String): Result<ApplicationCredentials> =
         try {
             val registeredApp = authService.registerApp(
