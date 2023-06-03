@@ -1,4 +1,3 @@
-
 import com.civciv.app.utils.libs
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
@@ -18,10 +17,10 @@ class AndroidDetektConventionPlugin : Plugin<Project> {
             }
 
             configure<DetektExtension> {
-                source = project.files(
-                    project.file(project.rootDir),
+                source.setFrom(
+                    project.files(project.file(project.rootDir)),
                 )
-                config = project.rootProject.files("config/detekt/detekt.yml")
+                config.setFrom(project.rootProject.files("config/detekt/detekt.yml"))
                 baseline = project.rootProject.file("config/detekt/baseline.xml")
             }
 
