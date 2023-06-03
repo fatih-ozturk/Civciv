@@ -15,8 +15,6 @@ class AndroidKtlintConventionPlugin : Plugin<Project> {
 
             extensions.configure<KtlintExtension> {
                 android.set(true)
-                // not supported with ktlint 0.48+
-                disabledRules.set(setOf("import-ordering", "no-wildcard-imports"))
                 filter {
                     exclude("**/generated/**")
                     include("**/kotlin/**")
@@ -30,6 +28,5 @@ class AndroidKtlintConventionPlugin : Plugin<Project> {
                 add("ktlintRuleset", libs.findLibrary("ktlint.compose").get())
             }
         }
-
     }
 }
