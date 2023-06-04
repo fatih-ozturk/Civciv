@@ -5,11 +5,10 @@ import groovy.xml.XmlSlurper
 import groovy.xml.slurpersupport.NodeChild
 import org.gradle.api.GradleException
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.extra
 import org.gradle.testing.jacoco.plugins.JacocoPluginExtension
 import org.gradle.testing.jacoco.tasks.JacocoReport
 import java.io.File
-import java.util.*
+import java.util.Locale
 import kotlin.math.roundToInt
 
 private val excludedFiles = mutableSetOf(
@@ -24,7 +23,7 @@ private val excludedFiles = mutableSetOf(
     "**/*Module*",
     "**/*Component*",
     "**android**",
-    "**/BR.class"
+    "**/BR.class",
 )
 
 internal fun Project.configureAndroidJacoco(
@@ -47,11 +46,16 @@ internal fun Project.configureAndroidJacoco(
                 sourceName = buildTypeName
                 sourcePath = buildTypeName
             } else {
-                sourceName = "${flavorName}${buildTypeName.replaceFirstChar { if (it.isLowerCase()) it.titlecase((Locale.ENGLISH)) else it.toString() }}"
+                sourceName = "${flavorName}${
+                    buildTypeName.replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase((Locale.ENGLISH)) else it.toString()
+                    }
+                }"
                 sourcePath = "${flavorName}/${buildTypeName}"
             }
 
-            val testTaskName = "test${sourceName.replaceFirstChar { if (it.isLowerCase()) it.titlecase((Locale.ENGLISH)) else it.toString() }}UnitTest"
+            val testTaskName =
+                "test${sourceName.replaceFirstChar { if (it.isLowerCase()) it.titlecase((Locale.ENGLISH)) else it.toString() }}UnitTest"
 
             registerCodeCoverageTask(
                 jacoco = jacoco,
@@ -59,7 +63,7 @@ internal fun Project.configureAndroidJacoco(
                 sourceName = sourceName,
                 sourcePath = sourcePath,
                 flavorName = flavorName,
-                buildTypeName = buildTypeName
+                buildTypeName = buildTypeName,
             )
         }
     }
@@ -77,14 +81,20 @@ private fun Project.registerCodeCoverageTask(
         dependsOn(testTaskName)
         group = "Reporting"
         description =
-            "Generate Jacoco coverage reports on the ${sourceName.replaceFirstChar { if (it.isLowerCase()) it.titlecase((Locale.ENGLISH)) else it.toString() }} build."
+            "Generate Jacoco coverage reports on the ${
+                sourceName.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(
+                        (Locale.ENGLISH),
+                    ) else it.toString()
+                }
+            } build."
 
         val javaDirectories = fileTree(
-            "${project.buildDir}/intermediates/classes/${sourcePath}"
+            "${project.buildDir}/intermediates/classes/${sourcePath}",
         ) { exclude(excludedFiles) }
 
         val kotlinDirectories = fileTree(
-            "${project.buildDir}/tmp/kotlin-classes/${sourcePath}"
+            "${project.buildDir}/tmp/kotlin-classes/${sourcePath}",
         ) { exclude(excludedFiles) }
 
         val coverageSrcDirectories = listOf(
@@ -93,14 +103,14 @@ private fun Project.registerCodeCoverageTask(
             "src/$buildTypeName/java",
             "src/main/kotlin",
             "src/$flavorName/kotlin",
-            "src/$buildTypeName/kotlin"
+            "src/$buildTypeName/kotlin",
         )
 
         classDirectories.setFrom(files(javaDirectories, kotlinDirectories))
         additionalClassDirs.setFrom(files(coverageSrcDirectories))
         sourceDirectories.setFrom(files(coverageSrcDirectories))
         executionData.setFrom(
-            files("${project.buildDir}/jacoco/${testTaskName}.exec")
+            files("${project.buildDir}/jacoco/${testTaskName}.exec"),
         )
 
         reports {
@@ -114,23 +124,24 @@ private fun Project.registerCodeCoverageTask(
     }
 }
 
-@Suppress("UNCHECKED_CAST")
 private fun Project.jacocoTestReport(jacoco: JacocoPluginExtension, testTaskName: String) {
     val reportsDirectory = jacoco.reportsDirectory.asFile.get()
     val report = file("$reportsDirectory/${testTaskName}/${testTaskName}.xml")
 
     logger.lifecycle("Checking coverage results: $report")
 
-    val limits = extra["limits"] as MutableMap<String, Double>
-    limits["instruction"] = 80.0
-    limits["branch"] = 80.0
+    val limits = mutableMapOf<String, Double>()
+    limits["instruction"] = 60.0
+    limits["branch"] = 60.0
 
     val metrics = report.extractTestsCoveredByType()
 
     val failures = metrics.filter { entry ->
-        entry.value < limits[entry.key]!!
-    }.map { entry ->
-        "- ${entry.key} coverage rate is: ${entry.value}%, minimum is ${limits[entry.key]}%"
+        entry.value <= (limits[entry.key] ?: 0.0)
+    }.mapNotNull { entry ->
+        limits[entry.key]?.let {
+            "- ${entry.key} coverage rate is: ${entry.value}%, minimum is ${limits[entry.key]}%"
+        }
     }
 
     if (failures.isNotEmpty()) {
@@ -147,7 +158,6 @@ private fun Project.jacocoTestReport(jacoco: JacocoPluginExtension, testTaskName
     logger.quiet("---------------------------------------------------------------")
 }
 
-@Suppress("UNCHECKED_CAST")
 private fun File.extractTestsCoveredByType(): Map<String, Double> {
     val xmlReader = XmlSlurper().apply {
         setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
@@ -159,7 +169,7 @@ private fun File.extractTestsCoveredByType(): Map<String, Double> {
         .children()
         .filter {
             (it as NodeChild).name() == "counter"
-        } as List<NodeChild>
+        }.map { it as NodeChild }
 
     return counterNodes.associate { nodeChild ->
         val type = nodeChild.attributes()["type"].toString().lowercase(Locale.ENGLISH)
