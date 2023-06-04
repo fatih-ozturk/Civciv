@@ -15,14 +15,20 @@
  */
 package com.civciv.app.database.entities
 
-import androidx.room.Embedded
-import androidx.room.Relation
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.civciv.app.model.Account
 
+@Entity
 data class AccountEntity(
-    @Embedded var credentials: AccountCredentialsEntity,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "detailId",
-    )
-    var detail: AccountDetailEntity,
+    @PrimaryKey var id: String,
+    var username: String,
+    val domain: String,
+    var accessToken: String,
+    var updatedAt: Long = System.currentTimeMillis(),
+    var isActive: Boolean = false,
 )
+
+fun AccountEntity.toExternalModel(): Account {
+    return Account(username = username)
+}

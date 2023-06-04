@@ -17,12 +17,12 @@ package com.civciv.app.domain.usecase
 
 import com.civciv.app.data.repository.AccountRepository
 import com.civciv.app.model.Account
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 class GetActiveUserUseCase @Inject constructor(
     private val accountRepository: AccountRepository,
 ) {
 
-    operator fun invoke(): Flow<Result<Account>> = accountRepository.getActiveAccount()
+    operator fun invoke(): Flow<Account> = accountRepository.getActiveAccount()
 }

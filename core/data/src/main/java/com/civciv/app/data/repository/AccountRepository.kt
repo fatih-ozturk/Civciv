@@ -19,5 +19,5 @@ import com.civciv.app.model.Account
 import kotlinx.coroutines.flow.Flow
 
 interface AccountRepository {
-    fun getActiveAccount(): Flow<Result<Account>>
+    fun getActiveAccount(): Flow<Account>
 }

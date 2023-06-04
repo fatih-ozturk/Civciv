@@ -34,6 +34,7 @@ jacoco = "0.8.7"
 junit4 = "4.13.2"
 kotlin = "1.8.21"
 kotlinxDatetime = "0.4.0"
+kotest = "5.6.2"
 ksp = "1.8.21-1.0.11"
 ktlint = "11.3.2"
 ktlint-compose = "0.0.26"
@@ -138,6 +139,7 @@ kotlin-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", 
 kotlin-extensions = { group = "org.jetbrains.kotlin", name = "kotlin-android-extensions", version.ref = "kotlin" }
 kotlin-pluginGradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotest = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
 ktlint-compose = { group = "com.twitter.compose.rules", name = "ktlint", version.ref = "ktlint-compose" }
 lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottieVersion" }
 mockK = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }

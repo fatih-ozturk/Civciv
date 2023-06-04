@@ -44,7 +44,7 @@ fun LoginScreen(
         // TODO result
     }
 
-    var domain by remember { mutableStateOf("mastodon.social") }
+    var domain by remember { mutableStateOf(viewModel.domain) }
 
     LaunchedEffect(Unit) {
         viewModel.events.collectLatest { event ->

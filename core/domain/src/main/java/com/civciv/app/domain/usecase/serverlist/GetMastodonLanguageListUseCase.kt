@@ -17,8 +17,8 @@ package com.civciv.app.domain.usecase.serverlist
 
 import com.civciv.app.data.repository.MastodonRepository
 import com.civciv.app.model.MastodonLanguage
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 class GetMastodonLanguageListUseCase @Inject constructor(
     private val mastodonRepository: MastodonRepository,

@@ -15,20 +15,44 @@
  */
 package com.civciv.app.auth.login.navigation
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.civciv.app.auth.login.LoginScreen
+import com.civciv.app.auth.login.navigation.LoginArgs.Companion.loginScreenDomainArg
 
 const val loginScreenRoute = "login"
 
-fun NavController.navigateToLogin(navOptions: NavOptions? = null) {
-    this.navigate(loginScreenRoute, navOptions)
+internal class LoginArgs(val domain: String) {
+
+    constructor(savedStateHandle: SavedStateHandle) :
+        this(checkNotNull<String>(savedStateHandle[loginScreenDomainArg]))
+
+    companion object {
+        const val loginScreenDomainArg = "domain"
+    }
+}
+
+fun NavController.navigateToLogin(
+    navOptions: NavOptions? = null,
+    domain: String = "mastodon.social",
+) {
+    this.navigate("$loginScreenRoute/$domain", navOptions = navOptions)
 }
 
 fun NavGraphBuilder.loginScreen() {
-    composable(route = loginScreenRoute) {
+    composable(
+        route = "$loginScreenRoute/{$loginScreenDomainArg}",
+        arguments = listOf(
+            navArgument(loginScreenDomainArg) {
+                type = NavType.StringType
+            },
+        ),
+    ) {
         LoginScreen()
     }
 }

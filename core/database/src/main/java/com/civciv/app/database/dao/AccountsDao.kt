@@ -20,30 +20,27 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
-import com.civciv.app.database.entities.AccountCredentialsEntity
-import com.civciv.app.database.entities.AccountDetailEntity
+import androidx.room.Update
 import com.civciv.app.database.entities.AccountEntity
 
 @Dao
 interface AccountsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(accountCredentials: AccountCredentialsEntity): Long
+    fun insert(accountDetail: AccountEntity): Long
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(accountDetail: AccountDetailEntity): Long
-
-    @Delete
-    fun delete(accountCredentials: AccountCredentialsEntity)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun update(accountDetail: AccountEntity)
 
     @Delete
-    fun delete(accountDetail: AccountDetailEntity)
+    fun delete(accountDetail: AccountEntity)
 
-    @Transaction
-    @Query("SELECT * FROM AccountCredentialsEntity ORDER BY id ASC")
-    fun getAllAccounts(): List<AccountEntity>
+    @Query("SELECT * FROM AccountEntity ORDER BY updatedAt DESC")
+    fun getAccounts(): List<AccountEntity>
 
-    @Query("""SELECT * FROM AccountCredentialsEntity WHERE isActive = 1 LIMIT 1""")
-    fun getCurrentAccountCredentials(): AccountCredentialsEntity
+    @Query("SELECT * FROM AccountEntity WHERE id = :accountId")
+    fun getAccount(accountId: String): AccountEntity?
+
+    @Query("""SELECT * FROM AccountEntity WHERE isActive = 1""")
+    fun getActiveAccount(): AccountEntity?
 }

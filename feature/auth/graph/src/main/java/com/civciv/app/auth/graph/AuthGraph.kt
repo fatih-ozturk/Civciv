@@ -27,6 +27,8 @@ const val authGraph = "authGraph"
 fun NavGraphBuilder.authGraph(
     onLoginClicked: () -> Unit = { },
     onServerListClicked: () -> Unit = { },
+    onBackClicked: () -> Unit = { },
+    onServerClicked: (domain: String) -> Unit = { },
 ) {
     navigation(
         route = authGraph,
@@ -37,6 +39,9 @@ fun NavGraphBuilder.authGraph(
             onLoginClicked = onLoginClicked,
             onServerListClicked = onServerListClicked,
         )
-        serverListScreen()
+        serverListScreen(
+            onBackClicked = onBackClicked,
+            onServerClicked = onServerClicked,
+        )
     }
 }

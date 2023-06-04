@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.database.entities
+package com.civciv.app.auth.serverlist
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.civciv.app.model.MastodonServer
 
-@Entity
-data class AccountDetailEntity(
-    @PrimaryKey var detailId: Long,
-    var accountId: String,
-    var username: String,
-)
+sealed interface ServerListSearchUiState {
+    object Empty : ServerListSearchUiState
+    object NotFound : ServerListSearchUiState
+    data class SearchResult(val searchResult: List<MastodonServer> = emptyList()) :
+        ServerListSearchUiState
+}

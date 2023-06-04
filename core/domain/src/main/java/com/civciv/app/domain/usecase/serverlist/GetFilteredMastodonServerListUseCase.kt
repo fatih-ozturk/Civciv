@@ -13,17 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.database.entities
+package com.civciv.app.domain.usecase.serverlist
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.civciv.app.model.MastodonServer
+import javax.inject.Inject
 
-@Entity
-data class AccountCredentialsEntity(
-    @PrimaryKey(autoGenerate = true) var id: Long = 0,
-    val domain: String,
-    var accessToken: String,
-    var clientId: String,
-    var clientSecret: String,
-    var isActive: Boolean,
-)
+class GetFilteredMastodonServerListUseCase @Inject constructor() {
+
+    operator fun invoke(
+        query: String?,
+        serverList: List<MastodonServer>?,
+    ): List<MastodonServer>? {
+        return if (!query.isNullOrBlank()) {
+            serverList?.filter { it.domain.contains(query) }.orEmpty()
+        } else {
+            null
+        }
+    }
+}

@@ -23,9 +23,9 @@ import com.civciv.app.network.model.MastodonCategoryResponse
 import com.civciv.app.network.model.MastodonLanguageResponse
 import com.civciv.app.network.model.MastodonServerResponse
 import com.civciv.app.network.model.asExternalModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
 class MastodonRepositoryImpl @Inject constructor(
     private val mastodonService: MastodonService,

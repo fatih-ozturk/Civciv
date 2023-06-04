@@ -24,8 +24,8 @@ import android.os.Bundle
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import com.civciv.app.model.ApplicationCredentials
-import okhttp3.HttpUrl
 import java.util.concurrent.atomic.AtomicBoolean
+import okhttp3.HttpUrl
 
 class RedirectUriReceiverActivity : Activity() {
 

@@ -16,11 +16,11 @@
 package com.civciv.app.network.utils
 
 import com.civciv.app.database.dao.AccountsDao
+import javax.inject.Inject
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import timber.log.Timber
-import javax.inject.Inject
 
 class DomainInterceptor @Inject constructor(
     private val accountsDao: AccountsDao,
@@ -29,7 +29,6 @@ class DomainInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val builder = originalRequest.newBuilder()
-        val accountCredentials = accountsDao.getCurrentAccountCredentials()
         val domainIsDefined = originalRequest.header(Constants.DOMAIN_PLACEHOLDER)
 
         if (domainIsDefined != null) {
@@ -40,8 +39,11 @@ class DomainInterceptor @Inject constructor(
             builder.url(originalRequest.url.newBuilder().host(domainIsDefined).build())
             builder.removeHeader(Constants.DOMAIN_PLACEHOLDER)
         } else {
-            builder.url(originalRequest.url.newBuilder().host(accountCredentials.domain).build())
-            builder.addHeader("Authorization", "Bearer " + accountCredentials.accessToken)
+            val currentAccount = accountsDao.getActiveAccount()
+            currentAccount?.run {
+                builder.url(originalRequest.url.newBuilder().host(domain).build())
+                builder.addHeader("Authorization", "Bearer $accessToken")
+            }
         }
 
         val newRequest: Request = builder.build()

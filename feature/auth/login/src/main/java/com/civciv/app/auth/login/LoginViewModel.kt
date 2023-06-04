@@ -15,21 +15,28 @@
  */
 package com.civciv.app.auth.login
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.civciv.app.auth.login.navigation.LoginArgs
 import com.civciv.app.domain.usecase.AuthenticateAppUseCase
 import com.civciv.app.model.ApplicationCredentials
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authenticateAppUseCase: AuthenticateAppUseCase,
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
+
+    private val loginArgs = LoginArgs(savedStateHandle)
+
+    val domain: String = loginArgs.domain
 
     private val _events: Channel<LoginEvent> = Channel(Channel.UNLIMITED)
     val events: Flow<LoginEvent> = _events.receiveAsFlow()
@@ -38,7 +45,9 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             authenticateAppUseCase(domain = domain).fold(
                 onSuccess = {
-                    _events.send(LoginEvent.RedirectToAuth(it))
+                    _events.send(
+                        LoginEvent.RedirectToAuth(it),
+                    )
                 },
                 onFailure = {
                 },

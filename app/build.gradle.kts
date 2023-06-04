@@ -70,6 +70,7 @@ dependencies {
     implementation(project(":feature:auth:graph"))
     implementation(project(":feature:auth:login"))
     implementation(project(":feature:auth:serverlist"))
+    implementation(project(":feature:auth:welcome"))
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.activity.compose)

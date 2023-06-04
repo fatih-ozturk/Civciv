@@ -36,7 +36,7 @@ dependencies {
     api(libs.kotlin.coroutines.test)
     api(libs.turbine)
     api(libs.mockK)
-    api(libs.truth)
+    api(libs.kotest)
 
     api(libs.androidx.test.runner)
     api(libs.androidx.test.rules)

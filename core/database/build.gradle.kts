@@ -20,6 +20,15 @@ plugins {
 }
 
 android {
+    defaultConfig {
+        testInstrumentationRunner = "com.civciv.app.testing.CivcivTestRunner"
+    }
+    packaging {
+        resources {
+            excludes.add("META-INF/LICENSE.md")
+            excludes.add("META-INF/LICENSE-notice.md")
+        }
+    }
     namespace = "com.civciv.app.database"
 }
 
@@ -28,4 +37,6 @@ dependencies {
 
     implementation(libs.kotlin.datetime)
     implementation(libs.kotlin.coroutines.android)
+
+    androidTestImplementation(project(":core:testing"))
 }

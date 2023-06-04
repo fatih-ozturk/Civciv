@@ -38,7 +38,7 @@ object DatabaseModule {
         context,
         CivcivDatabase::class.java,
         "civciv-database",
-    ).build()
+    ).fallbackToDestructiveMigration().build()
 
     @Provides
     @Singleton
