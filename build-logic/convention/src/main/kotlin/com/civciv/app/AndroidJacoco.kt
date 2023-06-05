@@ -127,8 +127,10 @@ private fun Project.registerCodeCoverageTask(
 private fun Project.jacocoTestReport(jacoco: JacocoPluginExtension, testTaskName: String) {
     val reportsDirectory = jacoco.reportsDirectory.asFile.get()
     val report = file("$reportsDirectory/${testTaskName}/${testTaskName}.xml")
+    val reportHtml = file("$reportsDirectory/${testTaskName}/html/index.html")
 
     logger.lifecycle("Checking coverage results: $report")
+    logger.lifecycle("Checking coverage results: $reportHtml")
 
     val limits = mutableMapOf<String, Double>()
     limits["instruction"] = 60.0
