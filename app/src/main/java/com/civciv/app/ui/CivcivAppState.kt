@@ -53,8 +53,8 @@ class CivcivAppState(
     val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.values().asList()
 
     val shouldShowBottomBar: Boolean
-        @Composable get() = topLevelDestinations.map { it.name.uppercase() }
-            .contains(currentDestination?.route.toString())
+        @Composable get() = currentDestination?.route?.uppercase() in
+            topLevelDestinations.map { it.name.uppercase() }
 
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
         val topLevelNavOptions = navOptions {

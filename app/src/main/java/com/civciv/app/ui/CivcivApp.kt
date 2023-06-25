@@ -15,6 +15,7 @@
  */
 package com.civciv.app.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.fadeIn
@@ -32,6 +33,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -51,8 +53,11 @@ import com.civciv.app.auth.welcome.navigation.navigateToWelcome
 import com.civciv.app.auth.welcome.navigation.welcomeScreenRoute
 import com.civciv.app.home.graph.homeGraph
 import com.civciv.app.home.main.navigation.navigateToHome
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 
+@SuppressLint("RestrictedApi")
 @OptIn(ExperimentalLayoutApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun CivcivApp(
@@ -81,8 +86,12 @@ fun CivcivApp(
                 }
             },
         ) { padding ->
-            Timber.tag("Fatih")
-                .e(appState.navController.backQueue.map { it.destination.route }.toString())
+            LaunchedEffect(Unit) {
+                appState.navController.currentBackStack.onEach { currentBackStack ->
+                    Timber.tag("Fatih").e(currentBackStack.map { it.destination.route }.toString())
+                }.collect()
+            }
+
             CivcivNavHost(
                 navController = appState.navController,
                 modifier = modifier
