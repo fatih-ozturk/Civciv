@@ -36,6 +36,7 @@ interface AuthService {
         @Field("scopes") scopes: String,
     ): CredentialsResponse
 
+    @FormUrlEncoded
     @POST("oauth/token")
     suspend fun fetchOAuthToken(
         @Header(Constants.DOMAIN_PLACEHOLDER) domain: String,

@@ -16,7 +16,7 @@ dependencyResolutionManagement {
         maven("https://jitpack.io")
     }
 }
-rootProject.name = "civciv"
+rootProject.name = "Civciv"
 
 include(":app")
 include(":core:base")
@@ -28,9 +28,12 @@ include(":core:model")
 include(":core:network")
 include(":core:testing")
 include(":core:ui")
-include(":feature:home")
+include(":feature:splash")
 include(":feature:auth:graph")
 include(":feature:auth:login")
 include(":feature:auth:welcome")
 include(":feature:auth:serverlist")
+include(":feature:home:graph")
+include(":feature:home:main")
+
 

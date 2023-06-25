@@ -16,6 +16,6 @@
 package com.civciv.app.model.auth
 
 data class AuthorizationResult(
-    val response: AuthorizationResponse?,
-    val exception: AuthorizationException?,
+    val response: AuthorizationResponse,
+    val exception: AuthorizationException,
 )

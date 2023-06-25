@@ -18,6 +18,22 @@ package com.civciv.app
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 @HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel()
+class MainViewModel @Inject constructor() : ViewModel() {
+
+    private val _splashState: MutableStateFlow<MainActivitySplashState> =
+        MutableStateFlow(MainActivitySplashState.Loading)
+    val splashState: StateFlow<MainActivitySplashState> = _splashState
+
+    fun hideSplashScreen() {
+        _splashState.value = MainActivitySplashState.Success
+    }
+}
+
+sealed interface MainActivitySplashState {
+    object Loading : MainActivitySplashState
+    object Success : MainActivitySplashState
+}

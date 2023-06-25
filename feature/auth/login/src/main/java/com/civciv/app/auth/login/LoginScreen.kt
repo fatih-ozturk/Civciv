@@ -19,9 +19,13 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,21 +34,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun LoginScreen(
+    onNavigateHome: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = hiltViewModel(),
 ) {
     val loginLauncher = rememberLauncherForActivityResult(
         contract = LoginActivityResultContract(),
-    ) { _ ->
-        // TODO result
+    ) { loginResult ->
+        viewModel.handleLoginResult(loginResult)
     }
-
-    var domain by remember { mutableStateOf(viewModel.domain) }
 
     LaunchedEffect(Unit) {
         viewModel.events.collectLatest { event ->
@@ -52,21 +57,53 @@ fun LoginScreen(
                 is LoginEvent.RedirectToAuth -> {
                     loginLauncher.launch(event.appCredentials)
                 }
+
+                is LoginEvent.FailedToLogin -> {
+                    // toast
+                }
+
+                LoginEvent.NavigateToHome -> onNavigateHome()
             }
+        }
+    }
+    var domain by remember { mutableStateOf("") }
+
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    when (val state = uiState) {
+        LoginUiState.Loading, LoginUiState.Idle -> {
+        }
+
+        is LoginUiState.Login -> {
+            domain = state.domain
         }
     }
 
     Column(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        TextField(value = domain, onValueChange = { domain = it })
-        Button(
-            onClick = {
-                viewModel.onLoginClick(domain)
+        OutlinedTextField(
+            value = domain,
+            onValueChange = { domain = it },
+            label = {
+                Text(text = "Domain")
             },
+        )
+        Button(
+            modifier = Modifier,
+            onClick = { viewModel.onLoginClick(domain) },
+            enabled = uiState is LoginUiState.Login,
         ) {
+            if (uiState is LoginUiState.Loading) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                        .size(18.dp),
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    strokeWidth = 2.dp,
+                )
+            }
             Text(text = "Login")
         }
     }

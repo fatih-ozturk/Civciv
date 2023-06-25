@@ -18,5 +18,5 @@ package com.civciv.app.data.repository
 import com.civciv.app.model.ApplicationCredentials
 
 interface AuthRepository {
-    suspend fun getAuthCredentials(domain: String): Result<ApplicationCredentials>
+    suspend fun getAuthCredentials(domain: String): ApplicationCredentials
 }

@@ -20,8 +20,9 @@ import com.civciv.app.database.entities.AccountEntity
 import com.civciv.app.database.entities.toExternalModel
 import com.civciv.app.model.Account
 import com.civciv.app.model.ApplicationCredentials
-import com.civciv.app.network.model.AccessTokenResponse
-import com.civciv.app.network.model.AccountResponse
+import com.civciv.app.model.auth.AuthorizationResponse
+import com.civciv.app.network.api.AccountsService
+import com.civciv.app.network.api.AuthService
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -29,27 +30,39 @@ import timber.log.Timber
 
 class AccountRepositoryImpl @Inject constructor(
     private val accountsDao: AccountsDao,
+    private val accountsService: AccountsService,
+    private val authService: AuthService,
 ) : AccountRepository {
-    override fun getActiveAccount(): Flow<Account> = flow {
+    override fun getActiveAccount(): Flow<Account?> = flow {
         val accounts = accountsDao.getAccounts()
-        val activeAccount = accountsDao.getActiveAccount()
-        accounts.find { account -> account.isActive } ?: accounts.firstOrNull()
-            ?.also { account -> account.isActive = true }
+        var activeAccount = accountsDao.getActiveAccount()
 
-        if (activeAccount != null) {
-            emit(activeAccount.toExternalModel())
-        } else {
-            throw NoSuchElementException("Couldn't find any active account")
+        activeAccount = activeAccount ?: accounts.firstOrNull()?.also { account ->
+            account.isActive = true
+            accountsDao.update(account)
         }
+        emit(activeAccount?.toExternalModel())
     }
 
-    fun addAccount(
+    override suspend fun addAccount(
+        authorizationResult: AuthorizationResponse,
         applicationCredentials: ApplicationCredentials,
-        accessTokenResponse: AccessTokenResponse,
-        accountResponse: AccountResponse,
     ) {
+        val accessTokenResponse = authService.fetchOAuthToken(
+            domain = applicationCredentials.domain,
+            clientId = applicationCredentials.clientId,
+            clientSecret = applicationCredentials.clientSecret,
+            redirectUri = applicationCredentials.redirectUri,
+            code = authorizationResult.code,
+            grantType = "authorization_code",
+        )
+
+        val accountResponse = accountsService.verifyAccountCredentials(
+            applicationCredentials.domain,
+            "Bearer ${accessTokenResponse.accessToken}",
+        )
         val accounts = accountsDao.getAccounts()
-        accounts.find { it.isActive }?.let {
+        accounts.filter { it.isActive }.onEach {
             accountsDao.insert(it.copy(isActive = false))
         }
 
@@ -58,27 +71,24 @@ class AccountRepositoryImpl @Inject constructor(
                 accountResponse.id == account.id
         }
 
-        if (existAccount != null) {
+        val newAccount = if (existAccount != null) {
             existAccount.copy(
                 isActive = true,
                 accessToken = accessTokenResponse.accessToken,
-            ).also { newAccount ->
-                accountsDao.insert(newAccount)
-            }
+            )
         } else {
             AccountEntity(
                 id = accountResponse.id,
                 accessToken = accessTokenResponse.accessToken,
                 domain = applicationCredentials.domain,
                 isActive = true,
-                username = accountResponse.username,
-            ).also { newAccount ->
-                accountsDao.insert(newAccount)
-            }
+                username = accountResponse.localUsername,
+            )
         }
+        accountsDao.insert(newAccount)
     }
 
-    fun setActiveAccount(accountId: String) {
+    override suspend fun setActiveAccount(accountId: String) {
         val activeAccount = accountsDao.getActiveAccount()
 
         if (activeAccount != null) {

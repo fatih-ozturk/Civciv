@@ -19,8 +19,10 @@ import app.cash.turbine.test
 import com.civciv.app.database.dao.AccountsDao
 import com.civciv.app.database.entities.AccountEntity
 import com.civciv.app.database.entities.toExternalModel
+import com.civciv.app.network.api.AccountsService
+import com.civciv.app.network.api.AuthService
 import io.kotest.matchers.shouldBe
-import io.mockk.every
+import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -29,12 +31,16 @@ import org.junit.Test
 class AccountRepositoryTest {
 
     private lateinit var accountsDao: AccountsDao
+    private lateinit var accountsService: AccountsService
+    private lateinit var authService: AuthService
     private lateinit var repository: AccountRepository
 
     @Before
     fun setup() {
         accountsDao = mockk()
-        repository = AccountRepositoryImpl(accountsDao)
+        accountsService = mockk()
+        authService = mockk()
+        repository = AccountRepositoryImpl(accountsDao, accountsService, authService)
     }
 
     @Test
@@ -51,8 +57,8 @@ class AccountRepositoryTest {
             accountEntity.copy(id = "2", domain = "domain2", isActive = false),
         )
 
-        every { accountsDao.getAccounts() } returns accounts
-        every { accountsDao.getActiveAccount() } returns accountEntity
+        coEvery { accountsDao.getAccounts() } returns accounts
+        coEvery { accountsDao.getActiveAccount() } returns accountEntity
 
         val mappedAccount = accountEntity.toExternalModel()
 

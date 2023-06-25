@@ -19,8 +19,8 @@ import com.google.gson.annotations.SerializedName
 
 data class AccountResponse(
     @SerializedName("id") val id: String,
-    @SerializedName("username") val username: String,
-    @SerializedName("acct") val acct: String,
+    @SerializedName("username") val localUsername: String,
+    @SerializedName("acct") val username: String,
     @SerializedName("display_name") val displayName: String,
     @SerializedName("locked") val isLocked: Boolean,
     @SerializedName("bot") val isBot: Boolean,

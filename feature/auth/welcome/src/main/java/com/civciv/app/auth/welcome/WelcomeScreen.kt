@@ -23,16 +23,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun WelcomeScreen(
     onLoginClicked: () -> Unit,
     onServerListClicked: () -> Unit,
-    onLearnMoreClicked: () -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Button(onClick = onServerListClicked) {
@@ -40,9 +40,6 @@ internal fun WelcomeScreen(
         }
         Button(onClick = onLoginClicked) {
             Text(text = "Login")
-        }
-        Button(onClick = onLearnMoreClicked) {
-            Text(text = "Learn More")
         }
     }
 }

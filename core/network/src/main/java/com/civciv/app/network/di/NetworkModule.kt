@@ -54,11 +54,11 @@ object NetworkModule {
     @Provides
     fun provideOkHttp(
         loggingInterceptor: HttpLoggingInterceptor,
-        domainInterceptor: DomainInterceptor,
+        domainInterceptor: dagger.Lazy<DomainInterceptor>,
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(domainInterceptor)
+            .addInterceptor(domainInterceptor.get())
             .build()
     }
 

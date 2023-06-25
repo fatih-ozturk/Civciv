@@ -16,11 +16,10 @@
 package com.civciv.app.network.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.Date
 
 data class AccessTokenResponse(
     @SerializedName("access_token") val accessToken: String,
     @SerializedName("token_type") val tokenType: String,
     @SerializedName("scope") val scope: String,
-    @SerializedName("created_at") val createdAt: Date,
+    @SerializedName("created_at") val createdAt: Long,
 )

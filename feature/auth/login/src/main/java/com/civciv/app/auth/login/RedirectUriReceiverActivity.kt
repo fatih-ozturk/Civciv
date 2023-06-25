@@ -41,12 +41,9 @@ class RedirectUriReceiverActivity : Activity() {
         super.onSaveInstanceState(outState)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        isAuthStarted.set(
-            savedInstanceState?.getBoolean(KEY_AUTH_STARTED, false)
-                ?: (intent.extras?.getBoolean(KEY_AUTH_STARTED, false) == true),
-        )
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        isAuthStarted.set(savedInstanceState.getBoolean(KEY_AUTH_STARTED, false))
     }
 
     override fun onResume() {
@@ -70,6 +67,7 @@ class RedirectUriReceiverActivity : Activity() {
         finish()
     }
 
+    @Suppress("Deprecation")
     private fun startAuth() {
         val input: ApplicationCredentials? = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(KEY_AUTH_REQUEST, ApplicationCredentials::class.java)
@@ -108,7 +106,6 @@ class RedirectUriReceiverActivity : Activity() {
             applicationCredentials: ApplicationCredentials,
         ): Intent {
             val intent = Intent(context, RedirectUriReceiverActivity::class.java)
-
             intent.putExtra(KEY_AUTH_REQUEST, applicationCredentials)
             return intent
         }

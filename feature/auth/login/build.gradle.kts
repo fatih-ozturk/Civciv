@@ -20,6 +20,13 @@ plugins {
 
 android {
     namespace = "com.civciv.app.auth.login"
+
+    packaging {
+        resources {
+            excludes.add("META-INF/LICENSE.md")
+            excludes.add("META-INF/LICENSE-notice.md")
+        }
+    }
 }
 
 dependencies {

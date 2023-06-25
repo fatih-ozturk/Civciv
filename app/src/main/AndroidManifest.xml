@@ -28,7 +28,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Civciv"
+        android:theme="@style/Theme.Civciv.Splash"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
@@ -43,7 +43,7 @@
         <activity
             android:name=".auth.login.RedirectUriReceiverActivity"
             android:exported="true"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

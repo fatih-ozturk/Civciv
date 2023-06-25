@@ -28,15 +28,13 @@ fun NavController.navigateToWelcome(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.welcomeScreen(
-    onLoginClicked: () -> Unit = { },
-    onServerListClicked: () -> Unit = { },
-    onLearnMoreClicked: () -> Unit = { },
+    onLoginClicked: () -> Unit,
+    onServerListClicked: () -> Unit,
 ) {
     composable(route = welcomeScreenRoute) {
         WelcomeScreen(
             onLoginClicked = onLoginClicked,
             onServerListClicked = onServerListClicked,
-            onLearnMoreClicked = onLearnMoreClicked,
         )
     }
 }

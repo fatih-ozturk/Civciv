@@ -28,8 +28,8 @@ fun NavController.navigateToServerList(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.serverListScreen(
-    onBackClicked: () -> Unit = {},
-    onServerClicked: (domain: String) -> Unit = {},
+    onBackClicked: () -> Unit,
+    onServerClicked: (domain: String) -> Unit,
 ) {
     composable(route = serverListScreenRoute) {
         ServerListScreen(

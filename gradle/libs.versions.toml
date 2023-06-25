@@ -6,6 +6,7 @@ androidxActivity = "1.7.2"
 androidxComposeMaterial3 = "1.2.0-alpha02"
 androidxComposeRuntimeTracing = "1.0.0-alpha03"
 androidxCore = "1.10.1"
+androidxCoreSplashscreen = "1.0.1"
 androidxDataStore = "1.0.0"
 androidxHiltNavigationCompose = "1.1.0-alpha01"
 androidxMetrics = "1.0.0-alpha04"
@@ -85,6 +86,7 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "androidxComposeMaterial3" }
 androidx-compose-runtime-tracing = { group = "androidx.compose.runtime", name = "runtime-tracing", version.ref = "androidxComposeRuntimeTracing" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
 androidx-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "androidxDataStore" }
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidxDataStore" }
 androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "androidxhilt" }

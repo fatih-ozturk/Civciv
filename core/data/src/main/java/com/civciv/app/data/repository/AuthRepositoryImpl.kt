@@ -26,8 +26,8 @@ class AuthRepositoryImpl @Inject constructor(
     @Named("civciv-redirect-uri") private val redirectUri: String,
 ) : AuthRepository {
 
-    override suspend fun getAuthCredentials(domain: String): Result<ApplicationCredentials> =
-        try {
+    override suspend fun getAuthCredentials(domain: String): ApplicationCredentials {
+        return try {
             val registeredApp = authService.registerApp(
                 domain = domain,
                 redirectUris = redirectUri,
@@ -44,8 +44,9 @@ class AuthRepositoryImpl @Inject constructor(
                     scope = Constants.AUTH_SCOPES,
                 )
             }
-            Result.success(applicationCredentials)
-        } catch (e: Exception) {
-            Result.failure(e)
+            applicationCredentials
+        } catch (exception: Exception) {
+            throw exception
         }
+    }
 }

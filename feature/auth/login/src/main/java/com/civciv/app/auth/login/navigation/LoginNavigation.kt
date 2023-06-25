@@ -44,7 +44,9 @@ fun NavController.navigateToLogin(
     this.navigate("$loginScreenRoute/$domain", navOptions = navOptions)
 }
 
-fun NavGraphBuilder.loginScreen() {
+fun NavGraphBuilder.loginScreen(
+    onNavigateHome: () -> Unit,
+) {
     composable(
         route = "$loginScreenRoute/{$loginScreenDomainArg}",
         arguments = listOf(
@@ -53,6 +55,8 @@ fun NavGraphBuilder.loginScreen() {
             },
         ),
     ) {
-        LoginScreen()
+        LoginScreen(
+            onNavigateHome = onNavigateHome,
+        )
     }
 }

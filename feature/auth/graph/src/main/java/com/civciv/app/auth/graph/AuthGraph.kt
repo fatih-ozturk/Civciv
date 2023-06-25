@@ -25,16 +25,19 @@ import com.civciv.app.auth.welcome.navigation.welcomeScreenRoute
 const val authGraph = "authGraph"
 
 fun NavGraphBuilder.authGraph(
-    onLoginClicked: () -> Unit = { },
-    onServerListClicked: () -> Unit = { },
-    onBackClicked: () -> Unit = { },
-    onServerClicked: (domain: String) -> Unit = { },
+    onLoginClicked: () -> Unit,
+    onServerListClicked: () -> Unit,
+    onBackClicked: () -> Unit,
+    onServerClicked: (domain: String) -> Unit,
+    onNavigateHome: () -> Unit,
 ) {
     navigation(
         route = authGraph,
         startDestination = welcomeScreenRoute,
     ) {
-        loginScreen()
+        loginScreen(
+            onNavigateHome = onNavigateHome,
+        )
         welcomeScreen(
             onLoginClicked = onLoginClicked,
             onServerListClicked = onServerListClicked,

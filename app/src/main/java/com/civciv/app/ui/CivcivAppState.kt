@@ -18,22 +18,25 @@ package com.civciv.app.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
+import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.civciv.app.home.navigation.navigateToHome
+import com.civciv.app.home.main.navigation.navigateToHome
 import com.civciv.app.ui.TopLevelDestination.HOME
 import com.civciv.app.ui.TopLevelDestination.MESSAGES
 import com.civciv.app.ui.TopLevelDestination.NOTIFICATION
 import com.civciv.app.ui.TopLevelDestination.SEARCH
+import com.civciv.app.ui.ext.TrackDisposableJank
 
 @Composable
 fun rememberCivcivAppState(
     navController: NavHostController = rememberNavController(),
 ): CivcivAppState {
+    NavigationTrackingSideEffect(navController)
     return remember(navController) {
         CivcivAppState(navController)
     }
@@ -50,7 +53,8 @@ class CivcivAppState(
     val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.values().asList()
 
     val shouldShowBottomBar: Boolean
-        @Composable get() = currentDestination?.route in topLevelDestinations.map { it.name }
+        @Composable get() = topLevelDestinations.map { it.name.uppercase() }
+            .contains(currentDestination?.route.toString())
 
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
         val topLevelNavOptions = navOptions {
@@ -66,6 +70,21 @@ class CivcivAppState(
             SEARCH -> navController.navigateToHome(topLevelNavOptions)
             MESSAGES -> navController.navigateToHome(topLevelNavOptions)
             NOTIFICATION -> navController.navigateToHome(topLevelNavOptions)
+        }
+    }
+}
+
+@Composable
+private fun NavigationTrackingSideEffect(navController: NavHostController) {
+    TrackDisposableJank(navController) { metricsHolder ->
+        val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
+            metricsHolder.state?.putState("Civciv Jank Navigation", destination.route.toString())
+        }
+
+        navController.addOnDestinationChangedListener(listener)
+
+        onDispose {
+            navController.removeOnDestinationChangedListener(listener)
         }
     }
 }

@@ -66,12 +66,15 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:model"))
 
-    implementation(project(":feature:home"))
+    implementation(project(":feature:splash"))
+    implementation(project(":feature:home:graph"))
+    implementation(project(":feature:home:main"))
     implementation(project(":feature:auth:graph"))
     implementation(project(":feature:auth:login"))
     implementation(project(":feature:auth:serverlist"))
     implementation(project(":feature:auth:welcome"))
 
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)

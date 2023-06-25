@@ -15,7 +15,10 @@
  */
 package com.civciv.app.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,16 +45,20 @@ import androidx.navigation.navOptions
 import com.civciv.app.auth.graph.authGraph
 import com.civciv.app.auth.login.navigation.navigateToLogin
 import com.civciv.app.auth.serverlist.navigation.navigateToServerList
+import com.civciv.app.auth.splash.navigation.splashScreen
+import com.civciv.app.auth.splash.navigation.splashScreenRoute
+import com.civciv.app.auth.welcome.navigation.navigateToWelcome
 import com.civciv.app.auth.welcome.navigation.welcomeScreenRoute
-import com.civciv.app.home.navigation.homeGraph
-import com.civciv.app.home.navigation.homeNavigationRoute
+import com.civciv.app.home.graph.homeGraph
+import com.civciv.app.home.main.navigation.navigateToHome
+import timber.log.Timber
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun CivcivApp(
     modifier: Modifier = Modifier,
     appState: CivcivAppState = rememberCivcivAppState(),
-    isLoggedIn: Boolean = false,
+    onHideSplashScreen: () -> Unit,
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -61,7 +68,11 @@ fun CivcivApp(
             modifier = Modifier.semantics { testTagsAsResourceId = true },
             contentColor = MaterialTheme.colorScheme.onBackground,
             bottomBar = {
-                if (appState.shouldShowBottomBar) {
+                AnimatedVisibility(
+                    visible = appState.shouldShowBottomBar,
+                    enter = fadeIn(),
+                    exit = fadeOut(),
+                ) {
                     CivcivBottomNavigation(
                         destinations = appState.topLevelDestinations,
                         onNavigateToDestination = appState::navigateToTopLevelDestination,
@@ -70,12 +81,14 @@ fun CivcivApp(
                 }
             },
         ) { padding ->
+            Timber.tag("Fatih")
+                .e(appState.navController.backQueue.map { it.destination.route }.toString())
             CivcivNavHost(
                 navController = appState.navController,
                 modifier = modifier
                     .padding(padding)
                     .consumeWindowInsets(padding),
-                startDestination = if (isLoggedIn) homeNavigationRoute else authGraph,
+                onHideSplashScreen = onHideSplashScreen,
             )
         }
     }
@@ -85,14 +98,47 @@ fun CivcivApp(
 fun CivcivNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    startDestination: String = homeNavigationRoute,
+    startDestination: String = splashScreenRoute,
+    onHideSplashScreen: () -> Unit,
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
         startDestination = startDestination,
     ) {
-        homeGraph()
+        splashScreen(
+            onNavigateToWelcomeScreen = {
+                onHideSplashScreen()
+                navController.navigateToWelcome(
+                    navOptions {
+                        popUpTo(splashScreenRoute) {
+                            inclusive = true
+                        }
+                    },
+                )
+            },
+            onNavigateToHomeScreen = {
+                onHideSplashScreen()
+                navController.navigateToHome(
+                    navOptions {
+                        popUpTo(splashScreenRoute) {
+                            inclusive = true
+                        }
+                    },
+                )
+            },
+        )
+        homeGraph(
+            onNavigateToWelcomeScreen = {
+                navController.navigateToWelcome(
+                    navOptions {
+                        popUpTo(welcomeScreenRoute) {
+                            inclusive = true
+                        }
+                    },
+                )
+            },
+        )
         authGraph(
             onLoginClicked = {
                 navController.navigateToLogin()
@@ -109,6 +155,15 @@ fun CivcivNavHost(
                         popUpTo(welcomeScreenRoute)
                     },
                     domain = it,
+                )
+            },
+            onNavigateHome = {
+                navController.navigateToHome(
+                    navOptions {
+                        popUpTo(authGraph) {
+                            inclusive = true
+                        }
+                    },
                 )
             },
         )

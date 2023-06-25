@@ -27,20 +27,20 @@ import com.civciv.app.database.entities.AccountEntity
 interface AccountsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(accountDetail: AccountEntity): Long
+    suspend fun insert(accountDetail: AccountEntity): Long
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(accountDetail: AccountEntity)
+    suspend fun update(accountDetail: AccountEntity)
 
     @Delete
     fun delete(accountDetail: AccountEntity)
 
     @Query("SELECT * FROM AccountEntity ORDER BY updatedAt DESC")
-    fun getAccounts(): List<AccountEntity>
+    suspend fun getAccounts(): List<AccountEntity>
 
     @Query("SELECT * FROM AccountEntity WHERE id = :accountId")
-    fun getAccount(accountId: String): AccountEntity?
+    suspend fun getAccount(accountId: String): AccountEntity?
 
     @Query("""SELECT * FROM AccountEntity WHERE isActive = 1""")
-    fun getActiveAccount(): AccountEntity?
+    suspend fun getActiveAccount(): AccountEntity?
 }

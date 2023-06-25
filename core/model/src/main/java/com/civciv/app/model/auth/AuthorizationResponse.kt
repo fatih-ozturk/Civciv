@@ -18,12 +18,12 @@ package com.civciv.app.model.auth
 import android.content.Intent
 
 data class AuthorizationResponse(
-    val code: String? = null,
+    val code: String,
 ) {
     companion object {
         fun fromIntent(intent: Intent?): AuthorizationResponse {
             val code = intent?.data?.getQueryParameter("code")
-            return AuthorizationResponse(code = code)
+            return AuthorizationResponse(code = code.orEmpty())
         }
     }
 }

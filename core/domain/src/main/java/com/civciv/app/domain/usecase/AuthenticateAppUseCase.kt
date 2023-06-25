@@ -23,6 +23,6 @@ class AuthenticateAppUseCase @Inject constructor(
     private val authRepository: AuthRepository,
 ) {
 
-    suspend operator fun invoke(domain: String): Result<ApplicationCredentials> =
+    suspend operator fun invoke(domain: String): ApplicationCredentials =
         authRepository.getAuthCredentials(domain)
 }
