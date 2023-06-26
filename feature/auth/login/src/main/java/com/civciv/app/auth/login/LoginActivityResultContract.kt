@@ -27,7 +27,7 @@ class LoginActivityResultContract :
     ActivityResultContract<ApplicationCredentials, AuthorizationResult>() {
 
     override fun createIntent(context: Context, input: ApplicationCredentials): Intent {
-        return RedirectUriReceiverActivity.createIntent(context, input)
+        return AuthorizationManagementActivity.createIntent(context, input)
     }
 
     override fun parseResult(resultCode: Int, intent: Intent?): AuthorizationResult {

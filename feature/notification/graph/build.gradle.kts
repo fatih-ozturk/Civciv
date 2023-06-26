@@ -13,10 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.home.main
+plugins {
+    id("civciv.android.feature")
+    id("civciv.android.library.compose")
+}
 
-sealed interface HomeUiState {
-    object Loading : HomeUiState
-    object NotLoggedIn : HomeUiState
-    object LoggedIn : HomeUiState
+android {
+    namespace = "com.civciv.app.notification.graph"
+}
+
+dependencies {
+    implementation(project(":core:base"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:model"))
+    implementation(project(":feature:notification:main"))
+
+    implementation(libs.accompanist.navigation)
 }

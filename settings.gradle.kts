@@ -35,5 +35,11 @@ include(":feature:auth:welcome")
 include(":feature:auth:serverlist")
 include(":feature:home:graph")
 include(":feature:home:main")
+include(":feature:profile:graph")
+include(":feature:profile:main")
+include(":feature:search:graph")
+include(":feature:search:main")
+include(":feature:notification:graph")
+include(":feature:notification:main")
 
 

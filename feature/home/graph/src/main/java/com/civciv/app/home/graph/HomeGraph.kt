@@ -15,20 +15,24 @@
  */
 package com.civciv.app.home.graph
 
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavOptions
 import androidx.navigation.navigation
 import com.civciv.app.home.main.navigation.homeMainScreenRoute
 import com.civciv.app.home.main.navigation.homeScreen
 
 const val homeGraph = "homeGraph"
 
-fun NavGraphBuilder.homeGraph(
-    onNavigateToWelcomeScreen: () -> Unit,
-) {
+fun NavController.navigateToHomeGraph(navOptions: NavOptions? = null) {
+    this.navigate(homeGraph, navOptions)
+}
+
+fun NavGraphBuilder.homeGraph() {
     navigation(
         route = homeGraph,
         startDestination = homeMainScreenRoute,
     ) {
-        homeScreen(onNavigateToWelcomeScreen)
+        homeScreen()
     }
 }

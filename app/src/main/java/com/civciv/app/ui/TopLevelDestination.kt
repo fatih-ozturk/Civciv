@@ -34,7 +34,7 @@ enum class TopLevelDestination(
         selectedIcon = R.drawable.icon_home_fill,
         unselectedIcon = R.drawable.icon_home,
     ),
-    MESSAGES(
+    PROFILE(
         selectedIcon = R.drawable.icon_home_fill,
         unselectedIcon = R.drawable.icon_home,
     ),

@@ -72,7 +72,7 @@ class LoginViewModel @Inject constructor(
             _events.send(LoginEvent.FailedToLogin(appCredentials?.domain.toString()))
             _uiState.value = LoginUiState.Idle
         } else {
-            authenticateUserUseCase.invoke(loginResult.response, appCredentials)
+            authenticateUserUseCase(loginResult.response, appCredentials)
             _events.send(LoginEvent.NavigateToHome)
         }
     }

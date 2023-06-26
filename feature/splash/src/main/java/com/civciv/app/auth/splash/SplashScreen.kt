@@ -22,8 +22,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 internal fun SplashScreen(
-    onNavigateToHomeScreen: () -> Unit,
-    onNavigateToWelcomeScreen: () -> Unit,
+    onHideSplashScreen: (isLoggedIn: Boolean) -> Unit,
     viewModel: SplashViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -33,11 +32,11 @@ internal fun SplashScreen(
         }
 
         SplashUiState.LoggedIn -> {
-            onNavigateToHomeScreen()
+            onHideSplashScreen(true)
         }
 
         SplashUiState.NotLoggedIn -> {
-            onNavigateToWelcomeScreen()
+            onHideSplashScreen(false)
         }
     }
 }

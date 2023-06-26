@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".auth.login.RedirectUriReceiverActivity"
+            android:name=".auth.login.AuthorizationManagementActivity"
             android:exported="true"
             android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustResize">

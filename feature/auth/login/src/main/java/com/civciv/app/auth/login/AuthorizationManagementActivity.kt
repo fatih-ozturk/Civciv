@@ -27,7 +27,7 @@ import com.civciv.app.model.ApplicationCredentials
 import java.util.concurrent.atomic.AtomicBoolean
 import okhttp3.HttpUrl
 
-class RedirectUriReceiverActivity : Activity() {
+class AuthorizationManagementActivity : Activity() {
 
     private var isAuthStarted: AtomicBoolean = AtomicBoolean(false)
 
@@ -105,7 +105,7 @@ class RedirectUriReceiverActivity : Activity() {
             context: Context,
             applicationCredentials: ApplicationCredentials,
         ): Intent {
-            val intent = Intent(context, RedirectUriReceiverActivity::class.java)
+            val intent = Intent(context, AuthorizationManagementActivity::class.java)
             intent.putExtra(KEY_AUTH_REQUEST, applicationCredentials)
             return intent
         }

@@ -16,15 +16,8 @@
 package com.civciv.app.home.main
 
 import androidx.lifecycle.ViewModel
-import com.civciv.app.domain.usecase.GetActiveAccountUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    getActiveAccountUseCase: GetActiveAccountUseCase,
-) : ViewModel() {
-
-    init {
-    }
-}
+class HomeViewModel @Inject constructor() : ViewModel()

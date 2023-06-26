@@ -34,6 +34,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -49,10 +53,12 @@ import com.civciv.app.auth.login.navigation.navigateToLogin
 import com.civciv.app.auth.serverlist.navigation.navigateToServerList
 import com.civciv.app.auth.splash.navigation.splashScreen
 import com.civciv.app.auth.splash.navigation.splashScreenRoute
-import com.civciv.app.auth.welcome.navigation.navigateToWelcome
 import com.civciv.app.auth.welcome.navigation.welcomeScreenRoute
 import com.civciv.app.home.graph.homeGraph
 import com.civciv.app.home.main.navigation.navigateToHome
+import com.civciv.app.notification.graph.notificationGraph
+import com.civciv.app.profile.graph.profileGraph
+import com.civciv.app.search.graph.searchGraph
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
@@ -63,12 +69,13 @@ import timber.log.Timber
 fun CivcivApp(
     modifier: Modifier = Modifier,
     appState: CivcivAppState = rememberCivcivAppState(),
-    onHideSplashScreen: () -> Unit,
+    onHideSplashScreen: (isLoggedIn: Boolean) -> Unit,
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
     ) {
+        var startDestination by remember { mutableStateOf(splashScreenRoute) }
         Scaffold(
             modifier = Modifier.semantics { testTagsAsResourceId = true },
             contentColor = MaterialTheme.colorScheme.onBackground,
@@ -88,7 +95,9 @@ fun CivcivApp(
         ) { padding ->
             LaunchedEffect(Unit) {
                 appState.navController.currentBackStack.onEach { currentBackStack ->
-                    Timber.tag("Fatih").e(currentBackStack.map { it.destination.route }.toString())
+                    Timber.tag("CivcivApp currentBackStack").e(
+                        currentBackStack.map { it.destination.route }.toString(),
+                    )
                 }.collect()
             }
 
@@ -97,7 +106,14 @@ fun CivcivApp(
                 modifier = modifier
                     .padding(padding)
                     .consumeWindowInsets(padding),
-                onHideSplashScreen = onHideSplashScreen,
+                onHideSplashScreen = { isLoggedIn ->
+                    onHideSplashScreen(isLoggedIn)
+                    startDestination = when (isLoggedIn) {
+                        true -> homeGraph
+                        false -> authGraph
+                    }
+                },
+                startDestination = startDestination,
             )
         }
     }
@@ -108,7 +124,7 @@ fun CivcivNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
     startDestination: String = splashScreenRoute,
-    onHideSplashScreen: () -> Unit,
+    onHideSplashScreen: (isLoggedIn: Boolean) -> Unit,
 ) {
     NavHost(
         modifier = modifier,
@@ -116,38 +132,9 @@ fun CivcivNavHost(
         startDestination = startDestination,
     ) {
         splashScreen(
-            onNavigateToWelcomeScreen = {
-                onHideSplashScreen()
-                navController.navigateToWelcome(
-                    navOptions {
-                        popUpTo(splashScreenRoute) {
-                            inclusive = true
-                        }
-                    },
-                )
-            },
-            onNavigateToHomeScreen = {
-                onHideSplashScreen()
-                navController.navigateToHome(
-                    navOptions {
-                        popUpTo(splashScreenRoute) {
-                            inclusive = true
-                        }
-                    },
-                )
-            },
+            onHideSplashScreen = onHideSplashScreen,
         )
-        homeGraph(
-            onNavigateToWelcomeScreen = {
-                navController.navigateToWelcome(
-                    navOptions {
-                        popUpTo(welcomeScreenRoute) {
-                            inclusive = true
-                        }
-                    },
-                )
-            },
-        )
+        homeGraph()
         authGraph(
             onLoginClicked = {
                 navController.navigateToLogin()
@@ -176,6 +163,9 @@ fun CivcivNavHost(
                 )
             },
         )
+        notificationGraph()
+        profileGraph()
+        searchGraph()
     }
 }
 

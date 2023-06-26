@@ -25,10 +25,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.civciv.app.home.main.navigation.navigateToHome
+import com.civciv.app.home.graph.navigateToHomeGraph
+import com.civciv.app.notification.graph.navigateToNotificationGraph
+import com.civciv.app.profile.graph.navigateToProfileGraph
+import com.civciv.app.search.graph.navigateToSearchGraph
 import com.civciv.app.ui.TopLevelDestination.HOME
-import com.civciv.app.ui.TopLevelDestination.MESSAGES
 import com.civciv.app.ui.TopLevelDestination.NOTIFICATION
+import com.civciv.app.ui.TopLevelDestination.PROFILE
 import com.civciv.app.ui.TopLevelDestination.SEARCH
 import com.civciv.app.ui.ext.TrackDisposableJank
 
@@ -66,10 +69,10 @@ class CivcivAppState(
         }
 
         when (topLevelDestination) {
-            HOME -> navController.navigateToHome(topLevelNavOptions)
-            SEARCH -> navController.navigateToHome(topLevelNavOptions)
-            MESSAGES -> navController.navigateToHome(topLevelNavOptions)
-            NOTIFICATION -> navController.navigateToHome(topLevelNavOptions)
+            HOME -> navController.navigateToHomeGraph(topLevelNavOptions)
+            SEARCH -> navController.navigateToSearchGraph(topLevelNavOptions)
+            NOTIFICATION -> navController.navigateToNotificationGraph(topLevelNavOptions)
+            PROFILE -> navController.navigateToProfileGraph(topLevelNavOptions)
         }
     }
 }

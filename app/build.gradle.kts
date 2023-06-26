@@ -73,6 +73,12 @@ dependencies {
     implementation(project(":feature:auth:login"))
     implementation(project(":feature:auth:serverlist"))
     implementation(project(":feature:auth:welcome"))
+    implementation(project(":feature:notification:graph"))
+    implementation(project(":feature:notification:main"))
+    implementation(project(":feature:profile:graph"))
+    implementation(project(":feature:profile:main"))
+    implementation(project(":feature:search:graph"))
+    implementation(project(":feature:search:main"))
 
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
