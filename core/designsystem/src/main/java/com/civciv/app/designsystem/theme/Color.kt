@@ -176,7 +176,7 @@ internal fun lightColorScheme(
     error = error,
     onError = onError,
     info = info,
-    onInfo = onInfo
+    onInfo = onInfo,
 )
 
 internal fun darkColorScheme(
@@ -210,7 +210,7 @@ internal fun darkColorScheme(
     error = error,
     onError = onError,
     info = info,
-    onInfo = onInfo
+    onInfo = onInfo,
 )
 
 internal fun CivcivColors.updateColorSchemeFrom(other: CivcivColors) {
@@ -265,4 +265,3 @@ internal fun CivcivColors.toMaterial3Colors(): ColorScheme = ColorScheme(
 
 internal val LocalColorScheme: ProvidableCompositionLocal<CivcivColors> =
     compositionLocalOf { lightColorScheme() }
-

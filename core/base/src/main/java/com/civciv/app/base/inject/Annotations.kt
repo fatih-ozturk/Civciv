@@ -24,7 +24,6 @@ class Annotations
 @MustBeDocumented
 annotation class ApplicationId
 
-
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
 annotation class CivcivRequestHeader

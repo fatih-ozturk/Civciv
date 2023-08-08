@@ -16,12 +16,12 @@
 package com.civciv.app.network.utils
 
 import com.civciv.app.base.inject.CivcivRequestHeader
+import javax.inject.Inject
+import javax.inject.Provider
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import timber.log.Timber
-import javax.inject.Inject
-import javax.inject.Provider
 
 class DomainInterceptor @Inject constructor(
     @CivcivRequestHeader private val requestHeader: Provider<Map<String, String?>>,

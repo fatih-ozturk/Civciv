@@ -44,7 +44,7 @@ fun CivcivTheme(
     MaterialTheme(
         colorScheme = rememberedColorScheme.toMaterial3Colors(),
         typography = Typography,
-        shapes = shapes.toMaterial3Shapes()
+        shapes = shapes.toMaterial3Shapes(),
     ) {
         CompositionLocalProvider(
             LocalColorScheme provides rememberedColorScheme,
