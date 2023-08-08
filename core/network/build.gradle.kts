@@ -25,7 +25,6 @@ android {
 dependencies {
     implementation(project(":core:base"))
     implementation(project(":core:model"))
-    implementation(project(":core:database"))
 
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.datastore.preferences)

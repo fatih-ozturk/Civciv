@@ -17,6 +17,8 @@ package com.civciv.app.database.di
 
 import android.content.Context
 import androidx.room.Room
+import com.civciv.app.base.MainDispatcher
+import com.civciv.app.base.inject.CivcivRequestHeader
 import com.civciv.app.database.CivcivDatabase
 import com.civciv.app.database.dao.AccountsDao
 import dagger.Module
@@ -24,6 +26,11 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Singleton
 
 @Module
@@ -45,4 +52,19 @@ object DatabaseModule {
     fun provideAccountDao(
         database: CivcivDatabase,
     ): AccountsDao = database.accountDao()
+
+    @Provides
+    @CivcivRequestHeader
+    fun provideRequestHeader(
+        accountsDao: AccountsDao,
+        @MainDispatcher mainDispatcher: CoroutineDispatcher,
+    ): Map<String, String?> {
+        val requestHeader = mutableMapOf<String, String?>()
+        GlobalScope.launch(mainDispatcher) {
+            val currentAccount = accountsDao.getActiveAccount()
+            requestHeader["Domain"] = currentAccount?.domain
+            requestHeader["Authorization"] = currentAccount?.accessToken
+        }
+        return requestHeader.toMap()
+    }
 }

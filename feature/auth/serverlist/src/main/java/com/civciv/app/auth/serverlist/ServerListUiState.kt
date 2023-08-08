@@ -21,7 +21,7 @@ import com.civciv.app.model.MastodonServer
 
 sealed interface ServerListUiState {
 
-    object Loading : ServerListUiState
+    data object Loading : ServerListUiState
 
     data class ServerList(
         val serverList: List<MastodonServer>,
@@ -29,5 +29,5 @@ sealed interface ServerListUiState {
         val categoryList: List<MastodonCategory>,
     ) : ServerListUiState
 
-    object Error : ServerListUiState
+    data object Error : ServerListUiState
 }

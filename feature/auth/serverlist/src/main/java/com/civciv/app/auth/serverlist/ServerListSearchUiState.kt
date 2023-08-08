@@ -18,8 +18,8 @@ package com.civciv.app.auth.serverlist
 import com.civciv.app.model.MastodonServer
 
 sealed interface ServerListSearchUiState {
-    object Empty : ServerListSearchUiState
-    object NotFound : ServerListSearchUiState
+    data object Empty : ServerListSearchUiState
+    data object NotFound : ServerListSearchUiState
     data class SearchResult(val searchResult: List<MastodonServer> = emptyList()) :
         ServerListSearchUiState
 }

@@ -23,3 +23,8 @@ class Annotations
 @Qualifier
 @MustBeDocumented
 annotation class ApplicationId
+
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+annotation class CivcivRequestHeader

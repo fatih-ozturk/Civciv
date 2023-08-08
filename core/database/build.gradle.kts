@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:base"))
     implementation(project(":core:model"))
 
     implementation(libs.kotlin.datetime)

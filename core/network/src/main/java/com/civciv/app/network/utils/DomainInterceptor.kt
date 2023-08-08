@@ -15,24 +15,18 @@
  */
 package com.civciv.app.network.utils
 
-import com.civciv.app.base.MainDispatcher
-import com.civciv.app.database.dao.AccountsDao
-import javax.inject.Inject
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.civciv.app.base.inject.CivcivRequestHeader
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Provider
 
 class DomainInterceptor @Inject constructor(
-    private val accountsDao: AccountsDao,
-    @MainDispatcher private val mainDispatcher: CoroutineDispatcher,
+    @CivcivRequestHeader private val requestHeader: Provider<Map<String, String?>>,
 ) : Interceptor {
 
-    @OptIn(DelicateCoroutinesApi::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val builder = originalRequest.newBuilder()
@@ -46,13 +40,9 @@ class DomainInterceptor @Inject constructor(
             builder.url(originalRequest.url.newBuilder().host(domainIsDefined).build())
             builder.removeHeader(Constants.DOMAIN_PLACEHOLDER)
         } else {
-            GlobalScope.launch(mainDispatcher) {
-                val currentAccount = accountsDao.getActiveAccount()
-                currentAccount?.run {
-                    builder.url(originalRequest.url.newBuilder().host(domain).build())
-                    builder.addHeader("Authorization", "Bearer $accessToken")
-                }
-            }
+            val userHeader = requestHeader.get()
+            builder.url(originalRequest.url.newBuilder().host(userHeader["Domain"] ?: "").build())
+            builder.addHeader("Authorization", "Bearer ${userHeader["Authorization"] ?: ""}")
         }
 
         val newRequest: Request = builder.build()

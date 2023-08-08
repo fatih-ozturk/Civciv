@@ -34,6 +34,6 @@ class MainViewModel @Inject constructor() : ViewModel() {
 }
 
 sealed interface MainActivitySplashState {
-    object Loading : MainActivitySplashState
-    object Success : MainActivitySplashState
+    data object Loading : MainActivitySplashState
+    data object Success : MainActivitySplashState
 }
