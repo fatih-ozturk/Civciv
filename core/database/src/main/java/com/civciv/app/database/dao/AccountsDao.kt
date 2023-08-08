@@ -42,5 +42,5 @@ interface AccountsDao {
     suspend fun getAccount(accountId: String): AccountEntity?
 
     @Query("SELECT * FROM AccountEntity WHERE isActive = 1")
-    suspend fun getActiveAccount(): AccountEntity?
+    fun getActiveAccount(): AccountEntity?
 }
