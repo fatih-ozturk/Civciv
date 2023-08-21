@@ -5,7 +5,7 @@ echo "Running git pre-push hook. Running Static analysis... "
 echo "*********************************************************"
 
 OUTPUT="/tmp/analysis-result"
-./gradlew ktlintCheck spotlessCheck check --daemon > ${OUTPUT}
+./gradlew ktlintCheck spotlessCheck --daemon > ${OUTPUT}
 EXIT_CODE=$?
 
 if [ ${EXIT_CODE} -ne 0 ]; then

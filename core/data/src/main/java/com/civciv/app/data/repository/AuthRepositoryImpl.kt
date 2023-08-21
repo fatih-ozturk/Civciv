@@ -15,7 +15,6 @@
  */
 package com.civciv.app.data.repository
 
-import com.civciv.app.base.MainDispatcher
 import com.civciv.app.database.dao.AccountsDao
 import com.civciv.app.database.entities.AccountEntity
 import com.civciv.app.model.AccountCredentials
@@ -24,7 +23,6 @@ import com.civciv.app.model.auth.AuthorizationResponse
 import com.civciv.app.network.api.AccountsService
 import com.civciv.app.network.api.AuthService
 import com.civciv.app.network.utils.Constants
-import kotlinx.coroutines.CoroutineDispatcher
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
@@ -110,8 +108,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
 
         val existAccount = accounts.find { account ->
-            applicationCredentials.domain == account.domain &&
-                    accountResponse.id == account.id
+            applicationCredentials.domain == account.domain && accountResponse.id == account.id
         }
 
         val newAccount = if (existAccount != null) {

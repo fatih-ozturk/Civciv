@@ -19,18 +19,18 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.civciv.app.auth.login.navigation.LoginArgs
-import com.civciv.app.domain.usecase.GetApplicationCredentialsUseCase
 import com.civciv.app.domain.usecase.AddAccountCredentialsUseCase
+import com.civciv.app.domain.usecase.GetApplicationCredentialsUseCase
 import com.civciv.app.model.ApplicationCredentials
 import com.civciv.app.model.auth.AuthorizationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
