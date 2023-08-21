@@ -13,13 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.data.repository
+package com.civciv.app.domain.usecase
 
-import com.civciv.app.model.Account
+import com.civciv.app.data.repository.AuthRepository
 import com.civciv.app.model.ApplicationCredentials
 import com.civciv.app.model.auth.AuthorizationResponse
-import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-interface AccountRepository {
-    fun getActiveAccount(): Flow<Account?>
+class AddAccountCredentialsUseCase @Inject constructor(
+    private val authRepository: AuthRepository,
+) {
+
+    suspend operator fun invoke(
+        authResult: AuthorizationResponse,
+        appCredentials: ApplicationCredentials,
+    ) = authRepository.addAccountCredentials(authResult, appCredentials)
 }

@@ -15,17 +15,14 @@
  */
 package com.civciv.app.domain.usecase
 
-import com.civciv.app.data.repository.AccountRepository
+import com.civciv.app.data.repository.AuthRepository
 import com.civciv.app.model.ApplicationCredentials
-import com.civciv.app.model.auth.AuthorizationResponse
 import javax.inject.Inject
 
-class AuthenticateUserUseCase @Inject constructor(
-    private val accountRepository: AccountRepository,
+class GetApplicationCredentialsUseCase @Inject constructor(
+    private val authRepository: AuthRepository,
 ) {
 
-    suspend operator fun invoke(
-        authResult: AuthorizationResponse,
-        appCredentials: ApplicationCredentials,
-    ) = accountRepository.addAccount(authResult, appCredentials)
+    suspend operator fun invoke(domain: String): ApplicationCredentials =
+        authRepository.getApplicationCredentials(domain)
 }

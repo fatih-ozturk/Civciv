@@ -29,7 +29,7 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-
+    // TODO separate each repository to own module
     @Binds
     abstract fun bindAccountRepository(
         accountRepositoryImpl: AccountRepositoryImpl,

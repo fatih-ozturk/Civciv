@@ -15,8 +15,16 @@
  */
 package com.civciv.app.data.repository
 
+import com.civciv.app.model.AccountCredentials
 import com.civciv.app.model.ApplicationCredentials
+import com.civciv.app.model.auth.AuthorizationResponse
 
 interface AuthRepository {
-    suspend fun getAuthCredentials(domain: String): ApplicationCredentials
+    suspend fun getApplicationCredentials(domain: String): ApplicationCredentials
+    fun getUserCredentials(): AccountCredentials?
+    suspend fun setActiveAccount(accountId: String)
+    suspend fun addAccountCredentials(
+        authorizationResult: AuthorizationResponse,
+        applicationCredentials: ApplicationCredentials,
+    )
 }

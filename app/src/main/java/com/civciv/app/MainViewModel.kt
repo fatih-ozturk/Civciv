@@ -29,6 +29,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
     val splashState: StateFlow<MainActivitySplashState> = _splashState
 
     fun hideSplashScreen() {
+        // TODO Update if there is any active user
         _splashState.value = MainActivitySplashState.Success
     }
 }

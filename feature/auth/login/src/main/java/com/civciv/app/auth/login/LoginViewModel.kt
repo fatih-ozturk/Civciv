@@ -19,8 +19,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.civciv.app.auth.login.navigation.LoginArgs
-import com.civciv.app.domain.usecase.AuthenticateAppUseCase
-import com.civciv.app.domain.usecase.AuthenticateUserUseCase
+import com.civciv.app.domain.usecase.GetApplicationCredentialsUseCase
+import com.civciv.app.domain.usecase.AddAccountCredentialsUseCase
 import com.civciv.app.model.ApplicationCredentials
 import com.civciv.app.model.auth.AuthorizationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,8 +34,8 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authenticateAppUseCase: AuthenticateAppUseCase,
-    private val authenticateUserUseCase: AuthenticateUserUseCase,
+    private val getApplicationCredentialsUseCase: GetApplicationCredentialsUseCase,
+    private val addAccountCredentialsUseCase: AddAccountCredentialsUseCase,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -60,7 +60,7 @@ class LoginViewModel @Inject constructor(
 
     fun onLoginClick(domain: String) = viewModelScope.launch {
         _uiState.value = LoginUiState.Loading
-        val appCredentials = authenticateAppUseCase(domain = domain)
+        val appCredentials = getApplicationCredentialsUseCase(domain = domain)
         savedStateHandle[APP_CREDENTIALS_KEY] = appCredentials
         _events.send(LoginEvent.RedirectToAuth(appCredentials))
     }
@@ -72,7 +72,7 @@ class LoginViewModel @Inject constructor(
             _events.send(LoginEvent.FailedToLogin(appCredentials?.domain.toString()))
             _uiState.value = LoginUiState.Idle
         } else {
-            authenticateUserUseCase(loginResult.response, appCredentials)
+            addAccountCredentialsUseCase(loginResult.response, appCredentials)
             _events.send(LoginEvent.NavigateToHome)
         }
     }
@@ -83,8 +83,8 @@ class LoginViewModel @Inject constructor(
 }
 
 sealed interface LoginUiState {
-    object Idle : LoginUiState
-    object Loading : LoginUiState
+    data object Idle : LoginUiState
+    data object Loading : LoginUiState
     data class Login(val domain: String) : LoginUiState
 }
 
@@ -97,5 +97,5 @@ sealed interface LoginEvent {
         val domain: String,
     ) : LoginEvent
 
-    object NavigateToHome : LoginEvent
+    data object NavigateToHome : LoginEvent
 }

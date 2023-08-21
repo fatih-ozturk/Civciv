@@ -17,14 +17,13 @@ package com.civciv.app.network.utils
 
 import com.civciv.app.base.inject.CivcivRequestHeader
 import javax.inject.Inject
-import javax.inject.Provider
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import timber.log.Timber
 
 class DomainInterceptor @Inject constructor(
-    @CivcivRequestHeader private val requestHeader: Provider<Map<String, String?>>,
+    @CivcivRequestHeader private val requestHeader: dagger.Lazy<Map<String, String?>>,
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {

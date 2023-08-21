@@ -13,16 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.domain.usecase
+package com.civciv.app.model
 
-import com.civciv.app.data.repository.AuthRepository
-import com.civciv.app.model.ApplicationCredentials
-import javax.inject.Inject
-
-class AuthenticateAppUseCase @Inject constructor(
-    private val authRepository: AuthRepository,
-) {
-
-    suspend operator fun invoke(domain: String): ApplicationCredentials =
-        authRepository.getAuthCredentials(domain)
-}
+data class AccountCredentials(
+    val domain: String,
+    val accessToken: String,
+)
