@@ -31,10 +31,10 @@ import androidx.metrics.performance.JankStats
 import com.civciv.app.designsystem.theme.CivcivTheme
 import com.civciv.app.ui.CivcivApp
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

@@ -15,253 +15,138 @@
  */
 package com.civciv.app.designsystem.theme
 
-import androidx.compose.material3.ColorScheme
-import androidx.compose.runtime.ProvidableCompositionLocal
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.structuralEqualityPolicy
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
-internal object ColorLightTokens {
-    val primary = Color(0XFFF8E74F)
-    val primaryVariant = Color(0xFFB08C0E)
-    val onPrimary = Color(0xDE000000)
-    val surface = Color(0xFFD9D9D9)
-    val onSurface = Color(0xFF1A1A1A)
-    val background = Color(0xFFFFFFFF)
-    val onBackground = Color(0xFF000000)
-    val success = Color(0xFF66BB6A)
-    val onSuccess = Color(0xDE000000)
-    val warning = Color(0xFFFFA726)
-    val onWarning = Color(0xDE000000)
-    val error = Color(0xFFF44336)
-    val onError = Color(0xFFFFFFFF)
-    val info = Color(0xFF29B6F6)
-    val onInfo = Color(0xDE000000)
-}
 
-internal object ColorDarkTokens {
-    val primary = Color(0XFFF8E74F)
-    val primaryVariant = Color(0xFFB08C0E)
-    val onPrimary = Color(0xDE000000)
-    val surface = Color(0xFF24252C)
-    val onSurface = Color(0xFFEAEAEA)
-    val background = Color(0xFF31323B)
-    val onBackground = Color(0xFFEAEAEA)
-    val success = Color(0xFF66BB6A)
-    val onSuccess = Color(0xDE000000)
-    val warning = Color(0xFFFFA726)
-    val onWarning = Color(0xDE000000)
-    val error = Color(0xFFF44336)
-    val onError = Color(0xFFFFFFFF)
-    val info = Color(0xFF29B6F6)
-    val onInfo = Color(0xDE000000)
-}
+val md_theme_light_primary = Color(0xFF6750A4)
+val md_theme_light_onPrimary = Color(0xFFFFFFFF)
+val md_theme_light_primaryContainer = Color(0xFFEADDFF)
+val md_theme_light_onPrimaryContainer = Color(0xFF21005D)
+val md_theme_light_secondary = Color(0xFF625B71)
+val md_theme_light_onSecondary = Color(0xFFFFFFFF)
+val md_theme_light_secondaryContainer = Color(0xFFE8DEF8)
+val md_theme_light_onSecondaryContainer = Color(0xFF1D192B)
+val md_theme_light_tertiary = Color(0xFF7D5260)
+val md_theme_light_onTertiary = Color(0xFFFFFFFF)
+val md_theme_light_tertiaryContainer = Color(0xFFFFD8E4)
+val md_theme_light_onTertiaryContainer = Color(0xFF31111D)
+val md_theme_light_error = Color(0xFFB3261E)
+val md_theme_light_onError = Color(0xFFFFFFFF)
+val md_theme_light_errorContainer = Color(0xFFF9DEDC)
+val md_theme_light_onErrorContainer = Color(0xFF410E0B)
+val md_theme_light_outline = Color(0xFF79747E)
+val md_theme_light_background = Color(0xFFFFFBFE)
+val md_theme_light_onBackground = Color(0xFF1C1B1F)
+val md_theme_light_surface = Color(0xFFFFFBFE)
+val md_theme_light_onSurface = Color(0xFF1C1B1F)
+val md_theme_light_surfaceVariant = Color(0xFFE7E0EC)
+val md_theme_light_onSurfaceVariant = Color(0xFF49454F)
+val md_theme_light_inverseSurface = Color(0xFF313033)
+val md_theme_light_inverseOnSurface = Color(0xFFF4EFF4)
+val md_theme_light_inversePrimary = Color(0xFFD0BCFF)
+val md_theme_light_shadow = Color(0xFF000000)
+val md_theme_light_surfaceTint = Color(0xFF6750A4)
+val md_theme_light_outlineVariant = Color(0xFFCAC4D0)
+val md_theme_light_scrim = Color(0xFF000000)
 
-@Stable
-class CivcivColors(
-    primary: Color,
-    primaryVariant: Color,
-    onPrimary: Color,
-    surface: Color,
-    onSurface: Color,
-    background: Color,
-    onBackground: Color,
-    success: Color,
-    onSuccess: Color,
-    warning: Color,
-    onWarning: Color,
-    error: Color,
-    onError: Color,
-    info: Color,
-    onInfo: Color,
-) {
-    var primary by mutableStateOf(primary, structuralEqualityPolicy())
-        internal set
-    var primaryVariant by mutableStateOf(primaryVariant, structuralEqualityPolicy())
-        internal set
-    var onPrimary by mutableStateOf(onPrimary, structuralEqualityPolicy())
-        internal set
-    var surface by mutableStateOf(surface, structuralEqualityPolicy())
-        internal set
-    var onSurface by mutableStateOf(onSurface, structuralEqualityPolicy())
-        internal set
-    var background by mutableStateOf(background, structuralEqualityPolicy())
-        internal set
-    var onBackground by mutableStateOf(onBackground, structuralEqualityPolicy())
-        internal set
-    var success by mutableStateOf(success, structuralEqualityPolicy())
-        internal set
-    var onSuccess by mutableStateOf(onSuccess, structuralEqualityPolicy())
-        internal set
-    var warning by mutableStateOf(warning, structuralEqualityPolicy())
-        internal set
-    var onWarning by mutableStateOf(onWarning, structuralEqualityPolicy())
-        internal set
-    var error by mutableStateOf(error, structuralEqualityPolicy())
-        internal set
-    var onError by mutableStateOf(onError, structuralEqualityPolicy())
-        internal set
-    var info by mutableStateOf(info, structuralEqualityPolicy())
-        internal set
-    var onInfo by mutableStateOf(onInfo, structuralEqualityPolicy())
-        internal set
+val md_theme_dark_primary = Color(0xFFD0BCFF)
+val md_theme_dark_onPrimary = Color(0xFF381E72)
+val md_theme_dark_primaryContainer = Color(0xFF4F378B)
+val md_theme_dark_onPrimaryContainer = Color(0xFFEADDFF)
+val md_theme_dark_secondary = Color(0xFFCCC2DC)
+val md_theme_dark_onSecondary = Color(0xFF332D41)
+val md_theme_dark_secondaryContainer = Color(0xFF4A4458)
+val md_theme_dark_onSecondaryContainer = Color(0xFFE8DEF8)
+val md_theme_dark_tertiary = Color(0xFFEFB8C8)
+val md_theme_dark_onTertiary = Color(0xFF492532)
+val md_theme_dark_tertiaryContainer = Color(0xFF633B48)
+val md_theme_dark_onTertiaryContainer = Color(0xFFFFD8E4)
+val md_theme_dark_error = Color(0xFFF2B8B5)
+val md_theme_dark_onError = Color(0xFF601410)
+val md_theme_dark_errorContainer = Color(0xFF8C1D18)
+val md_theme_dark_onErrorContainer = Color(0xFFF9DEDC)
+val md_theme_dark_outline = Color(0xFF938F99)
+val md_theme_dark_background = Color(0xFF1C1B1F)
+val md_theme_dark_onBackground = Color(0xFFE6E1E5)
+val md_theme_dark_surface = Color(0xFF1C1B1F)
+val md_theme_dark_onSurface = Color(0xFFE6E1E5)
+val md_theme_dark_surfaceVariant = Color(0xFF49454F)
+val md_theme_dark_onSurfaceVariant = Color(0xFFCAC4D0)
+val md_theme_dark_inverseSurface = Color(0xFFE6E1E5)
+val md_theme_dark_inverseOnSurface = Color(0xFF313033)
+val md_theme_dark_inversePrimary = Color(0xFF6750A4)
+val md_theme_dark_shadow = Color(0xFF000000)
+val md_theme_dark_surfaceTint = Color(0xFFD0BCFF)
+val md_theme_dark_outlineVariant = Color(0xFF49454F)
+val md_theme_dark_scrim = Color(0xFF000000)
 
-    fun copy(
-        primary: Color = this.primary,
-        primaryVariant: Color = this.primaryVariant,
-        onPrimary: Color = this.onPrimary,
-        surface: Color = this.surface,
-        onSurface: Color = this.onSurface,
-        background: Color = this.background,
-        onBackground: Color = this.onBackground,
-        success: Color = this.success,
-        onSuccess: Color = this.onSuccess,
-        warning: Color = this.warning,
-        onWarning: Color = this.onWarning,
-        error: Color = this.error,
-        onError: Color = this.onError,
-        info: Color = this.info,
-        onInfo: Color = this.onInfo,
-    ): CivcivColors = CivcivColors(
-        primary = primary,
-        primaryVariant = primaryVariant,
-        onPrimary = onPrimary,
-        surface = surface,
-        onSurface = onSurface,
-        background = background,
-        onBackground = onBackground,
-        success = success,
-        onSuccess = onSuccess,
-        warning = warning,
-        onWarning = onWarning,
-        error = error,
-        onError = onError,
-        info = info,
-        onInfo = onInfo,
-    )
-}
 
-internal fun lightColorScheme(
-    primary: Color = ColorLightTokens.primary,
-    primaryVariant: Color = ColorLightTokens.primaryVariant,
-    onPrimary: Color = ColorLightTokens.onPrimary,
-    surface: Color = ColorLightTokens.surface,
-    onSurface: Color = ColorLightTokens.onSurface,
-    background: Color = ColorLightTokens.background,
-    onBackground: Color = ColorLightTokens.onBackground,
-    success: Color = ColorLightTokens.success,
-    onSuccess: Color = ColorLightTokens.onSuccess,
-    warning: Color = ColorLightTokens.warning,
-    onWarning: Color = ColorLightTokens.onWarning,
-    error: Color = ColorLightTokens.error,
-    onError: Color = ColorLightTokens.onError,
-    info: Color = ColorLightTokens.info,
-    onInfo: Color = ColorLightTokens.onInfo,
-): CivcivColors = CivcivColors(
-    primary = primary,
-    primaryVariant = primaryVariant,
-    onPrimary = onPrimary,
-    surface = surface,
-    onSurface = onSurface,
-    background = background,
-    onBackground = onBackground,
-    success = success,
-    onSuccess = onSuccess,
-    warning = warning,
-    onWarning = onWarning,
-    error = error,
-    onError = onError,
-    info = info,
-    onInfo = onInfo,
+val seed = Color(0xFF6750A4)
+
+
+val LightColors = lightColorScheme(
+    primary = md_theme_light_primary,
+    onPrimary = md_theme_light_onPrimary,
+    primaryContainer = md_theme_light_primaryContainer,
+    onPrimaryContainer = md_theme_light_onPrimaryContainer,
+    secondary = md_theme_light_secondary,
+    onSecondary = md_theme_light_onSecondary,
+    secondaryContainer = md_theme_light_secondaryContainer,
+    onSecondaryContainer = md_theme_light_onSecondaryContainer,
+    tertiary = md_theme_light_tertiary,
+    onTertiary = md_theme_light_onTertiary,
+    tertiaryContainer = md_theme_light_tertiaryContainer,
+    onTertiaryContainer = md_theme_light_onTertiaryContainer,
+    error = md_theme_light_error,
+    onError = md_theme_light_onError,
+    errorContainer = md_theme_light_errorContainer,
+    onErrorContainer = md_theme_light_onErrorContainer,
+    outline = md_theme_light_outline,
+    background = md_theme_light_background,
+    onBackground = md_theme_light_onBackground,
+    surface = md_theme_light_surface,
+    onSurface = md_theme_light_onSurface,
+    surfaceVariant = md_theme_light_surfaceVariant,
+    onSurfaceVariant = md_theme_light_onSurfaceVariant,
+    inverseSurface = md_theme_light_inverseSurface,
+    inverseOnSurface = md_theme_light_inverseOnSurface,
+    inversePrimary = md_theme_light_inversePrimary,
+    surfaceTint = md_theme_light_surfaceTint,
+    outlineVariant = md_theme_light_outlineVariant,
+    scrim = md_theme_light_scrim,
 )
 
-internal fun darkColorScheme(
-    primary: Color = ColorDarkTokens.primary,
-    primaryVariant: Color = ColorDarkTokens.primaryVariant,
-    onPrimary: Color = ColorDarkTokens.onPrimary,
-    surface: Color = ColorDarkTokens.surface,
-    onSurface: Color = ColorDarkTokens.onSurface,
-    background: Color = ColorDarkTokens.background,
-    onBackground: Color = ColorDarkTokens.onBackground,
-    success: Color = ColorDarkTokens.success,
-    onSuccess: Color = ColorDarkTokens.onSuccess,
-    warning: Color = ColorDarkTokens.warning,
-    onWarning: Color = ColorDarkTokens.onWarning,
-    error: Color = ColorDarkTokens.error,
-    onError: Color = ColorDarkTokens.onError,
-    info: Color = ColorDarkTokens.info,
-    onInfo: Color = ColorDarkTokens.onInfo,
-): CivcivColors = CivcivColors(
-    primary = primary,
-    primaryVariant = primaryVariant,
-    onPrimary = onPrimary,
-    surface = surface,
-    onSurface = onSurface,
-    background = background,
-    onBackground = onBackground,
-    success = success,
-    onSuccess = onSuccess,
-    warning = warning,
-    onWarning = onWarning,
-    error = error,
-    onError = onError,
-    info = info,
-    onInfo = onInfo,
+
+val DarkColors = darkColorScheme(
+    primary = md_theme_dark_primary,
+    onPrimary = md_theme_dark_onPrimary,
+    primaryContainer = md_theme_dark_primaryContainer,
+    onPrimaryContainer = md_theme_dark_onPrimaryContainer,
+    secondary = md_theme_dark_secondary,
+    onSecondary = md_theme_dark_onSecondary,
+    secondaryContainer = md_theme_dark_secondaryContainer,
+    onSecondaryContainer = md_theme_dark_onSecondaryContainer,
+    tertiary = md_theme_dark_tertiary,
+    onTertiary = md_theme_dark_onTertiary,
+    tertiaryContainer = md_theme_dark_tertiaryContainer,
+    onTertiaryContainer = md_theme_dark_onTertiaryContainer,
+    error = md_theme_dark_error,
+    onError = md_theme_dark_onError,
+    errorContainer = md_theme_dark_errorContainer,
+    onErrorContainer = md_theme_dark_onErrorContainer,
+    outline = md_theme_dark_outline,
+    background = md_theme_dark_background,
+    onBackground = md_theme_dark_onBackground,
+    surface = md_theme_dark_surface,
+    onSurface = md_theme_dark_onSurface,
+    surfaceVariant = md_theme_dark_surfaceVariant,
+    onSurfaceVariant = md_theme_dark_onSurfaceVariant,
+    inverseSurface = md_theme_dark_inverseSurface,
+    inverseOnSurface = md_theme_dark_inverseOnSurface,
+    inversePrimary = md_theme_dark_inversePrimary,
+    surfaceTint = md_theme_dark_surfaceTint,
+    outlineVariant = md_theme_dark_outlineVariant,
+    scrim = md_theme_dark_scrim,
 )
-
-internal fun CivcivColors.updateColorSchemeFrom(other: CivcivColors) {
-    primary = other.primary
-    primaryVariant = other.primaryVariant
-    onPrimary = other.onPrimary
-    surface = other.surface
-    onSurface = other.onSurface
-    background = other.background
-    onBackground = other.onBackground
-    success = other.success
-    onSuccess = other.onSuccess
-    warning = other.warning
-    onWarning = other.onWarning
-    error = other.error
-    onError = other.onError
-    info = other.info
-    onInfo = other.onInfo
-}
-
-internal fun CivcivColors.toMaterial3Colors(): ColorScheme = ColorScheme(
-    primary = primary,
-    onPrimary = onPrimary,
-    primaryContainer = Color.Magenta,
-    onPrimaryContainer = Color.Magenta,
-    inversePrimary = Color.Magenta,
-    secondary = Color.Magenta,
-    onSecondary = Color.Magenta,
-    secondaryContainer = Color.Magenta,
-    onSecondaryContainer = Color.Magenta,
-    tertiary = info,
-    onTertiary = onInfo,
-    tertiaryContainer = Color.Magenta,
-    onTertiaryContainer = Color.Magenta,
-    background = background,
-    onBackground = onBackground,
-    surface = surface,
-    onSurface = onSurface,
-    surfaceVariant = Color.Magenta,
-    onSurfaceVariant = Color.Magenta,
-    surfaceTint = Color.Magenta,
-    inverseSurface = Color.Magenta,
-    inverseOnSurface = Color.Magenta,
-    error = error,
-    onError = onError,
-    errorContainer = Color.Magenta,
-    onErrorContainer = Color.Magenta,
-    outline = Color.Magenta,
-    outlineVariant = Color.Magenta,
-    scrim = Color.Magenta,
-)
-
-internal val LocalColorScheme: ProvidableCompositionLocal<CivcivColors> =
-    compositionLocalOf { lightColorScheme() }
