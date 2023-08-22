@@ -14,13 +14,4 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<resources>
-
-    <style name="Theme.Civciv" parent="android:Theme.Material.Light.NoActionBar" />
-
-    <style name="Theme.Civciv.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenIconBackgroundColor">#FAF8FB</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.Civciv</item>
-    </style>
-</resources>
+<manifest />

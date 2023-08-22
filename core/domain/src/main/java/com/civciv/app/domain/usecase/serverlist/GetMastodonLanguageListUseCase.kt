@@ -15,7 +15,7 @@
  */
 package com.civciv.app.domain.usecase.serverlist
 
-import com.civciv.app.data.repository.MastodonRepository
+import com.civciv.app.data.common.repository.MastodonRepository
 import com.civciv.app.model.MastodonLanguage
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow

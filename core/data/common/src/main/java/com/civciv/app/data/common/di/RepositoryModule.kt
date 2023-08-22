@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.data.di
+package com.civciv.app.data.common.di
 
-import com.civciv.app.data.repository.AccountRepository
-import com.civciv.app.data.repository.AccountRepositoryImpl
-import com.civciv.app.data.repository.AuthRepository
-import com.civciv.app.data.repository.AuthRepositoryImpl
-import com.civciv.app.data.repository.MastodonRepository
-import com.civciv.app.data.repository.MastodonRepositoryImpl
+import com.civciv.app.data.common.repository.AccountRepository
+import com.civciv.app.data.common.repository.AccountRepositoryImpl
+import com.civciv.app.data.common.repository.MastodonRepository
+import com.civciv.app.data.common.repository.MastodonRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -34,11 +32,6 @@ abstract class RepositoryModule {
     abstract fun bindAccountRepository(
         accountRepositoryImpl: AccountRepositoryImpl,
     ): AccountRepository
-
-    @Binds
-    abstract fun bindAuthRepository(
-        authRepositoryImpl: AuthRepositoryImpl,
-    ): AuthRepository
 
     @Binds
     abstract fun bindMastodonRepository(

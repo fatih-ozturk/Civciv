@@ -20,7 +20,8 @@ rootProject.name = "Civciv"
 
 include(":app")
 include(":core:base")
-include(":core:data")
+include(":core:data:common")
+include(":core:data:auth")
 include(":core:database")
 include(":core:designsystem")
 include(":core:domain")

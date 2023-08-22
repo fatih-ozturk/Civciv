@@ -15,7 +15,7 @@
  */
 package com.civciv.app.domain.usecase
 
-import com.civciv.app.data.repository.AccountRepository
+import com.civciv.app.data.common.repository.AccountRepository
 import com.civciv.app.model.Account
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow

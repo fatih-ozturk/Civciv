@@ -15,7 +15,7 @@
  */
 package com.civciv.app.domain.usecase
 
-import com.civciv.app.data.repository.AuthRepository
+import com.civciv.app.data.auth.repository.AuthRepository
 import com.civciv.app.model.ApplicationCredentials
 import javax.inject.Inject
 

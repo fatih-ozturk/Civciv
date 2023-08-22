@@ -13,18 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.data.repository
+package com.civciv.app.data.auth.di
 
-import com.civciv.app.model.AccountCredentials
-import com.civciv.app.model.ApplicationCredentials
-import com.civciv.app.model.auth.AuthorizationResponse
+import com.civciv.app.data.auth.repository.AuthRepository
+import com.civciv.app.data.auth.repository.AuthRepositoryImpl
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
-interface AuthRepository {
-    suspend fun getApplicationCredentials(domain: String): ApplicationCredentials
-    fun getUserCredentials(): AccountCredentials?
-    suspend fun setActiveAccount(accountId: String)
-    suspend fun addAccountCredentials(
-        authorizationResult: AuthorizationResponse,
-        applicationCredentials: ApplicationCredentials,
-    )
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class AuthRepositoryModule {
+
+    @Binds
+    abstract fun bindAuthRepository(
+        authRepositoryImpl: AuthRepositoryImpl,
+    ): AuthRepository
 }

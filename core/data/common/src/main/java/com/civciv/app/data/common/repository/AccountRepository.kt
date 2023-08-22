@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.data.repository
+package com.civciv.app.data.common.repository
 
 import com.civciv.app.model.Account
 import kotlinx.coroutines.flow.Flow

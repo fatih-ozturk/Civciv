@@ -19,15 +19,20 @@ plugins {
 }
 
 android {
-    namespace = "com.civciv.app.domain"
+    namespace = "com.civciv.app.data.common"
 }
 
 dependencies {
-    implementation(project(":core:data:common"))
-    implementation(project(":core:data:auth"))
     implementation(project(":core:base"))
+    implementation(project(":core:network"))
     implementation(project(":core:model"))
+    implementation(project(":core:database"))
 
     implementation(libs.androidx.paging.runtime)
     implementation(libs.room.ktx)
+
+    implementation(libs.androidx.datastore)
+    implementation(libs.androidx.datastore.preferences)
+
+    testImplementation(project(":core:testing"))
 }

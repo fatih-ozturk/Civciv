@@ -13,26 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("civciv.android.library")
-    id("civciv.android.hilt")
-}
+package com.civciv.app.data.auth.repository
 
-android {
-    namespace = "com.civciv.app.data"
-}
+import com.civciv.app.model.AccountCredentials
+import com.civciv.app.model.ApplicationCredentials
+import com.civciv.app.model.auth.AuthorizationResponse
 
-dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:network"))
-    implementation(project(":core:model"))
-    implementation(project(":core:database"))
-
-    implementation(libs.androidx.paging.runtime)
-    implementation(libs.room.ktx)
-
-    implementation(libs.androidx.datastore)
-    implementation(libs.androidx.datastore.preferences)
-
-    testImplementation(project(":core:testing"))
+interface AuthRepository {
+    suspend fun getApplicationCredentials(domain: String): ApplicationCredentials
+    fun getUserCredentials(): AccountCredentials?
+    suspend fun setActiveAccount(accountId: String)
+    suspend fun addAccountCredentials(
+        authorizationResult: AuthorizationResponse,
+        applicationCredentials: ApplicationCredentials,
+    )
 }
