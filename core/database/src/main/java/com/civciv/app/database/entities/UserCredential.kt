@@ -17,18 +17,14 @@ package com.civciv.app.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.civciv.app.model.Account
 
-@Entity
-data class AccountEntity(
-    @PrimaryKey var id: String,
-    var username: String,
+@Entity(tableName = "user_credential")
+data class UserCredential(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
     val domain: String,
-    var accessToken: String,
-    var updatedAt: Long = System.currentTimeMillis(),
-    var isActive: Boolean = false,
+    val accountId: String,
+    val accessToken: String,
+    val tokenType: String,
+    val isActive: Boolean = false,
 )
-
-fun AccountEntity.toExternalModel(): Account {
-    return Account(username = username)
-}

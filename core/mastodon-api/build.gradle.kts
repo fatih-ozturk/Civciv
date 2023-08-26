@@ -16,24 +16,24 @@
 plugins {
     id("civciv.android.library")
     id("civciv.android.hilt")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.civciv.app.data"
+    namespace = "com.civciv.app.mastodonapi"
 }
 
 dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:network"))
-    implementation(project(":core:model"))
-    implementation(project(":core:database"))
-    implementation(project(":core:mastodon-api"))
+    implementation(libs.kotlin.datetime)
+    api(libs.kotlinx.serialization)
 
-    implementation(libs.androidx.paging.runtime)
-    implementation(libs.room.ktx)
-
-    implementation(libs.androidx.datastore)
-    implementation(libs.androidx.datastore.preferences)
-
-    testImplementation(project(":core:testing"))
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.auth)
+    implementation(libs.ktor.logging)
+    implementation(libs.ktor.serialization.gson)
+    implementation(libs.ktor.serialization.json)
+    implementation(libs.ktor.content.negotiation)
+    implementation(libs.ktor.engine.android)
+    implementation(libs.okhttp.okhttp)
+    implementation(libs.okhttp.loggingInterceptor)
 }

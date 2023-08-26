@@ -19,12 +19,12 @@ import android.app.Application
 import android.content.Context
 import com.civciv.app.R
 import com.civciv.app.base.inject.ApplicationId
+import com.civciv.app.base.inject.CivcivRedirectUri
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -36,7 +36,7 @@ object AppModule {
     fun provideApplicationId(application: Application): String = application.packageName
 
     @Singleton
-    @Named("civciv-redirect-uri")
+    @CivcivRedirectUri
     @Provides
     fun provideAuthRedirectUri(
         @ApplicationId applicationId: String,

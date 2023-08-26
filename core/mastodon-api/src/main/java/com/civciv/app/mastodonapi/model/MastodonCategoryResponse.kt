@@ -13,22 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.network.api
+package com.civciv.app.mastodonapi.model
 
-import com.civciv.app.network.model.AccountResponse
-import com.civciv.app.network.utils.Constants
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-interface AccountsService {
-
-    @GET("/api/v1/accounts/{id}")
-    fun getAccount(@Path("id") accountId: String): AccountResponse
-
-    @GET("api/v1/accounts/verify_credentials")
-    suspend fun verifyAccountCredentials(
-        @Header(Constants.DOMAIN_PLACEHOLDER) domain: String? = null,
-        @Header("Authorization") auth: String? = null,
-    ): AccountResponse
-}
+@Serializable
+data class MastodonCategoryResponse(
+    @SerialName("category") val category: String,
+    @SerialName("servers_count") val serversCount: Int,
+)

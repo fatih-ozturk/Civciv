@@ -13,17 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.base.inject
+package com.civciv.app.mastodonapi
 
-import javax.inject.Qualifier
-
-class Annotations
-
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-@MustBeDocumented
-annotation class ApplicationId
-
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class CivcivRedirectUri
+internal object MastodonWebConfig {
+    const val MASTODON_HOST = "api.joinmastodon.org"
+}

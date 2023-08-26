@@ -15,24 +15,13 @@
  */
 package com.civciv.app.data.repository
 
-import com.civciv.app.database.dao.AccountsDao
-import com.civciv.app.database.entities.toExternalModel
 import com.civciv.app.model.Account
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class AccountRepositoryImpl @Inject constructor(
-    private val accountsDao: AccountsDao,
-) : AccountRepository {
+class AccountRepositoryImpl @Inject constructor() : AccountRepository {
     override fun getActiveAccount(): Flow<Account?> = flow {
-        val accounts = accountsDao.getAccounts()
-        var activeAccount = accountsDao.getActiveAccount()
-
-        activeAccount = activeAccount ?: accounts.firstOrNull()?.also { account ->
-            account.isActive = true
-            accountsDao.update(account)
-        }
-        emit(activeAccount?.toExternalModel())
+        emit(null)
     }
 }

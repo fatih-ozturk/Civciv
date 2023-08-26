@@ -15,23 +15,18 @@
  */
 package com.civciv.app.network.di
 
-import com.civciv.app.network.api.AccountsService
-import com.civciv.app.network.api.AuthService
-import com.civciv.app.network.api.MastodonService
-import com.civciv.app.network.utils.Constants
-import com.civciv.app.network.utils.DomainInterceptor
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.civciv.app.database.dao.UserCredentialDao
+import com.civciv.app.mastodonapi.Mastodon
+import com.civciv.app.mastodonapi.api.MastodonApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import timber.log.Timber
 import javax.inject.Singleton
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -39,56 +34,33 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(
-        okHttp: OkHttpClient,
-        gson: Gson,
-    ): Retrofit {
-        return Retrofit.Builder()
-            .client(okHttp)
-            .baseUrl(Constants.DOMAIN_PLACEHOLDER)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
+    fun provideMastodon(
+        userCredentialDao: UserCredentialDao,
+    ): Mastodon {
+        return Mastodon {
+            userAuthentication {
+                loadDomain {
+                    userCredentialDao.getActiveUserCredential()?.domain
+                }
+                loadAccessToken {
+                    userCredentialDao.getActiveUserCredential()?.accessToken
+                }
+            }
+            httpClientConfig {
+                install(Logging) {
+                    logger = object : Logger {
+                        override fun log(message: String) {
+                            Timber.i(message)
+                        }
+                    }
+                    level = LogLevel.ALL
+                }
+            }
+        }
     }
 
-    @Singleton
     @Provides
-    fun provideOkHttp(
-        loggingInterceptor: HttpLoggingInterceptor,
-        domainInterceptor: dagger.Lazy<DomainInterceptor>,
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .addInterceptor(domainInterceptor.get())
-            .build()
+    fun provideMastodonApi(mastodon: Mastodon): MastodonApi {
+        return mastodon.mastodonApi
     }
-
-    @Provides
-    @Singleton
-    internal fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
-    }
-
-    @Singleton
-    @Provides
-    fun provideGson(): Gson = GsonBuilder()
-        .setLenient()
-        .create()
-
-    @Singleton
-    @Provides
-    fun provideAccountsService(
-        retrofit: Retrofit,
-    ): AccountsService = retrofit.create()
-
-    @Singleton
-    @Provides
-    fun provideAuthService(
-        retrofit: Retrofit,
-    ): AuthService = retrofit.create()
-
-    @Singleton
-    @Provides
-    fun provideMastodonService(
-        retrofit: Retrofit,
-    ): MastodonService = retrofit.create()
 }

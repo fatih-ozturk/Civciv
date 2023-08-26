@@ -13,17 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.base.inject
+package com.civciv.app.mastodonapi.model
 
-import javax.inject.Qualifier
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-class Annotations
-
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-@MustBeDocumented
-annotation class ApplicationId
-
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class CivcivRedirectUri
+@Serializable
+data class MastodonLanguageResponse(
+    @SerialName("locale") val locale: String,
+    @SerialName("language") val language: String?,
+    @SerialName("servers_count") val serversCount: Int,
+)

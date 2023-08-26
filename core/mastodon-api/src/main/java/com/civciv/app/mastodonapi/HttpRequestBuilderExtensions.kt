@@ -13,17 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.base.inject
+package com.civciv.app.mastodonapi
 
-import javax.inject.Qualifier
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.parameter
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 
-class Annotations
+internal fun HttpRequestBuilder.json() {
+    contentType(ContentType.Application.Json)
+}
 
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-@MustBeDocumented
-annotation class ApplicationId
+internal fun HttpRequestBuilder.parameterLanguage(language: String?) {
+    language?.let { parameter("language", it) }
+}
 
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class CivcivRedirectUri
+internal fun HttpRequestBuilder.parameterCategory(category: String?) {
+    category?.let { parameter("category", it) }
+}

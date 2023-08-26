@@ -39,6 +39,7 @@ kotest = "5.6.2"
 ksp = "1.9.0-1.0.13"
 ktlint = "11.5.1"
 ktlint-compose = "0.0.26"
+ktor = "2.3.3"
 lottieVersion = "6.1.0"
 mockkVersion = "1.13.7"
 moshi = "1.15.0"
@@ -50,6 +51,7 @@ protobufPlugin = "0.9.4"
 retrofit = "2.9.0"
 room = "2.5.2"
 secrets = "2.0.1"
+kotlinx-serialization = "1.5.1"
 spotless = "6.20.0"
 timberVersion = "5.0.1"
 truthVersion = "1.1.5"
@@ -134,15 +136,25 @@ hilt-library = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-pluginGradle = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
 hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 junit = { group = "junit", name = "junit", version.ref = "junit4" }
+kotest = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
 kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 kotlin-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlin-extensions = { group = "org.jetbrains.kotlin", name = "kotlin-android-extensions", version.ref = "kotlin" }
 kotlin-pluginGradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
-kotest = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
 ktlint-compose = { group = "com.twitter.compose.rules", name = "ktlint", version.ref = "ktlint-compose" }
+ktor-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor" }
+ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-engine-android = {group = "io.ktor", name = "ktor-client-android", version.ref = "ktor"}
+ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-logging = { group = "io.ktor", name = "ktor-client-logging-jvm", version.ref = "ktor" }
+ktor-serialization-gson = { group = "io.ktor", name = "ktor-serialization-gson", version.ref = "ktor" }
+ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottieVersion" }
 mockK = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
 moshi-adapter = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshi" }

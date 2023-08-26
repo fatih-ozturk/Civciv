@@ -13,17 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.network.model
+package com.civciv.app.mastodonapi
 
-import com.civciv.app.model.MastodonCategory
-import com.google.gson.annotations.SerializedName
-
-data class MastodonCategoryResponse(
-    @SerializedName("category") val category: String,
-    @SerializedName("servers_count") val serversCount: Int,
+@DslMarker
+@Target(
+    AnnotationTarget.CLASS,
+    AnnotationTarget.TYPEALIAS,
+    AnnotationTarget.TYPE,
+    AnnotationTarget.FUNCTION,
 )
-
-fun MastodonCategoryResponse.asExternalModel(): MastodonCategory = MastodonCategory(
-    category = category,
-    serversCount = serversCount,
-)
+annotation class MastodonDsl

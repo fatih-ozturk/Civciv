@@ -15,20 +15,19 @@
  */
 package com.civciv.app.data.repository
 
+import com.civciv.app.mastodonapi.api.MastodonApi
+import com.civciv.app.mastodonapi.model.MastodonCategoryResponse
+import com.civciv.app.mastodonapi.model.MastodonLanguageResponse
+import com.civciv.app.mastodonapi.model.MastodonServerResponse
 import com.civciv.app.model.MastodonCategory
 import com.civciv.app.model.MastodonLanguage
 import com.civciv.app.model.MastodonServer
-import com.civciv.app.network.api.MastodonService
-import com.civciv.app.network.model.MastodonCategoryResponse
-import com.civciv.app.network.model.MastodonLanguageResponse
-import com.civciv.app.network.model.MastodonServerResponse
-import com.civciv.app.network.model.asExternalModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 class MastodonRepositoryImpl @Inject constructor(
-    private val mastodonService: MastodonService,
+    private val mastodonService: MastodonApi,
 ) : MastodonRepository {
 
     override suspend fun getServerList(
@@ -54,3 +53,27 @@ class MastodonRepositoryImpl @Inject constructor(
         return categoryList.map(MastodonCategoryResponse::asExternalModel)
     }
 }
+
+// TODO Move later
+fun MastodonServerResponse.asExternalModel(): MastodonServer {
+    return MastodonServer(
+        domain = domain,
+        description = description,
+        totalUser = totalUsers,
+        languages = languages,
+        categories = categories,
+        thumbnail = proxiedThumbnail,
+    )
+}
+
+fun MastodonLanguageResponse.asExternalModel(): MastodonLanguage {
+    return MastodonLanguage(
+        locale = locale,
+        serversCount = serversCount,
+    )
+}
+
+fun MastodonCategoryResponse.asExternalModel(): MastodonCategory = MastodonCategory(
+    category = category,
+    serversCount = serversCount,
+)

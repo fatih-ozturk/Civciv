@@ -17,9 +17,8 @@ package com.civciv.app.database.di
 
 import android.content.Context
 import androidx.room.Room
-import com.civciv.app.base.inject.CivcivRequestHeader
 import com.civciv.app.database.CivcivDatabase
-import com.civciv.app.database.dao.AccountsDao
+import com.civciv.app.database.dao.UserCredentialDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,19 +42,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideAccountDao(
+    fun provideUserCredentialDao(
         database: CivcivDatabase,
-    ): AccountsDao = database.accountDao()
-
-    @Provides
-    @CivcivRequestHeader
-    fun provideRequestHeader(
-        accountsDao: AccountsDao,
-    ): Map<String, String?> {
-        val requestHeader = mutableMapOf<String, String?>()
-        val currentAccount = accountsDao.getActiveAccount()
-        requestHeader["Domain"] = currentAccount?.domain
-        requestHeader["Authorization"] = currentAccount?.accessToken
-        return requestHeader.toMap()
-    }
+    ): UserCredentialDao = database.userCredentialDao()
 }
