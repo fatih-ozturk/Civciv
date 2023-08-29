@@ -28,11 +28,15 @@ fun NavController.navigateToHomeGraph(navOptions: NavOptions? = null) {
     this.navigate(homeGraph, navOptions)
 }
 
-fun NavGraphBuilder.homeGraph() {
+fun NavGraphBuilder.homeGraph(
+    onNavigateToLoginGraph: () -> Unit,
+) {
     navigation(
         route = homeGraph,
         startDestination = homeMainScreenRoute,
     ) {
-        homeScreen()
+        homeScreen(
+            onNavigateToLoginGraph = onNavigateToLoginGraph,
+        )
     }
 }

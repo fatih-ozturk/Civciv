@@ -18,7 +18,8 @@ package com.civciv.app.database.di
 import android.content.Context
 import androidx.room.Room
 import com.civciv.app.database.CivcivDatabase
-import com.civciv.app.database.dao.UserCredentialDao
+import com.civciv.app.database.dao.AccountCredentialDao
+import com.civciv.app.database.dao.AccountDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,7 +43,13 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideUserCredentialDao(
+    fun provideAccountCredentialDao(
         database: CivcivDatabase,
-    ): UserCredentialDao = database.userCredentialDao()
+    ): AccountCredentialDao = database.accountCredentialDao()
+
+    @Provides
+    @Singleton
+    fun provideAccountDao(
+        database: CivcivDatabase,
+    ): AccountDao = database.accountDao()
 }

@@ -15,13 +15,21 @@
  */
 package com.civciv.app.data.repository
 
-import com.civciv.app.model.Account
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import com.civciv.app.database.dao.AccountCredentialDao
+import com.civciv.app.database.dao.AccountDao
+import com.civciv.app.mastodonapi.api.AccountApi
+import com.civciv.app.mastodonapi.model.request.AccountRequest
 import javax.inject.Inject
 
-class AccountRepositoryImpl @Inject constructor() : AccountRepository {
-    override fun getActiveAccount(): Flow<Account?> = flow {
-        emit(null)
+class AccountRepositoryImpl @Inject constructor(
+    private val accountApi: AccountApi,
+    private val accountCredentialDao: AccountCredentialDao,
+    private val accountDao: AccountDao,
+) : AccountRepository {
+    override suspend fun updateCurrentAccount() {
+        val currentUser = accountCredentialDao.getActiveAccountCredential() ?: throw Exception()
+        val request = AccountRequest(currentUser.accountId)
+        val account = accountApi.getAccount(request)
+        accountDao.updateAccount(account.toEntityModel())
     }
 }

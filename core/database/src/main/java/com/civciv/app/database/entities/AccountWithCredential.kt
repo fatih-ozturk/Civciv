@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.domain.usecase
+package com.civciv.app.database.entities
 
-import com.civciv.app.data.repository.AccountRepository
-import com.civciv.app.model.Account
-import javax.inject.Inject
-import kotlinx.coroutines.flow.Flow
+import androidx.room.Embedded
+import androidx.room.Relation
 
-class GetActiveAccountUseCase @Inject constructor(
-    private val accountRepository: AccountRepository,
-) {
-    operator fun invoke(): Flow<Account?> = accountRepository.getActiveAccount()
-}
+data class AccountWithCredential(
+    @Embedded val user: AccountEntity,
+    @Relation(
+        parentColumn = "accountId",
+        entityColumn = "accountId",
+    )
+    val credential: AccountCredentialEntity,
+)

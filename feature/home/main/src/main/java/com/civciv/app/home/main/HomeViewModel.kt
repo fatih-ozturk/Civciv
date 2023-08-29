@@ -16,8 +16,39 @@
 package com.civciv.app.home.main
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.civciv.app.domain.usecase.GetAuthStateUseCase
+import com.civciv.app.domain.usecase.UpdateCurrentUserUseCase
+import com.civciv.app.model.AuthState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel()
+class HomeViewModel @Inject constructor(
+    private val getAuthStateUseCase: GetAuthStateUseCase,
+    private val updateCurrentUserUseCase: UpdateCurrentUserUseCase,
+) : ViewModel() {
+
+    val uiState: StateFlow<HomeAuthUiState> = getAuthStateUseCase()
+        .map {
+            when (it) {
+                AuthState.LOGGED_IN -> {
+                    updateCurrentUserUseCase()
+                    HomeAuthUiState.Authorized
+                }
+
+                AuthState.LOGGED_OUT -> {
+                    HomeAuthUiState.NotAuthorized
+                }
+            }
+        }
+        .stateIn(
+            scope = viewModelScope,
+            initialValue = HomeAuthUiState.Loading,
+            started = SharingStarted.WhileSubscribed(5_000),
+        )
+}

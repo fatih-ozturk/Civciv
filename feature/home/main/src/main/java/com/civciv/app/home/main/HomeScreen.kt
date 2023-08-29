@@ -18,6 +18,9 @@ package com.civciv.app.home.main
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -25,8 +28,25 @@ import androidx.hilt.navigation.compose.hiltViewModel
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
+    onNavigateToLoginGraph: () -> Unit,
 ) {
-    Box(modifier = modifier) {
-        Text(text = "HOME")
+    val homeAuthUiState by viewModel.uiState.collectAsState()
+
+    when (homeAuthUiState) {
+        HomeAuthUiState.Authorized -> {
+            Box(modifier = modifier) {
+                Text(text = "HOME")
+            }
+        }
+        HomeAuthUiState.Loading -> {
+            Box(modifier = modifier) {
+                Text(text = "LOADING")
+            }
+        }
+        HomeAuthUiState.NotAuthorized -> {
+            LaunchedEffect(homeAuthUiState) {
+                onNavigateToLoginGraph()
+            }
+        }
     }
 }

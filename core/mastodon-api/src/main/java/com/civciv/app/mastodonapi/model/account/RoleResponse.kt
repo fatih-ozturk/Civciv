@@ -13,13 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.mastodonapi
+package com.civciv.app.mastodonapi.model.account
 
-@DslMarker
-@Target(
-    AnnotationTarget.CLASS,
-    AnnotationTarget.TYPEALIAS,
-    AnnotationTarget.TYPE,
-    AnnotationTarget.FUNCTION,
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class RoleResponse(
+    @SerialName("id") val id: String,
+    @SerialName("name") val name: String,
+    @SerialName("permissions") val permissions: String,
+    @SerialName("color") val color: String,
+    @SerialName("highlighted") val highlighted: Boolean,
 )
-annotation class MastodonDsl

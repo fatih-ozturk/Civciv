@@ -17,25 +17,32 @@ package com.civciv.app.auth.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.civciv.app.domain.usecase.GetActiveAccountUseCase
+import com.civciv.app.domain.usecase.GetAuthStateUseCase
+import com.civciv.app.domain.usecase.UpdateCurrentUserUseCase
+import com.civciv.app.model.AuthState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    getActiveAccountUseCase: GetActiveAccountUseCase,
+    getAuthStateUseCase: GetAuthStateUseCase,
+    updateCurrentUserUseCase: UpdateCurrentUserUseCase,
 ) : ViewModel() {
 
-    val uiState: StateFlow<SplashUiState> = getActiveAccountUseCase()
+    val uiState: StateFlow<SplashUiState> = getAuthStateUseCase()
         .map {
-            if (it == null) {
-                SplashUiState.NotLoggedIn
-            } else {
-                SplashUiState.LoggedIn
+            when (it) {
+                AuthState.LOGGED_IN -> {
+                    updateCurrentUserUseCase()
+                    SplashUiState.LoggedIn
+                }
+
+                AuthState.LOGGED_OUT ->
+                    SplashUiState.NotLoggedIn
             }
         }
         .stateIn(

@@ -17,4 +17,6 @@ package com.civciv.app.mastodonapi
 
 internal object MastodonWebConfig {
     const val MASTODON_HOST = "api.joinmastodon.org"
+    const val AUTH_SCOPES = "read write follow push"
+    const val APP_NAME = "civciv"
 }

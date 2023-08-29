@@ -72,7 +72,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             CivcivTheme {
                 CivcivApp(
-                    onHideSplashScreen = { viewModel.hideSplashScreen() },
+                    onExitApp = {
+                        this.finish()
+                    },
                 )
             }
         }

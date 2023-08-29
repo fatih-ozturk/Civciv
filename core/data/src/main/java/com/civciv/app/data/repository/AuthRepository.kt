@@ -15,16 +15,18 @@
  */
 package com.civciv.app.data.repository
 
-import com.civciv.app.model.AccountCredentials
 import com.civciv.app.model.ApplicationCredentials
+import com.civciv.app.model.AuthState
 import com.civciv.app.model.auth.AuthorizationResponse
+import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
     suspend fun getApplicationCredentials(domain: String): ApplicationCredentials
-    fun getUserCredentials(): AccountCredentials?
     suspend fun setActiveAccount(accountId: String)
     suspend fun addAccountCredentials(
         authorizationResult: AuthorizationResponse,
         applicationCredentials: ApplicationCredentials,
-    )
+    ): Boolean
+
+    fun getAuthenticateState(): Flow<AuthState>
 }

@@ -13,17 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.mastodonapi
+package com.civciv.app.mastodonapi.model.account
 
-import kotlinx.serialization.json.Json
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-object JsonFactory {
-
-    fun buildJson(): Json = Json {
-        encodeDefaults = false
-        ignoreUnknownKeys = true
-        isLenient = true
-        allowSpecialFloatingPointValues = true
-        prettyPrint = false
-    }
-}
+@Serializable
+data class FieldResponse(
+    @SerialName("name") val name: String,
+    @SerialName("value") val value: String,
+    @SerialName("verified_at") val verifiedAt: String?,
+)

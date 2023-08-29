@@ -13,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.database.entities
+package com.civciv.app.mastodonapi.model.account
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@Entity(tableName = "user_credential")
-data class UserCredential(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
-    val domain: String,
-    val accountId: String,
-    val accessToken: String,
-    val tokenType: String,
-    val isActive: Boolean = false,
+@Serializable
+data class EmojiResponse(
+    @SerialName("shortcode") val shortcode: String,
+    @SerialName("static_url") val staticUrl: String,
+    @SerialName("url") val url: String,
+    @SerialName("visible_in_picker") val visibleInPicker: Boolean,
 )

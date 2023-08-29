@@ -13,10 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.network.model
+package com.civciv.app.database.entities
 
-import com.google.gson.annotations.SerializedName
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-data class ConfigurationResponse(
-    @SerializedName("statuses") val statuses: StatusesResponse,
+@Entity(tableName = "account")
+data class AccountEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
+    val accountId: String,
+    val username: String,
+    val profilePictureUrl: String,
 )

@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.data.repository
+package com.civciv.app.model
 
-interface AccountRepository {
-    suspend fun updateCurrentAccount()
+enum class AuthState {
+    LOGGED_IN, LOGGED_OUT
 }

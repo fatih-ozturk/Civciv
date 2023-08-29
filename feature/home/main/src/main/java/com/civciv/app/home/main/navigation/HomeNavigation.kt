@@ -27,10 +27,14 @@ fun NavController.navigateToHome(navOptions: NavOptions? = null) {
     this.navigate(homeMainScreenRoute, navOptions)
 }
 
-fun NavGraphBuilder.homeScreen() {
+fun NavGraphBuilder.homeScreen(
+    onNavigateToLoginGraph: () -> Unit,
+) {
     composable(
         route = homeMainScreenRoute,
     ) {
-        HomeScreen()
+        HomeScreen(
+            onNavigateToLoginGraph = onNavigateToLoginGraph,
+        )
     }
 }

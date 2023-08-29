@@ -13,8 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.data.repository
+package com.civciv.app.mastodonapi.core
 
-interface AccountRepository {
-    suspend fun updateCurrentAccount()
+import kotlinx.serialization.json.Json
+
+object JsonFactory {
+
+    fun buildJson(): Json = Json {
+        encodeDefaults = false
+        ignoreUnknownKeys = true
+        isLenient = true
+        allowSpecialFloatingPointValues = true
+        prettyPrint = false
+    }
 }

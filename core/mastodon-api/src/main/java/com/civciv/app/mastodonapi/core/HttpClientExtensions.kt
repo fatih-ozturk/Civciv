@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.mastodonapi
+package com.civciv.app.mastodonapi.core
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.HttpClientCall

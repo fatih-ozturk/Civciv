@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.network.utils
+package com.civciv.app.mastodonapi.core
 
-object Constants {
-    const val DOMAIN_PLACEHOLDER = "https://localhost/"
-    const val AUTH_SCOPES = "read write follow push"
-    const val APP_NAME = "civciv"
-}
+@DslMarker
+@Target(
+    AnnotationTarget.CLASS,
+    AnnotationTarget.TYPEALIAS,
+    AnnotationTarget.TYPE,
+    AnnotationTarget.FUNCTION,
+)
+annotation class MastodonDsl

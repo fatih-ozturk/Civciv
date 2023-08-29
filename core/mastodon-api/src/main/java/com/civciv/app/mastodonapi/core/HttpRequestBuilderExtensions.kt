@@ -13,12 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.network.model
+package com.civciv.app.mastodonapi.core
 
-import com.google.gson.annotations.SerializedName
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.parameter
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 
-data class CredentialsResponse(
-    @SerializedName("redirect_uri") val redirectUri: String,
-    @SerializedName("client_id") val clientId: String,
-    @SerializedName("client_secret") val clientSecret: String,
-)
+internal fun HttpRequestBuilder.json() {
+    contentType(ContentType.Application.Json)
+}
+
+internal fun HttpRequestBuilder.parameterLanguage(language: String?) {
+    language?.let { parameter("language", it) }
+}
+
+internal fun HttpRequestBuilder.parameterCategory(category: String?) {
+    category?.let { parameter("category", it) }
+}

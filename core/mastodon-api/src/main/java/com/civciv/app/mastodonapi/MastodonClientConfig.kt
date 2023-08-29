@@ -15,6 +15,7 @@
  */
 package com.civciv.app.mastodonapi
 
+import com.civciv.app.mastodonapi.core.MastodonDsl
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngineConfig

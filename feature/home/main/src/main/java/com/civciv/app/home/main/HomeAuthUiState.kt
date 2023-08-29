@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.data.repository
+package com.civciv.app.home.main
 
-interface AccountRepository {
-    suspend fun updateCurrentAccount()
+sealed interface HomeAuthUiState {
+    data object Loading : HomeAuthUiState
+    data object Authorized : HomeAuthUiState
+    data object NotAuthorized : HomeAuthUiState
 }

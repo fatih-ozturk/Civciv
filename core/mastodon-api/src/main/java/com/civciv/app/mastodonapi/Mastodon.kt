@@ -15,7 +15,11 @@
  */
 package com.civciv.app.mastodonapi
 
+import com.civciv.app.mastodonapi.api.AccountApi
+import com.civciv.app.mastodonapi.api.AuthApi
 import com.civciv.app.mastodonapi.api.MastodonApi
+import com.civciv.app.mastodonapi.core.HttpClientFactory
+import com.civciv.app.mastodonapi.core.MastodonDsl
 import io.ktor.client.HttpClient
 
 @MastodonDsl
@@ -33,6 +37,8 @@ class Mastodon internal constructor(private val config: MastodonClientConfig) {
     }
 
     val mastodonApi by buildApi(::MastodonApi)
+    val accountApi by buildApi(::AccountApi)
+    val authApi by buildApi(::AuthApi)
 
     private inline fun <T> buildApi(crossinline builder: (HttpClient) -> T) =
         lazy { builder(client) }

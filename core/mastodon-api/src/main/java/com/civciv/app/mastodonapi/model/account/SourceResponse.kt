@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.mastodonapi
+package com.civciv.app.mastodonapi.model.account
 
-import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.parameter
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-internal fun HttpRequestBuilder.json() {
-    contentType(ContentType.Application.Json)
-}
-
-internal fun HttpRequestBuilder.parameterLanguage(language: String?) {
-    language?.let { parameter("language", it) }
-}
-
-internal fun HttpRequestBuilder.parameterCategory(category: String?) {
-    category?.let { parameter("category", it) }
-}
+@Serializable
+data class SourceResponse(
+    @SerialName("privacy") val privacy: String,
+    @SerialName("sensitive") val sensitive: Boolean,
+    @SerialName("language") val language: String?,
+    @SerialName("note") val note: String,
+    @SerialName("fields") val fields: List<FieldResponse>,
+    @SerialName("follow_requests_count") val followRequestsCount: Int,
+)

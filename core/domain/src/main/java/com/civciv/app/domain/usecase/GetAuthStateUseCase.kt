@@ -13,8 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.data.repository
+package com.civciv.app.domain.usecase
 
-interface AccountRepository {
-    suspend fun updateCurrentAccount()
+import com.civciv.app.data.repository.AuthRepository
+import com.civciv.app.model.AuthState
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+
+class GetAuthStateUseCase @Inject constructor(
+    private val authRepository: AuthRepository,
+) {
+
+    operator fun invoke(): Flow<AuthState> =
+        authRepository.getAuthenticateState()
 }

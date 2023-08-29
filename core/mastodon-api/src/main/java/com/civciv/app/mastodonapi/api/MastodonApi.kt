@@ -15,17 +15,16 @@
  */
 package com.civciv.app.mastodonapi.api
 
-import com.civciv.app.mastodonapi.getByPaths
-import com.civciv.app.mastodonapi.json
+import com.civciv.app.mastodonapi.core.getByPaths
+import com.civciv.app.mastodonapi.core.json
+import com.civciv.app.mastodonapi.core.parameterCategory
+import com.civciv.app.mastodonapi.core.parameterLanguage
 import com.civciv.app.mastodonapi.model.MastodonCategoryResponse
 import com.civciv.app.mastodonapi.model.MastodonLanguageResponse
 import com.civciv.app.mastodonapi.model.MastodonServerResponse
-import com.civciv.app.mastodonapi.parameterCategory
-import com.civciv.app.mastodonapi.parameterLanguage
 import io.ktor.client.HttpClient
-import javax.inject.Inject
 
-class MastodonApi @Inject constructor(
+class MastodonApi internal constructor(
     private val client: HttpClient,
 ) {
 
