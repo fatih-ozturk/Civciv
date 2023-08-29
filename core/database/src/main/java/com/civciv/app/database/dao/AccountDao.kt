@@ -20,25 +20,32 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.civciv.app.database.entities.UserCredential
+import androidx.room.Transaction
+import androidx.room.Update
+import com.civciv.app.database.entities.AccountEntity
+import com.civciv.app.database.entities.AccountWithCredential
 
 @Dao
-interface UserCredentialDao {
-    @Query("SELECT * FROM user_credential WHERE isActive = 1")
-    fun getActiveUserCredential(): UserCredential?
+interface AccountDao {
+    @Query("SELECT * FROM account")
+    suspend fun getAllAccount(): List<AccountEntity>
 
-    @Query("UPDATE user_credential SET isActive = 0 WHERE isActive = 1")
-    suspend fun clearActiveUserCredential()
-
-    @Query("UPDATE user_credential SET isActive = 1 WHERE accountId = :accountId")
-    suspend fun setActiveUser(accountId: String)
-
-    @Query("SELECT * FROM user_credential WHERE accountId = :accountId")
-    suspend fun getUserCredentialForAccount(accountId: String): UserCredential?
+    @Query("SELECT * FROM account WHERE id = :userId")
+    suspend fun getAccountById(userId: Long): AccountEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUserCredential(userCredential: UserCredential)
+    suspend fun insertAccount(user: AccountEntity): Long
+
+    @Update
+    suspend fun updateAccount(user: AccountEntity)
 
     @Delete
-    suspend fun deleteUserCredential(userCredential: UserCredential)
+    suspend fun deleteAccount(user: AccountEntity)
+
+    @Query("DELETE FROM account")
+    suspend fun deleteAllAccount()
+
+    @Transaction
+    @Query("SELECT * FROM account WHERE accountId = :accountId")
+    suspend fun getAccountWithCredential(accountId: String): AccountWithCredential?
 }

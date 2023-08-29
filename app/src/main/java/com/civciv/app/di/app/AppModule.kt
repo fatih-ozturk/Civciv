@@ -16,16 +16,11 @@
 package com.civciv.app.di.app
 
 import android.app.Application
-import android.content.Context
-import com.civciv.app.R
 import com.civciv.app.base.inject.ApplicationId
-import com.civciv.app.base.inject.CivcivRedirectUri
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -34,12 +29,4 @@ object AppModule {
     @ApplicationId
     @Provides
     fun provideApplicationId(application: Application): String = application.packageName
-
-    @Singleton
-    @CivcivRedirectUri
-    @Provides
-    fun provideAuthRedirectUri(
-        @ApplicationId applicationId: String,
-        @ApplicationContext context: Context,
-    ): String = "$applicationId://${context.getString(R.string.oauth_scheme)}"
 }

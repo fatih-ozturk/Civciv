@@ -24,18 +24,13 @@ android {
 
 dependencies {
     implementation(project(":core:base"))
-    implementation(project(":core:model"))
     implementation(project(":core:database"))
     implementation(project(":core:mastodon-api"))
 
-    implementation(libs.androidx.datastore)
-    implementation(libs.androidx.datastore.preferences)
     implementation(libs.ktor.core)
     implementation(libs.ktor.auth)
     implementation(libs.ktor.logging)
     implementation(libs.ktor.serialization.gson)
     implementation(libs.ktor.content.negotiation)
     implementation(libs.ktor.engine.android)
-    implementation(libs.okhttp.okhttp)
-    implementation(libs.okhttp.loggingInterceptor)
 }

@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.mastodonapi
+package com.civciv.app.domain.usecase
 
-import com.civciv.app.mastodonapi.model.MastodonErrorResponse
+import com.civciv.app.data.repository.AuthRepository
+import com.civciv.app.model.AuthState
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-@Suppress("MemberVisibilityCanBePrivate")
-class MastodonException(
-    mastodonErrorResponse: MastodonErrorResponse,
-    caused: Throwable? = null,
-) : IllegalStateException(
-    "Status code: ${mastodonErrorResponse.statusCode}." +
-        " Message: \"${mastodonErrorResponse.errorMessage}\"",
-    caused,
-)
+class UpdateCurrentUserUseCase @Inject constructor(
+    private val authRepository: AuthRepository,
+) {
+
+    operator fun invoke(): Flow<AuthState> =
+        authRepository.getAuthenticateState()
+}

@@ -13,11 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.network.model
+package com.civciv.app.mastodonapi.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
-data class InstanceRulesResponse(
-    @SerializedName("id") val id: String,
-    @SerializedName("text") val text: String,
+@Serializable
+data class CredentialsResponse(
+    @SerialName("redirect_uri") val redirectUri: String,
+    @SerialName("client_id") val clientId: String,
+    @SerialName("client_secret") val clientSecret: String,
+    @Transient val scopes: String = "",
+    @Transient val domain: String = "",
 )

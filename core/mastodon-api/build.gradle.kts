@@ -16,7 +16,6 @@
 plugins {
     id("civciv.android.library")
     id("civciv.android.hilt")
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -25,15 +24,12 @@ android {
 
 dependencies {
     implementation(libs.kotlin.datetime)
-    api(libs.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization)
 
     implementation(libs.ktor.core)
     implementation(libs.ktor.auth)
     implementation(libs.ktor.logging)
-    implementation(libs.ktor.serialization.gson)
     implementation(libs.ktor.serialization.json)
     implementation(libs.ktor.content.negotiation)
     implementation(libs.ktor.engine.android)
-    implementation(libs.okhttp.okhttp)
-    implementation(libs.okhttp.loggingInterceptor)
 }

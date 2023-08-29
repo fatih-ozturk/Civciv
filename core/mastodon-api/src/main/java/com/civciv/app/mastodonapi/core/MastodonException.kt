@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.network.model
+package com.civciv.app.mastodonapi.core
 
-import com.google.gson.annotations.SerializedName
+import com.civciv.app.mastodonapi.model.MastodonErrorResponse
 
-data class StatusesResponse(
-    @SerializedName("max_characters") val maxCharacters: Int,
-    @SerializedName("max_media_attachments") val maxMediaAttachments: Int,
-    @SerializedName("characters_reserved_per_url") val charactersReservedPerUrl: Int,
+class MastodonException(
+    mastodonErrorResponse: MastodonErrorResponse,
+    caused: Throwable? = null,
+) : IllegalStateException(
+    "Status code: ${mastodonErrorResponse.statusCode}." +
+        " Message: \"${mastodonErrorResponse.errorMessage}\"",
+    caused,
 )

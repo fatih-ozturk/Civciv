@@ -17,16 +17,20 @@ package com.civciv.app.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.civciv.app.database.dao.UserCredentialDao
-import com.civciv.app.database.entities.UserCredential
+import com.civciv.app.database.dao.AccountCredentialDao
+import com.civciv.app.database.dao.AccountDao
+import com.civciv.app.database.entities.AccountCredentialEntity
+import com.civciv.app.database.entities.AccountEntity
 
 @Database(
     version = 1,
     exportSchema = true,
     entities = [
-        UserCredential::class,
+        AccountCredentialEntity::class,
+        AccountEntity::class,
     ],
 )
 abstract class CivcivDatabase : RoomDatabase() {
-    abstract fun userCredentialDao(): UserCredentialDao
+    abstract fun accountCredentialDao(): AccountCredentialDao
+    abstract fun accountDao(): AccountDao
 }

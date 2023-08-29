@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.mastodonapi
+package com.civciv.app.mastodonapi.core
 
+import com.civciv.app.mastodonapi.MastodonClientConfig
+import com.civciv.app.mastodonapi.MastodonWebConfig
 import com.civciv.app.mastodonapi.model.MastodonErrorResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -35,6 +37,7 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.client.utils.unwrapCancellationException
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.URLProtocol
+import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import kotlin.coroutines.cancellation.CancellationException
@@ -49,9 +52,12 @@ internal object HttpClientFactory {
 
             defaultRequest {
                 url {
+                    val serverHost = config.mastodonAuthCredentials?.loadDomainProvider?.invoke()
                     protocol = URLProtocol.HTTPS
-                    host = config.mastodonAuthCredentials?.loadDomainProvider?.invoke()
-                        ?: MastodonWebConfig.MASTODON_HOST
+                    host = serverHost ?: MastodonWebConfig.MASTODON_HOST
+                    serverHost?.let {
+                        path("api/v1/")
+                    }
                 }
             }
 

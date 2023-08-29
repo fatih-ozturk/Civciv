@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.model
+package com.civciv.app.mastodonapi.model.request
 
-data class AccountCredentials(
-    val domain: String,
-    val accessToken: String,
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class AccountRequest(
+    val id: String,
 )

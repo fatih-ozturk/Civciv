@@ -16,10 +16,13 @@
 package com.civciv.app
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
@@ -28,8 +31,12 @@ class MainViewModel @Inject constructor() : ViewModel() {
         MutableStateFlow(MainActivitySplashState.Loading)
     val splashState: StateFlow<MainActivitySplashState> = _splashState
 
-    fun hideSplashScreen() {
-        // TODO Update if there is any active user
+    init {
+        hideSplashScreen()
+    }
+
+    private fun hideSplashScreen() = viewModelScope.launch {
+        delay(1000L)
         _splashState.value = MainActivitySplashState.Success
     }
 }

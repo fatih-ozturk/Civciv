@@ -20,7 +20,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,10 +33,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -49,10 +44,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
 import com.civciv.app.auth.graph.authGraph
+import com.civciv.app.auth.graph.navigateToAuthGraph
 import com.civciv.app.auth.login.navigation.navigateToLogin
 import com.civciv.app.auth.serverlist.navigation.navigateToServerList
-import com.civciv.app.auth.splash.navigation.splashScreen
-import com.civciv.app.auth.splash.navigation.splashScreenRoute
 import com.civciv.app.auth.welcome.navigation.welcomeScreenRoute
 import com.civciv.app.home.graph.homeGraph
 import com.civciv.app.home.main.navigation.navigateToHome
@@ -64,18 +58,17 @@ import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 
 @SuppressLint("RestrictedApi")
-@OptIn(ExperimentalLayoutApi::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CivcivApp(
     modifier: Modifier = Modifier,
     appState: CivcivAppState = rememberCivcivAppState(),
-    onHideSplashScreen: (isLoggedIn: Boolean) -> Unit,
+    onExitApp: () -> Unit,
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
     ) {
-        var startDestination by remember { mutableStateOf(splashScreenRoute) }
         Scaffold(
             modifier = Modifier.semantics { testTagsAsResourceId = true },
             contentColor = MaterialTheme.colorScheme.onBackground,
@@ -106,14 +99,7 @@ fun CivcivApp(
                 modifier = modifier
                     .padding(padding)
                     .consumeWindowInsets(padding),
-                onHideSplashScreen = { isLoggedIn ->
-                    onHideSplashScreen(isLoggedIn)
-                    startDestination = when (isLoggedIn) {
-                        true -> homeGraph
-                        false -> authGraph
-                    }
-                },
-                startDestination = startDestination,
+                onExitApp = onExitApp,
             )
         }
     }
@@ -123,18 +109,27 @@ fun CivcivApp(
 fun CivcivNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    startDestination: String = splashScreenRoute,
-    onHideSplashScreen: (isLoggedIn: Boolean) -> Unit,
+    onExitApp: () -> Unit,
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = startDestination,
+        startDestination = homeGraph,
     ) {
-        splashScreen(
-            onHideSplashScreen = onHideSplashScreen,
+        homeGraph(
+            onNavigateToLoginGraph = {
+                navController.navigateToAuthGraph(
+                    navOptions = navOptions {
+                        popUpTo(
+                            homeGraph,
+                            popUpToBuilder = {
+                                inclusive = true
+                            },
+                        )
+                    },
+                )
+            },
         )
-        homeGraph()
         authGraph(
             onLoginClicked = {
                 navController.navigateToLogin()
@@ -162,6 +157,7 @@ fun CivcivNavHost(
                     },
                 )
             },
+            onExitApp = onExitApp,
         )
         notificationGraph()
         profileGraph()

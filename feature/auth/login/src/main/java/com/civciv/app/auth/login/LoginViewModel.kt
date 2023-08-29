@@ -72,8 +72,12 @@ class LoginViewModel @Inject constructor(
             _events.send(LoginEvent.FailedToLogin(appCredentials?.domain.toString()))
             _uiState.value = LoginUiState.Idle
         } else {
-            addAccountCredentialsUseCase(loginResult.response, appCredentials)
-            _events.send(LoginEvent.NavigateToHome)
+            val result = addAccountCredentialsUseCase(loginResult.response, appCredentials)
+            if (result) {
+                _events.send(LoginEvent.NavigateToHome)
+            } else {
+                // todo error
+            }
         }
     }
 

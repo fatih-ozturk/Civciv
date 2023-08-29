@@ -15,8 +15,10 @@
  */
 package com.civciv.app.network.di
 
-import com.civciv.app.database.dao.UserCredentialDao
+import com.civciv.app.database.dao.AccountCredentialDao
 import com.civciv.app.mastodonapi.Mastodon
+import com.civciv.app.mastodonapi.api.AccountApi
+import com.civciv.app.mastodonapi.api.AuthApi
 import com.civciv.app.mastodonapi.api.MastodonApi
 import dagger.Module
 import dagger.Provides
@@ -35,15 +37,15 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideMastodon(
-        userCredentialDao: UserCredentialDao,
+        accountCredentialDao: AccountCredentialDao,
     ): Mastodon {
         return Mastodon {
             userAuthentication {
                 loadDomain {
-                    userCredentialDao.getActiveUserCredential()?.domain
+                    accountCredentialDao.getActiveAccountCredential()?.domain
                 }
                 loadAccessToken {
-                    userCredentialDao.getActiveUserCredential()?.accessToken
+                    accountCredentialDao.getActiveAccountCredential()?.accessToken
                 }
             }
             httpClientConfig {
@@ -62,5 +64,15 @@ object NetworkModule {
     @Provides
     fun provideMastodonApi(mastodon: Mastodon): MastodonApi {
         return mastodon.mastodonApi
+    }
+
+    @Provides
+    fun provideAccountApi(mastodon: Mastodon): AccountApi {
+        return mastodon.accountApi
+    }
+
+    @Provides
+    fun provideAuthApi(mastodon: Mastodon): AuthApi {
+        return mastodon.authApi
     }
 }
