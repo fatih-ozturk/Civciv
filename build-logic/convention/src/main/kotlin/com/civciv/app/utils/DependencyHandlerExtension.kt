@@ -23,3 +23,6 @@ internal fun DependencyHandler.kaptAndroidTest(dependencyNotation: Any): Depende
 
 internal fun DependencyHandler.ksp(dependencyNotation: Any): Dependency? =
     add("ksp", dependencyNotation)
+
+internal fun DependencyHandler.kspAndroidTest(dependencyNotation: Any): Dependency? =
+    add("kspAndroidTest", dependencyNotation)

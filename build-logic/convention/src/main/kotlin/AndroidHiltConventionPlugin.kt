@@ -1,7 +1,7 @@
 
 import com.civciv.app.utils.implementation
-import com.civciv.app.utils.kapt
-import com.civciv.app.utils.kaptAndroidTest
+import com.civciv.app.utils.ksp
+import com.civciv.app.utils.kspAndroidTest
 import com.civciv.app.utils.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -12,13 +12,13 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("dagger.hilt.android.plugin")
-                apply("org.jetbrains.kotlin.kapt")
+                apply("com.google.devtools.ksp")
             }
 
             dependencies {
                 implementation(libs.findLibrary("hilt.library").get())
-                kapt(libs.findLibrary("hilt.compiler").get())
-                kaptAndroidTest(libs.findLibrary("hilt.compiler").get())
+                ksp(libs.findLibrary("hilt.compiler").get())
+                kspAndroidTest(libs.findLibrary("hilt.compiler").get())
             }
         }
     }
