@@ -16,27 +16,32 @@
 package com.civciv.app.auth.splash
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 internal fun SplashScreen(
-    onHideSplashScreen: (isLoggedIn: Boolean) -> Unit,
+    onNavigateToHome: () -> Unit,
+    onNavigateToLoginGraph: () -> Unit,
     viewModel: SplashViewModel = hiltViewModel(),
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val homeAuthUiState by viewModel.uiState.collectAsState()
 
-    when (uiState) {
-        SplashUiState.Loading -> {
+    when (homeAuthUiState) {
+        SplashUiState.Authorized -> {
+            LaunchedEffect(homeAuthUiState) {
+                onNavigateToHome()
+            }
         }
 
-        SplashUiState.LoggedIn -> {
-            onHideSplashScreen(true)
+        SplashUiState.NotAuthorized -> {
+            LaunchedEffect(homeAuthUiState) {
+                onNavigateToLoginGraph()
+            }
         }
 
-        SplashUiState.NotLoggedIn -> {
-            onHideSplashScreen(false)
-        }
+        SplashUiState.Loading -> {}
     }
 }

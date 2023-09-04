@@ -88,7 +88,5 @@ dependencies {
 
     implementation(libs.accompanist.navigation)
 
-    implementation(libs.kotlin.stdlib)
-    implementation(libs.kotlin.coroutines.core)
-    implementation(libs.kotlin.coroutines.android)
+    implementation(libs.kotlinx.coroutines.android)
 }

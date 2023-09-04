@@ -15,8 +15,13 @@
  */
 package com.civciv.app.home.main
 
-sealed interface HomeAuthUiState {
-    data object Loading : HomeAuthUiState
-    data object Authorized : HomeAuthUiState
-    data object NotAuthorized : HomeAuthUiState
+import com.civciv.app.model.Account
+import kotlinx.collections.immutable.ImmutableList
+
+sealed interface HomeUiState {
+    data object Loading : HomeUiState
+    data class Home(
+        val account: Account,
+        val accounts: ImmutableList<Account>,
+    ) : HomeUiState
 }

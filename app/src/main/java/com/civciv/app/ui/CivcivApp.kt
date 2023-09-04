@@ -47,8 +47,11 @@ import com.civciv.app.auth.graph.authGraph
 import com.civciv.app.auth.graph.navigateToAuthGraph
 import com.civciv.app.auth.login.navigation.navigateToLogin
 import com.civciv.app.auth.serverlist.navigation.navigateToServerList
+import com.civciv.app.auth.splash.navigation.splashScreen
+import com.civciv.app.auth.splash.navigation.splashScreenRoute
 import com.civciv.app.auth.welcome.navigation.welcomeScreenRoute
 import com.civciv.app.home.graph.homeGraph
+import com.civciv.app.home.graph.navigateToHomeGraph
 import com.civciv.app.home.main.navigation.navigateToHome
 import com.civciv.app.notification.graph.notificationGraph
 import com.civciv.app.profile.graph.profileGraph
@@ -63,7 +66,6 @@ import timber.log.Timber
 fun CivcivApp(
     modifier: Modifier = Modifier,
     appState: CivcivAppState = rememberCivcivAppState(),
-    onExitApp: () -> Unit,
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -99,7 +101,6 @@ fun CivcivApp(
                 modifier = modifier
                     .padding(padding)
                     .consumeWindowInsets(padding),
-                onExitApp = onExitApp,
             )
         }
     }
@@ -109,25 +110,41 @@ fun CivcivApp(
 fun CivcivNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    onExitApp: () -> Unit,
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = homeGraph,
+        startDestination = splashScreenRoute,
     ) {
-        homeGraph(
-            onNavigateToLoginGraph = {
-                navController.navigateToAuthGraph(
+        splashScreen(
+            onNavigateToHome = {
+                navController.navigateToHomeGraph(
                     navOptions = navOptions {
                         popUpTo(
-                            homeGraph,
+                            splashScreenRoute,
                             popUpToBuilder = {
                                 inclusive = true
                             },
                         )
                     },
                 )
+            },
+            onNavigateToLoginGraph = {
+                navController.navigateToAuthGraph(
+                    navOptions = navOptions {
+                        popUpTo(
+                            splashScreenRoute,
+                            popUpToBuilder = {
+                                inclusive = true
+                            },
+                        )
+                    },
+                )
+            },
+        )
+        homeGraph(
+            onAddAccount = {
+                navController.navigateToAuthGraph()
             },
         )
         authGraph(
@@ -157,7 +174,6 @@ fun CivcivNavHost(
                     },
                 )
             },
-            onExitApp = onExitApp,
         )
         notificationGraph()
         profileGraph()

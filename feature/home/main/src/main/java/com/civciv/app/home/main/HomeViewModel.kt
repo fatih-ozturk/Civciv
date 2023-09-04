@@ -17,38 +17,48 @@ package com.civciv.app.home.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.civciv.app.domain.usecase.GetAuthStateUseCase
-import com.civciv.app.domain.usecase.UpdateCurrentUserUseCase
-import com.civciv.app.model.AuthState
+import com.civciv.app.domain.usecase.ChangeAccountUseCase
+import com.civciv.app.domain.usecase.GetAuthorizedAccountsUseCase
+import com.civciv.app.domain.usecase.GetCurrentAccountUseCase
+import com.civciv.app.domain.usecase.LogoutAccountUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getAuthStateUseCase: GetAuthStateUseCase,
-    private val updateCurrentUserUseCase: UpdateCurrentUserUseCase,
+    private val getCurrentAccountUseCase: GetCurrentAccountUseCase,
+    private val getAuthorizedAccountsUseCase: GetAuthorizedAccountsUseCase,
+    private val changeAccountUseCase: ChangeAccountUseCase,
+    private val logoutAccountUseCase: LogoutAccountUseCase,
 ) : ViewModel() {
 
-    val uiState: StateFlow<HomeAuthUiState> = getAuthStateUseCase()
-        .map {
-            when (it) {
-                AuthState.LOGGED_IN -> {
-                    updateCurrentUserUseCase()
-                    HomeAuthUiState.Authorized
-                }
+    private val _uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Loading)
+    val uiState: StateFlow<HomeUiState> = _uiState
 
-                AuthState.LOGGED_OUT -> {
-                    HomeAuthUiState.NotAuthorized
-                }
-            }
-        }
-        .stateIn(
-            scope = viewModelScope,
-            initialValue = HomeAuthUiState.Loading,
-            started = SharingStarted.WhileSubscribed(5_000),
+    init {
+        getCurrentUser()
+    }
+
+    private fun getCurrentUser() = viewModelScope.launch {
+        val currentAccount = getCurrentAccountUseCase()
+        val authorizedAccounts = getAuthorizedAccountsUseCase()
+        _uiState.emit(
+            HomeUiState.Home(
+                currentAccount,
+                authorizedAccounts.toImmutableList(),
+            ),
         )
+    }
+
+    fun onAccountChanged(accountId: String) = viewModelScope.launch {
+        changeAccountUseCase(accountId)
+    }
+
+    fun onLogoutAccount() = viewModelScope.launch {
+        logoutAccountUseCase()
+    }
 }

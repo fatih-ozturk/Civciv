@@ -38,7 +38,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 implementation(libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
                 implementation(libs.findLibrary("androidx.lifecycle.viewmodel.compose").get())
 
-                implementation(libs.findLibrary("kotlin.coroutines.android").get())
+                implementation(libs.findLibrary("kotlinx.coroutines.android").get())
+                implementation(libs.findLibrary("kotlinx.collections.immutable").get())
             }
         }
     }

@@ -17,6 +17,6 @@ package com.civciv.app.auth.splash
 
 sealed interface SplashUiState {
     data object Loading : SplashUiState
-    data object NotLoggedIn : SplashUiState
-    data object LoggedIn : SplashUiState
+    data object Authorized : SplashUiState
+    data object NotAuthorized : SplashUiState
 }

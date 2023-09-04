@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.database.entities
+package com.civciv.app.domain.usecase
 
-import androidx.room.Embedded
-import androidx.room.Relation
+import com.civciv.app.data.repository.AccountRepository
+import javax.inject.Inject
 
-data class AccountWithCredential(
-    @Embedded val account: AccountEntity,
-    @Relation(
-        parentColumn = "accountId",
-        entityColumn = "accountId",
-    )
-    val accountCredential: AccountCredentialEntity,
-)
+class GetAuthorizedAccountsUseCase @Inject constructor(
+    private val accountRepository: AccountRepository,
+) {
+
+    suspend operator fun invoke() =
+        accountRepository.getAuthorizedAccounts()
+}

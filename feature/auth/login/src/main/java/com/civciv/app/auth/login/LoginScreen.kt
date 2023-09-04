@@ -42,6 +42,7 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun LoginScreen(
     onNavigateHome: () -> Unit,
+    onBackClicked: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = hiltViewModel(),
 ) {

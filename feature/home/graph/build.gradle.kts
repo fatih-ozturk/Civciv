@@ -23,11 +23,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:model"))
     implementation(project(":feature:home:main"))
-
-    implementation(libs.accompanist.navigation)
 }

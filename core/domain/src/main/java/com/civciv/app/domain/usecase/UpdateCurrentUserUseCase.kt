@@ -15,15 +15,13 @@
  */
 package com.civciv.app.domain.usecase
 
-import com.civciv.app.data.repository.AuthRepository
-import com.civciv.app.model.AuthState
-import kotlinx.coroutines.flow.Flow
+import com.civciv.app.data.repository.AccountRepository
 import javax.inject.Inject
 
 class UpdateCurrentUserUseCase @Inject constructor(
-    private val authRepository: AuthRepository,
+    private val accountRepository: AccountRepository,
 ) {
 
-    operator fun invoke(): Flow<AuthState> =
-        authRepository.getAuthenticateState()
+    suspend operator fun invoke() =
+        accountRepository.updateCurrentAccount()
 }

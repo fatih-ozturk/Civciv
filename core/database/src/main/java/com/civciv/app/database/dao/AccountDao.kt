@@ -48,4 +48,8 @@ interface AccountDao {
     @Transaction
     @Query("SELECT * FROM account WHERE accountId = :accountId")
     suspend fun getAccountWithCredential(accountId: String): AccountWithCredential?
+
+    @Transaction
+    @Query("SELECT * FROM account")
+    suspend fun getAllAccountsWithCredential(): List<AccountWithCredential>
 }

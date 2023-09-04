@@ -79,7 +79,10 @@ class AuthRepositoryImpl @Inject constructor(
 
     override fun getAuthenticateState(): Flow<AuthState> {
         return accountCredentialDao.getActiveAccountCredentialFlow().map {
-            // TODO we can verify account authorization
+            /*
+             * TODO we can verify account authorization if throws exception,
+             *  we can change current account if there is any available.
+            */
             if (it?.accessToken.isNullOrEmpty()) {
                 AuthState.LOGGED_OUT
             } else {

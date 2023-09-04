@@ -16,5 +16,7 @@
 package com.civciv.app.model
 
 data class Account(
+    val id: String,
     val username: String,
+    val isActive: Boolean,
 )

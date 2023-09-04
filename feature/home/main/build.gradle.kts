@@ -27,15 +27,4 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:ui"))
     implementation(project(":core:model"))
-
-    implementation(libs.androidx.paging.runtime)
-    implementation(libs.androidx.paging.compose)
-
-    implementation(libs.coil.kt.gif)
-
-    implementation(libs.accompanist.navigation)
-
-    implementation(libs.accompanist.pager.pager)
-    implementation(libs.accompanist.pager.indicators)
-    implementation(libs.accompanist.swiperefresh)
 }

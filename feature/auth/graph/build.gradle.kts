@@ -23,13 +23,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:model"))
     implementation(project(":feature:auth:login"))
     implementation(project(":feature:auth:welcome"))
     implementation(project(":feature:auth:serverlist"))
-
-    implementation(libs.accompanist.navigation)
 }

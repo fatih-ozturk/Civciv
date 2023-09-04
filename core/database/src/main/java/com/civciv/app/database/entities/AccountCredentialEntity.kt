@@ -16,9 +16,13 @@
 package com.civciv.app.database.entities
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "account_credential")
+@Entity(
+    tableName = "account_credential",
+    indices = [Index(value = ["accountId"], unique = true)],
+)
 data class AccountCredentialEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,

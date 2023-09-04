@@ -56,6 +56,7 @@ spotless = "6.21.0"
 timberVersion = "5.0.1"
 truthVersion = "1.1.5"
 turbine = "1.0.0"
+kotlinx-collections-immutable = "0.3.5"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradleplugin" }
@@ -137,11 +138,11 @@ hilt-pluginGradle = { group = "com.google.dagger", name = "hilt-android-gradle-p
 hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 junit = { group = "junit", name = "junit", version.ref = "junit4" }
 kotest = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
-kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
-kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
-kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
-kotlin-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
-kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlinx-serialization = {  group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-collections-immutable = {  group = "org.jetbrains.kotlinx",name = "kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
 kotlin-extensions = { group = "org.jetbrains.kotlin", name = "kotlin-android-extensions", version.ref = "kotlin" }
 kotlin-pluginGradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
@@ -150,7 +151,7 @@ ktor-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktor"
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
 ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
-ktor-engine-android = {group = "io.ktor", name = "ktor-client-android", version.ref = "ktor"}
+ktor-engine-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
 ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-logging = { group = "io.ktor", name = "ktor-client-logging-jvm", version.ref = "ktor" }
 ktor-serialization-gson = { group = "io.ktor", name = "ktor-serialization-gson", version.ref = "ktor" }

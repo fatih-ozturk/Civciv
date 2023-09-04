@@ -23,31 +23,38 @@ import com.civciv.app.model.AuthState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    getAuthStateUseCase: GetAuthStateUseCase,
-    updateCurrentUserUseCase: UpdateCurrentUserUseCase,
+    private val getAuthStateUseCase: GetAuthStateUseCase,
+    private val updateCurrentUserUseCase: UpdateCurrentUserUseCase,
 ) : ViewModel() {
 
     val uiState: StateFlow<SplashUiState> = getAuthStateUseCase()
-        .map {
-            when (it) {
+        .map { authState ->
+            Timber.tag("AuthState").e(authState.name)
+            when (authState) {
                 AuthState.LOGGED_IN -> {
                     updateCurrentUserUseCase()
-                    SplashUiState.LoggedIn
+                    SplashUiState.Authorized
                 }
 
-                AuthState.LOGGED_OUT ->
-                    SplashUiState.NotLoggedIn
+                AuthState.LOGGED_OUT -> {
+                    SplashUiState.NotAuthorized
+                }
             }
+        }
+        .catch {
+            emit(SplashUiState.NotAuthorized)
         }
         .stateIn(
             scope = viewModelScope,
             initialValue = SplashUiState.Loading,
-            started = SharingStarted.WhileSubscribed(5_000),
+            started = SharingStarted.Lazily,
         )
 }

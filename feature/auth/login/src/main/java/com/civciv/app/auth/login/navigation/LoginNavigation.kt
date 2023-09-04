@@ -46,6 +46,7 @@ fun NavController.navigateToLogin(
 
 fun NavGraphBuilder.loginScreen(
     onNavigateHome: () -> Unit,
+    onBackClicked: () -> Unit,
 ) {
     composable(
         route = "$loginScreenRoute/{$loginScreenDomainArg}",
@@ -57,6 +58,7 @@ fun NavGraphBuilder.loginScreen(
     ) {
         LoginScreen(
             onNavigateHome = onNavigateHome,
+            onBackClicked = onBackClicked,
         )
     }
 }

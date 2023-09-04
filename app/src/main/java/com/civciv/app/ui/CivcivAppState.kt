@@ -53,7 +53,7 @@ class CivcivAppState(
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
 
-    val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.values().asList()
+    val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.entries
 
     val shouldShowBottomBar: Boolean
         @Composable get() = currentDestination?.route?.uppercase() in

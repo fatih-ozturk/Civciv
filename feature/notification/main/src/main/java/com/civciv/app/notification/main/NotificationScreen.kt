@@ -16,6 +16,7 @@
 package com.civciv.app.notification.main
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,7 +27,7 @@ fun NotificationScreen(
     modifier: Modifier = Modifier,
     viewModel: NotificationViewModel = hiltViewModel(),
 ) {
-    Box(modifier = modifier) {
+    Box(modifier = modifier.fillMaxSize()) {
         Text(text = "NOTIFICATION")
     }
 }
