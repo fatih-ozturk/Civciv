@@ -91,6 +91,9 @@ internal object HttpClientFactory {
 
             install(HttpRequestRetry) {
                 exponentialDelay()
+                retryIf(maxRetries = 5) { _, response ->
+                    response.status.value == HttpStatusCode.NonAuthoritativeInformation.value
+                }
                 retryOnServerErrors(maxRetries = 3)
 
                 retryOnExceptionIf(maxRetries = 3) { _, cause ->

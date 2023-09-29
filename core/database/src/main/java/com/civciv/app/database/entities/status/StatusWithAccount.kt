@@ -13,14 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.domain.usecase
+package com.civciv.app.database.entities.status
 
-import com.civciv.app.data.repository.AccountRepository
-import javax.inject.Inject
+import androidx.room.Embedded
+import androidx.room.Relation
+import com.civciv.app.database.entities.account.AccountEntity
 
-class LogoutAccountUseCase @Inject constructor(
-    private val accountRepository: AccountRepository,
-) {
-
-    suspend operator fun invoke() = accountRepository.logoutCurrentUser()
-}
+data class StatusWithAccount(
+    @Embedded
+    val statusEntity: StatusEntity,
+    @Relation(
+        parentColumn = "statusAccountId",
+        entityColumn = "accountId",
+    )
+    val statusAccount: AccountEntity,
+    @Relation(
+        parentColumn = "reblogAccountId",
+        entityColumn = "accountId",
+    )
+    val reblogAccount: AccountEntity?,
+)

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.database.entities
+package com.civciv.app.database.entities.account
 
 import androidx.room.Entity
 import androidx.room.Index

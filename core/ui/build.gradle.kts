@@ -36,7 +36,7 @@ dependencies {
     api(libs.androidx.compose.material3)
     api(libs.androidx.compose.material3.windowSizeClass)
 
-    implementation(libs.lottie.compose)
+    implementation(libs.airbnb.lottie.compose)
     implementation(libs.accompanist.pager.pager)
 
     api(libs.accompanist.navigation.animation)

@@ -13,14 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.domain.usecase
+package com.civciv.app.database.entities.account
 
-import com.civciv.app.data.repository.AccountRepository
-import javax.inject.Inject
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 
-class LogoutAccountUseCase @Inject constructor(
-    private val accountRepository: AccountRepository,
-) {
-
-    suspend operator fun invoke() = accountRepository.logoutCurrentUser()
-}
+@Entity(
+    tableName = "account_credential",
+    indices = [Index(value = ["accountId"], unique = true)],
+)
+data class AccountCredentialEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
+    val domain: String,
+    val accountId: String,
+    val accessToken: String,
+    val tokenType: String,
+    val isActive: Boolean = false,
+)

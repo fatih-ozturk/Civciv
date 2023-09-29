@@ -16,14 +16,14 @@
 package com.civciv.app.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContent
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -67,19 +67,24 @@ fun CivcivApp(
     modifier: Modifier = Modifier,
     appState: CivcivAppState = rememberCivcivAppState(),
 ) {
+    LaunchedEffect(Unit) {
+        appState.navController.currentBackStack.onEach { currentBackStack ->
+            Timber.tag("CivcivApp currentBackStack").e(
+                currentBackStack.map { it.destination.route }.toString(),
+            )
+        }.collect()
+    }
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
     ) {
         Scaffold(
-            modifier = Modifier.semantics { testTagsAsResourceId = true },
+            modifier = Modifier
+                .semantics { testTagsAsResourceId = true },
             contentColor = MaterialTheme.colorScheme.onBackground,
             bottomBar = {
-                AnimatedVisibility(
-                    visible = appState.shouldShowBottomBar,
-                    enter = fadeIn(),
-                    exit = fadeOut(),
-                ) {
+                if (appState.shouldShowBottomBar) {
                     CivcivBottomNavigation(
                         destinations = appState.topLevelDestinations,
                         onNavigateToDestination = appState::navigateToTopLevelDestination,
@@ -88,19 +93,12 @@ fun CivcivApp(
                 }
             },
         ) { padding ->
-            LaunchedEffect(Unit) {
-                appState.navController.currentBackStack.onEach { currentBackStack ->
-                    Timber.tag("CivcivApp currentBackStack").e(
-                        currentBackStack.map { it.destination.route }.toString(),
-                    )
-                }.collect()
-            }
-
             CivcivNavHost(
                 navController = appState.navController,
                 modifier = modifier
                     .padding(padding)
-                    .consumeWindowInsets(padding),
+                    .consumeWindowInsets(padding)
+                    .windowInsetsPadding(WindowInsets.safeContent),
             )
         }
     }
@@ -190,7 +188,8 @@ fun CivcivBottomNavigation(
     modifier: Modifier = Modifier,
 ) {
     NavigationBar(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth(),
         containerColor = MaterialTheme.colorScheme.surface,
         contentColor = contentColorFor(MaterialTheme.colorScheme.surface),
     ) {

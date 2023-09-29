@@ -13,15 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.home.main
+package com.civciv.app.home.main.di
 
-import com.civciv.app.model.Account
-import kotlinx.collections.immutable.ImmutableList
+import com.airbnb.mvrx.hilt.AssistedViewModelFactory
+import com.airbnb.mvrx.hilt.MavericksViewModelComponent
+import com.airbnb.mvrx.hilt.ViewModelKey
+import com.civciv.app.home.main.HomeViewModel
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.multibindings.IntoMap
 
-sealed interface HomeUiState {
-    data object Loading : HomeUiState
-    data class Home(
-        val account: Account,
-        val accounts: ImmutableList<Account>,
-    ) : HomeUiState
+@Module
+@InstallIn(MavericksViewModelComponent::class)
+interface MavericksViewModelModule {
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    fun homesViewModelFactory(factory: HomeViewModel.Factory): AssistedViewModelFactory<*, *>
 }

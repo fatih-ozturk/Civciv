@@ -41,13 +41,13 @@ fun NavGraphBuilder.authGraph(
         route = authGraph,
         startDestination = welcomeScreenRoute,
     ) {
-        loginScreen(
-            onNavigateHome = onNavigateHome,
-            onBackClicked = onBackClicked,
-        )
         welcomeScreen(
             onLoginClicked = onLoginClicked,
             onServerListClicked = onServerListClicked,
+        )
+        loginScreen(
+            onNavigateHome = onNavigateHome,
+            onBackClicked = onBackClicked,
         )
         serverListScreen(
             onBackClicked = onBackClicked,

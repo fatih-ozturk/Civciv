@@ -15,33 +15,34 @@
  */
 package com.civciv.app
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import com.airbnb.mvrx.MavericksState
+import com.airbnb.mvrx.MavericksViewModel
+import com.airbnb.mvrx.MavericksViewModelFactory
+import com.airbnb.mvrx.hilt.AssistedViewModelFactory
+import com.airbnb.mvrx.hilt.hiltMavericksViewModelFactory
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 
-@HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
-
-    private val _splashState: MutableStateFlow<MainActivitySplashState> =
-        MutableStateFlow(MainActivitySplashState.Loading)
-    val splashState: StateFlow<MainActivitySplashState> = _splashState
+class MainViewModel @AssistedInject constructor(
+    @Assisted val initialState: MainState,
+) : MavericksViewModel<MainState>(initialState = initialState) {
 
     init {
         hideSplashScreen()
     }
 
-    private fun hideSplashScreen() = viewModelScope.launch {
-        delay(1000L)
-        _splashState.value = MainActivitySplashState.Success
+    private fun hideSplashScreen() {
+        setState { copy(isLoading = false) }
     }
+
+    @AssistedFactory
+    interface Factory : AssistedViewModelFactory<MainViewModel, MainState> {
+        override fun create(state: MainState): MainViewModel
+    }
+
+    companion object :
+        MavericksViewModelFactory<MainViewModel, MainState> by hiltMavericksViewModelFactory()
 }
 
-sealed interface MainActivitySplashState {
-    data object Loading : MainActivitySplashState
-    data object Success : MainActivitySplashState
-}
+data class MainState(val isLoading: Boolean = true) : MavericksState

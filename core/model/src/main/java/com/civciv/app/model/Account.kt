@@ -15,6 +15,9 @@
  */
 package com.civciv.app.model
 
+import androidx.compose.runtime.Stable
+
+@Stable
 data class Account(
     val id: String,
     val username: String,

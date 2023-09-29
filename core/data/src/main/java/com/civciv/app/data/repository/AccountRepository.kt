@@ -22,4 +22,5 @@ interface AccountRepository {
     suspend fun getCurrentAccount(): Account
     suspend fun getAuthorizedAccounts(): List<Account>
     suspend fun changeAccount(accountId: String)
+    suspend fun logoutCurrentUser()
 }

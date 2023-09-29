@@ -34,9 +34,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.civciv.app.ui.ext.restartActivity
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -46,6 +48,7 @@ fun LoginScreen(
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = hiltViewModel(),
 ) {
+    val context = LocalContext.current
     val loginLauncher = rememberLauncherForActivityResult(
         contract = LoginActivityResultContract(),
     ) { loginResult ->
@@ -63,7 +66,12 @@ fun LoginScreen(
                     // toast
                 }
 
-                LoginEvent.NavigateToHome -> onNavigateHome()
+                LoginEvent.NavigateToHome -> {
+                    context.restartActivity()
+                    // onNavigateHome()
+                }
+
+                else -> {}
             }
         }
     }
@@ -77,6 +85,8 @@ fun LoginScreen(
         is LoginUiState.Login -> {
             domain = state.domain
         }
+
+        else -> {}
     }
 
     Column(

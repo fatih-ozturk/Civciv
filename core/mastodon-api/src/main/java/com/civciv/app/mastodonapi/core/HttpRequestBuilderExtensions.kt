@@ -31,3 +31,19 @@ internal fun HttpRequestBuilder.parameterLanguage(language: String?) {
 internal fun HttpRequestBuilder.parameterCategory(category: String?) {
     category?.let { parameter("category", it) }
 }
+
+internal fun HttpRequestBuilder.parameterMinID(minId: String?) {
+    minId?.let { parameter("min_id", it) }
+}
+
+internal fun HttpRequestBuilder.parameterSinceId(sinceId: String?) {
+    sinceId?.let { parameter("since_id", it) }
+}
+
+internal fun HttpRequestBuilder.parameterMaxID(maxId: String?) {
+    maxId?.let { parameter("max_id", it) }
+}
+
+internal fun HttpRequestBuilder.parameterLimit(limit: Int?) {
+    limit?.let { parameter("limit", it) }
+}

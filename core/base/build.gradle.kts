@@ -26,6 +26,9 @@ dependencies {
     api(libs.kotlin.stdlib)
     api(libs.kotlinx.coroutines.android)
 
+    implementation(libs.airbnb.mavericks)
+    implementation(libs.airbnb.mavericks.hilt)
+    implementation(libs.airbnb.mavericks.compose)
     implementation(libs.androidx.core.ktx)
     api(libs.timber)
 }

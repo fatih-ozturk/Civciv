@@ -13,14 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.domain.usecase
+package com.civciv.app.di.app
 
-import com.civciv.app.data.repository.AccountRepository
-import javax.inject.Inject
+import com.airbnb.mvrx.hilt.AssistedViewModelFactory
+import com.airbnb.mvrx.hilt.MavericksViewModelComponent
+import com.airbnb.mvrx.hilt.ViewModelKey
+import com.civciv.app.MainViewModel
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.multibindings.IntoMap
 
-class LogoutAccountUseCase @Inject constructor(
-    private val accountRepository: AccountRepository,
-) {
+@Module
+@InstallIn(MavericksViewModelComponent::class)
+interface MainViewModelModule {
 
-    suspend operator fun invoke() = accountRepository.logoutCurrentUser()
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    fun mainViewModelFactory(factory: MainViewModel.Factory): AssistedViewModelFactory<*, *>
 }

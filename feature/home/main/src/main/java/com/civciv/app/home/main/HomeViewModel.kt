@@ -15,29 +15,28 @@
  */
 package com.civciv.app.home.main
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.airbnb.mvrx.MavericksViewModel
+import com.airbnb.mvrx.MavericksViewModelFactory
+import com.airbnb.mvrx.hilt.AssistedViewModelFactory
+import com.airbnb.mvrx.hilt.hiltMavericksViewModelFactory
 import com.civciv.app.domain.usecase.ChangeAccountUseCase
 import com.civciv.app.domain.usecase.GetAuthorizedAccountsUseCase
 import com.civciv.app.domain.usecase.GetCurrentAccountUseCase
 import com.civciv.app.domain.usecase.LogoutAccountUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
+class HomeViewModel @AssistedInject constructor(
+    @Assisted initialState: HomeState,
     private val getCurrentAccountUseCase: GetCurrentAccountUseCase,
     private val getAuthorizedAccountsUseCase: GetAuthorizedAccountsUseCase,
     private val changeAccountUseCase: ChangeAccountUseCase,
     private val logoutAccountUseCase: LogoutAccountUseCase,
-) : ViewModel() {
-
-    private val _uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Loading)
-    val uiState: StateFlow<HomeUiState> = _uiState
+) : MavericksViewModel<HomeState>(initialState = initialState) {
 
     init {
         getCurrentUser()
@@ -46,19 +45,45 @@ class HomeViewModel @Inject constructor(
     private fun getCurrentUser() = viewModelScope.launch {
         val currentAccount = getCurrentAccountUseCase()
         val authorizedAccounts = getAuthorizedAccountsUseCase()
-        _uiState.emit(
-            HomeUiState.Home(
-                currentAccount,
-                authorizedAccounts.toImmutableList(),
-            ),
-        )
+        setState {
+            copy(
+                currentAccount = currentAccount,
+                authorizedAccounts = authorizedAccounts.toImmutableList(),
+            )
+        }
     }
 
     fun onAccountChanged(accountId: String) = viewModelScope.launch {
-        changeAccountUseCase(accountId)
+        val job = async { changeAccountUseCase(accountId) }
+        job.await()
+        job.invokeOnCompletion { throwable ->
+            if (throwable != null) {
+                // TODO show error
+                // or BaseViewModel.handleException(throwable)
+            } else {
+                setState { copy(isAccountChanged = true) }
+            }
+        }
     }
 
     fun onLogoutAccount() = viewModelScope.launch {
-        logoutAccountUseCase()
+        val job = async { logoutAccountUseCase() }
+        job.await()
+        job.invokeOnCompletion { throwable ->
+            if (throwable != null) {
+                // TODO show error
+                // or BaseViewModel.handleException(throwable)
+            } else {
+                setState { copy(isAccountLoggedOut = true) }
+            }
+        }
     }
+
+    @AssistedFactory
+    interface Factory : AssistedViewModelFactory<HomeViewModel, HomeState> {
+        override fun create(state: HomeState): HomeViewModel
+    }
+
+    companion object :
+        MavericksViewModelFactory<HomeViewModel, HomeState> by hiltMavericksViewModelFactory()
 }

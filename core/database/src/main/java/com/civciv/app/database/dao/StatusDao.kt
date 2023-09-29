@@ -13,14 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.domain.usecase
+package com.civciv.app.database.dao
 
-import com.civciv.app.data.repository.AccountRepository
-import javax.inject.Inject
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.civciv.app.database.entities.status.StatusEntity
+import com.civciv.app.database.entities.status.StatusWithAccount
 
-class LogoutAccountUseCase @Inject constructor(
-    private val accountRepository: AccountRepository,
-) {
+@Dao
+interface StatusDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertStatus(user: StatusEntity): Long
 
-    suspend operator fun invoke() = accountRepository.logoutCurrentUser()
+    @Query("SELECT * FROM status")
+    suspend fun getStatuses(): List<StatusWithAccount>
 }

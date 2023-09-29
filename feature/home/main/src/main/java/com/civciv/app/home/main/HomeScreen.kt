@@ -16,13 +16,9 @@
 package com.civciv.app.home.main
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -38,79 +34,103 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import com.airbnb.mvrx.compose.collectAsState
+import com.airbnb.mvrx.compose.mavericksViewModel
 import com.civciv.app.model.Account
+import com.civciv.app.ui.ext.recomposeHighlighter
+import com.civciv.app.ui.ext.restartActivity
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onAddAccount: () -> Unit = {},
-    viewModel: HomeViewModel = hiltViewModel(),
+    viewModel: HomeViewModel = mavericksViewModel(),
 ) {
-    val uiState by viewModel.uiState.collectAsState()
-    when (val state = uiState) {
-        is HomeUiState.Home -> HomeContent(
-            account = state.account,
-            accounts = state.accounts,
-            onAddAccount = onAddAccount,
-            onAccountChanged = viewModel::onAccountChanged,
-            modifier = modifier,
-        )
+    val context = LocalContext.current
+    val uiState by viewModel.collectAsState()
 
-        HomeUiState.Loading -> {
-            Box {
-                Text(text = "Loading")
+    LaunchedEffect(uiState) {
+        when {
+            uiState.isAccountLoggedOut -> {
+                context.restartActivity()
+            }
+
+            uiState.isAccountChanged -> {
+                context.restartActivity()
             }
         }
     }
+
+    HomeContent(
+        account = uiState.currentAccount,
+        accounts = uiState.authorizedAccounts,
+        onAddAccount = onAddAccount,
+        onLogoutAccount = viewModel::onLogoutAccount,
+        onAccountChanged = viewModel::onAccountChanged,
+        modifier = modifier,
+    )
 }
 
 @Composable
 fun HomeContent(
-    account: Account,
+    account: Account?,
     accounts: ImmutableList<Account>,
     onAddAccount: () -> Unit,
+    onLogoutAccount: () -> Unit,
     onAccountChanged: (accountId: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var openBottomSheet by rememberSaveable { mutableStateOf(false) }
-    Box {
-        Column(
-            modifier = modifier
-                .fillMaxSize()
-                .windowInsetsPadding(WindowInsets.statusBars),
+
+    Column(
+        modifier = modifier
+            .fillMaxSize(),
+    ) {
+        Text(
+            text = "Current User = ${account?.username}",
+        )
+
+        Button(
+            onClick = {
+                onAddAccount()
+            },
         ) {
-            Text(text = "Current User = ${account.username}")
+            Text(
+                text = "Add Another Account",
+            )
+        }
 
-            Button(
-                onClick = {
-                    onAddAccount()
-                },
-            ) {
-                Text(text = "Add Another Account")
-            }
+        Button(
+            modifier = Modifier.recomposeHighlighter(),
+            onClick = {
+                onLogoutAccount()
+            },
+        ) {
+            Text(
+                text = "Logout Current User",
+            )
+        }
 
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "Logout Current User")
-            }
-
-            Button(
-                onClick = {
-                    openBottomSheet = !openBottomSheet
-                },
-            ) {
-                Text(text = "Account List")
-            }
+        Button(
+            onClick = {
+                openBottomSheet = !openBottomSheet
+            },
+        ) {
+            Text(
+                text = "Account List",
+            )
         }
     }
+
     if (openBottomSheet) {
         AccountListBottomSheet(
             accounts = accounts,

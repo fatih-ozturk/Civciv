@@ -80,6 +80,8 @@ dependencies {
     implementation(project(":feature:search:graph"))
     implementation(project(":feature:search:main"))
 
+    implementation(libs.airbnb.mavericks.hilt)
+    implementation(libs.airbnb.mavericks)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.activity.compose)
@@ -87,6 +89,7 @@ dependencies {
     implementation(libs.androidx.work.ktx)
 
     implementation(libs.accompanist.navigation)
+    implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.kotlinx.coroutines.android)
 }

@@ -29,7 +29,9 @@ fun Context.getActivity(): Activity? = when (this) {
 }
 
 fun Context.restartActivity() {
-    getActivity()?.recreate()
+    val intent = getActivity()?.intent
+    getActivity()?.finish()
+    startActivity(intent)
 }
 
 fun Context.restartApplication() {

@@ -22,16 +22,16 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.civciv.app.database.entities.AccountEntity
-import com.civciv.app.database.entities.AccountWithCredential
+import com.civciv.app.database.entities.account.AccountEntity
+import com.civciv.app.database.entities.account.AccountWithCredential
 
 @Dao
 interface AccountDao {
     @Query("SELECT * FROM account")
     suspend fun getAllAccount(): List<AccountEntity>
 
-    @Query("SELECT * FROM account WHERE id = :userId")
-    suspend fun getAccountById(userId: Long): AccountEntity?
+    @Query("SELECT * FROM account WHERE id = :accountId")
+    suspend fun getAccountById(accountId: Long): AccountEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAccount(user: AccountEntity): Long
@@ -44,6 +44,9 @@ interface AccountDao {
 
     @Query("DELETE FROM account")
     suspend fun deleteAllAccount()
+
+    @Query("DELETE FROM account WHERE accountId = :accountId")
+    suspend fun deleteAccountById(accountId: String)
 
     @Transaction
     @Query("SELECT * FROM account WHERE accountId = :accountId")

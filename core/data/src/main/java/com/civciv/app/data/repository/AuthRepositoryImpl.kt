@@ -17,8 +17,8 @@ package com.civciv.app.data.repository
 
 import com.civciv.app.database.dao.AccountCredentialDao
 import com.civciv.app.database.dao.AccountDao
-import com.civciv.app.database.entities.AccountCredentialEntity
-import com.civciv.app.database.entities.AccountEntity
+import com.civciv.app.database.entities.account.AccountCredentialEntity
+import com.civciv.app.database.entities.account.AccountEntity
 import com.civciv.app.mastodonapi.api.AccountApi
 import com.civciv.app.mastodonapi.api.AuthApi
 import com.civciv.app.mastodonapi.model.CredentialsResponse

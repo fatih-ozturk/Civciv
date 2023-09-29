@@ -13,22 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.database.entities
+package com.civciv.app.home.main
 
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import com.airbnb.mvrx.MavericksState
+import com.civciv.app.model.Account
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
-@Entity(
-    tableName = "account_credential",
-    indices = [Index(value = ["accountId"], unique = true)],
-)
-data class AccountCredentialEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
-    val domain: String,
-    val accountId: String,
-    val accessToken: String,
-    val tokenType: String,
-    val isActive: Boolean = false,
-)
+data class HomeState(
+    val currentAccount: Account? = null,
+    val authorizedAccounts: ImmutableList<Account> = persistentListOf(),
+    val isLoading: Boolean = false,
+    val isAccountChanged: Boolean = false,
+    val isAccountLoggedOut: Boolean = false,
+) : MavericksState

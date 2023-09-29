@@ -15,6 +15,7 @@
  */
 package com.civciv.app.mastodonapi.api
 
+import com.civciv.app.mastodonapi.MastodonWebConfig
 import com.civciv.app.mastodonapi.core.getByPaths
 import com.civciv.app.mastodonapi.core.json
 import com.civciv.app.mastodonapi.core.parameterCategory
@@ -23,6 +24,7 @@ import com.civciv.app.mastodonapi.model.MastodonCategoryResponse
 import com.civciv.app.mastodonapi.model.MastodonLanguageResponse
 import com.civciv.app.mastodonapi.model.MastodonServerResponse
 import io.ktor.client.HttpClient
+import io.ktor.client.request.host
 
 class MastodonApi internal constructor(
     private val client: HttpClient,
@@ -32,6 +34,7 @@ class MastodonApi internal constructor(
         language: String?,
     ): List<MastodonCategoryResponse> {
         return client.getByPaths("categories") {
+            host = MastodonWebConfig.MASTODON_HOST
             json()
             parameterLanguage(language)
         }
@@ -42,6 +45,7 @@ class MastodonApi internal constructor(
         category: String?,
     ): List<MastodonServerResponse> {
         return client.getByPaths("servers") {
+            host = MastodonWebConfig.MASTODON_HOST
             json()
             parameterLanguage(language)
             parameterCategory(category)
@@ -50,6 +54,7 @@ class MastodonApi internal constructor(
 
     suspend fun getMastodonLanguages(): List<MastodonLanguageResponse> {
         return client.getByPaths("languages") {
+            host = MastodonWebConfig.MASTODON_HOST
             json()
         }
     }
