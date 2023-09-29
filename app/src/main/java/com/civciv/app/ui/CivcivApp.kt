@@ -16,14 +16,14 @@
 package com.civciv.app.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContent
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -47,8 +47,11 @@ import com.civciv.app.auth.graph.authGraph
 import com.civciv.app.auth.graph.navigateToAuthGraph
 import com.civciv.app.auth.login.navigation.navigateToLogin
 import com.civciv.app.auth.serverlist.navigation.navigateToServerList
+import com.civciv.app.auth.splash.navigation.splashScreen
+import com.civciv.app.auth.splash.navigation.splashScreenRoute
 import com.civciv.app.auth.welcome.navigation.welcomeScreenRoute
 import com.civciv.app.home.graph.homeGraph
+import com.civciv.app.home.graph.navigateToHomeGraph
 import com.civciv.app.home.main.navigation.navigateToHome
 import com.civciv.app.notification.graph.notificationGraph
 import com.civciv.app.profile.graph.profileGraph
@@ -63,21 +66,25 @@ import timber.log.Timber
 fun CivcivApp(
     modifier: Modifier = Modifier,
     appState: CivcivAppState = rememberCivcivAppState(),
-    onExitApp: () -> Unit,
 ) {
+    LaunchedEffect(Unit) {
+        appState.navController.currentBackStack.onEach { currentBackStack ->
+            Timber.tag("CivcivApp currentBackStack").e(
+                currentBackStack.map { it.destination.route }.toString(),
+            )
+        }.collect()
+    }
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
     ) {
         Scaffold(
-            modifier = Modifier.semantics { testTagsAsResourceId = true },
+            modifier = Modifier
+                .semantics { testTagsAsResourceId = true },
             contentColor = MaterialTheme.colorScheme.onBackground,
             bottomBar = {
-                AnimatedVisibility(
-                    visible = appState.shouldShowBottomBar,
-                    enter = fadeIn(),
-                    exit = fadeOut(),
-                ) {
+                if (appState.shouldShowBottomBar) {
                     CivcivBottomNavigation(
                         destinations = appState.topLevelDestinations,
                         onNavigateToDestination = appState::navigateToTopLevelDestination,
@@ -86,20 +93,12 @@ fun CivcivApp(
                 }
             },
         ) { padding ->
-            LaunchedEffect(Unit) {
-                appState.navController.currentBackStack.onEach { currentBackStack ->
-                    Timber.tag("CivcivApp currentBackStack").e(
-                        currentBackStack.map { it.destination.route }.toString(),
-                    )
-                }.collect()
-            }
-
             CivcivNavHost(
                 navController = appState.navController,
                 modifier = modifier
                     .padding(padding)
-                    .consumeWindowInsets(padding),
-                onExitApp = onExitApp,
+                    .consumeWindowInsets(padding)
+                    .windowInsetsPadding(WindowInsets.safeContent),
             )
         }
     }
@@ -109,25 +108,41 @@ fun CivcivApp(
 fun CivcivNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    onExitApp: () -> Unit,
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = homeGraph,
+        startDestination = splashScreenRoute,
     ) {
-        homeGraph(
-            onNavigateToLoginGraph = {
-                navController.navigateToAuthGraph(
+        splashScreen(
+            onNavigateToHome = {
+                navController.navigateToHomeGraph(
                     navOptions = navOptions {
                         popUpTo(
-                            homeGraph,
+                            splashScreenRoute,
                             popUpToBuilder = {
                                 inclusive = true
                             },
                         )
                     },
                 )
+            },
+            onNavigateToLoginGraph = {
+                navController.navigateToAuthGraph(
+                    navOptions = navOptions {
+                        popUpTo(
+                            splashScreenRoute,
+                            popUpToBuilder = {
+                                inclusive = true
+                            },
+                        )
+                    },
+                )
+            },
+        )
+        homeGraph(
+            onAddAccount = {
+                navController.navigateToAuthGraph()
             },
         )
         authGraph(
@@ -157,7 +172,6 @@ fun CivcivNavHost(
                     },
                 )
             },
-            onExitApp = onExitApp,
         )
         notificationGraph()
         profileGraph()
@@ -174,7 +188,8 @@ fun CivcivBottomNavigation(
     modifier: Modifier = Modifier,
 ) {
     NavigationBar(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth(),
         containerColor = MaterialTheme.colorScheme.surface,
         contentColor = contentColorFor(MaterialTheme.colorScheme.surface),
     ) {

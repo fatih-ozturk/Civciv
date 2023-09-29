@@ -13,16 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.database.entities
+package com.civciv.app.home.main.di
 
-import androidx.room.Embedded
-import androidx.room.Relation
+import com.airbnb.mvrx.hilt.AssistedViewModelFactory
+import com.airbnb.mvrx.hilt.MavericksViewModelComponent
+import com.airbnb.mvrx.hilt.ViewModelKey
+import com.civciv.app.home.main.HomeViewModel
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.multibindings.IntoMap
 
-data class AccountWithCredential(
-    @Embedded val user: AccountEntity,
-    @Relation(
-        parentColumn = "accountId",
-        entityColumn = "accountId",
-    )
-    val credential: AccountCredentialEntity,
-)
+@Module
+@InstallIn(MavericksViewModelComponent::class)
+interface MavericksViewModelModule {
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    fun homesViewModelFactory(factory: HomeViewModel.Factory): AssistedViewModelFactory<*, *>
+}

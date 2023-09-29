@@ -33,7 +33,7 @@ android {
 dependencies {
     api(libs.junit)
     api(libs.androidx.test.core)
-    api(libs.kotlin.coroutines.test)
+    api(libs.kotlinx.coroutines.test)
     api(libs.turbine)
     api(libs.mockK)
     api(libs.kotest)

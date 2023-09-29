@@ -15,40 +15,75 @@
  */
 package com.civciv.app.home.main
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.civciv.app.domain.usecase.GetAuthStateUseCase
-import com.civciv.app.domain.usecase.UpdateCurrentUserUseCase
-import com.civciv.app.model.AuthState
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
-import javax.inject.Inject
+import com.airbnb.mvrx.MavericksViewModel
+import com.airbnb.mvrx.MavericksViewModelFactory
+import com.airbnb.mvrx.hilt.AssistedViewModelFactory
+import com.airbnb.mvrx.hilt.hiltMavericksViewModelFactory
+import com.civciv.app.domain.usecase.ChangeAccountUseCase
+import com.civciv.app.domain.usecase.GetAuthorizedAccountsUseCase
+import com.civciv.app.domain.usecase.GetCurrentAccountUseCase
+import com.civciv.app.domain.usecase.LogoutAccountUseCase
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val getAuthStateUseCase: GetAuthStateUseCase,
-    private val updateCurrentUserUseCase: UpdateCurrentUserUseCase,
-) : ViewModel() {
+class HomeViewModel @AssistedInject constructor(
+    @Assisted initialState: HomeState,
+    private val getCurrentAccountUseCase: GetCurrentAccountUseCase,
+    private val getAuthorizedAccountsUseCase: GetAuthorizedAccountsUseCase,
+    private val changeAccountUseCase: ChangeAccountUseCase,
+    private val logoutAccountUseCase: LogoutAccountUseCase,
+) : MavericksViewModel<HomeState>(initialState = initialState) {
 
-    val uiState: StateFlow<HomeAuthUiState> = getAuthStateUseCase()
-        .map {
-            when (it) {
-                AuthState.LOGGED_IN -> {
-                    updateCurrentUserUseCase()
-                    HomeAuthUiState.Authorized
-                }
+    init {
+        getCurrentUser()
+    }
 
-                AuthState.LOGGED_OUT -> {
-                    HomeAuthUiState.NotAuthorized
-                }
+    private fun getCurrentUser() = viewModelScope.launch {
+        val currentAccount = getCurrentAccountUseCase()
+        val authorizedAccounts = getAuthorizedAccountsUseCase()
+        setState {
+            copy(
+                currentAccount = currentAccount,
+                authorizedAccounts = authorizedAccounts.toImmutableList(),
+            )
+        }
+    }
+
+    fun onAccountChanged(accountId: String) = viewModelScope.launch {
+        val job = async { changeAccountUseCase(accountId) }
+        job.await()
+        job.invokeOnCompletion { throwable ->
+            if (throwable != null) {
+                // TODO show error
+                // or BaseViewModel.handleException(throwable)
+            } else {
+                setState { copy(isAccountChanged = true) }
             }
         }
-        .stateIn(
-            scope = viewModelScope,
-            initialValue = HomeAuthUiState.Loading,
-            started = SharingStarted.WhileSubscribed(5_000),
-        )
+    }
+
+    fun onLogoutAccount() = viewModelScope.launch {
+        val job = async { logoutAccountUseCase() }
+        job.await()
+        job.invokeOnCompletion { throwable ->
+            if (throwable != null) {
+                // TODO show error
+                // or BaseViewModel.handleException(throwable)
+            } else {
+                setState { copy(isAccountLoggedOut = true) }
+            }
+        }
+    }
+
+    @AssistedFactory
+    interface Factory : AssistedViewModelFactory<HomeViewModel, HomeState> {
+        override fun create(state: HomeState): HomeViewModel
+    }
+
+    companion object :
+        MavericksViewModelFactory<HomeViewModel, HomeState> by hiltMavericksViewModelFactory()
 }

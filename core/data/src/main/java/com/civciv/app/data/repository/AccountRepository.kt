@@ -15,6 +15,12 @@
  */
 package com.civciv.app.data.repository
 
+import com.civciv.app.model.Account
+
 interface AccountRepository {
     suspend fun updateCurrentAccount()
+    suspend fun getCurrentAccount(): Account
+    suspend fun getAuthorizedAccounts(): List<Account>
+    suspend fun changeAccount(accountId: String)
+    suspend fun logoutCurrentUser()
 }

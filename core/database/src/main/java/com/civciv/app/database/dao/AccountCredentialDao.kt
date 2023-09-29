@@ -20,7 +20,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.civciv.app.database.entities.AccountCredentialEntity
+import com.civciv.app.database.entities.account.AccountCredentialEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

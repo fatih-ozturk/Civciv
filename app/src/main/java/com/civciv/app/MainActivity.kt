@@ -18,16 +18,18 @@ package com.civciv.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.metrics.performance.JankStats
+import com.airbnb.mvrx.viewModel
 import com.civciv.app.designsystem.theme.CivcivTheme
 import com.civciv.app.ui.CivcivApp
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,40 +44,36 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var lazyStats: dagger.Lazy<JankStats>
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        var uiState: MainActivitySplashState by mutableStateOf(MainActivitySplashState.Loading)
+        var uiState: MainState by mutableStateOf(MainState())
 
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.splashState
-                    .onEach {
-                        uiState = it
-                    }
+                viewModel.stateFlow.onEach {
+                    uiState = it
+                }
                     .collect()
             }
         }
+        enableEdgeToEdge()
 
         splashScreen.setKeepOnScreenCondition {
-            when (uiState) {
-                MainActivitySplashState.Loading -> true
-                MainActivitySplashState.Success -> false
-            }
+            uiState.isLoading
         }
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
         setContent {
+            val isDarkTheme = isSystemInDarkTheme()
+            DisposableEffect(isDarkTheme) {
+                enableEdgeToEdge()
+                onDispose {}
+            }
             CivcivTheme {
-                CivcivApp(
-                    onExitApp = {
-                        this.finish()
-                    },
-                )
+                CivcivApp()
             }
         }
     }

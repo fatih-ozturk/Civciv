@@ -28,11 +28,13 @@ fun NavController.navigateToSplash(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.splashScreen(
-    onHideSplashScreen: (isLoggedIn: Boolean) -> Unit,
+    onNavigateToHome: () -> Unit,
+    onNavigateToLoginGraph: () -> Unit,
 ) {
     composable(route = splashScreenRoute) {
         SplashScreen(
-            onHideSplashScreen = onHideSplashScreen,
+            onNavigateToHome = onNavigateToHome,
+            onNavigateToLoginGraph = onNavigateToLoginGraph,
         )
     }
 }

@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.database.entities
+package com.civciv.app.database.entities.account
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.Embedded
+import androidx.room.Relation
 
-@Entity(tableName = "account")
-data class AccountEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
-    val accountId: String,
-    val username: String,
-    val profilePictureUrl: String,
+data class AccountWithCredential(
+    @Embedded val account: AccountEntity,
+    @Relation(
+        parentColumn = "accountId",
+        entityColumn = "accountId",
+    )
+    val accountCredential: AccountCredentialEntity,
 )

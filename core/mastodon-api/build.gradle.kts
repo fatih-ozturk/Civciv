@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.kotlin.datetime)
+    implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization)
 
     implementation(libs.ktor.core)

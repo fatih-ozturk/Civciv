@@ -20,6 +20,7 @@ import androidx.room.Room
 import com.civciv.app.database.CivcivDatabase
 import com.civciv.app.database.dao.AccountCredentialDao
 import com.civciv.app.database.dao.AccountDao
+import com.civciv.app.database.dao.StatusDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -52,4 +53,10 @@ object DatabaseModule {
     fun provideAccountDao(
         database: CivcivDatabase,
     ): AccountDao = database.accountDao()
+
+    @Provides
+    @Singleton
+    fun provideStatusDao(
+        database: CivcivDatabase,
+    ): StatusDao = database.statusDao()
 }

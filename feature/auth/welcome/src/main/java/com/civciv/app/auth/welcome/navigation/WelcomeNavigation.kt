@@ -15,7 +15,6 @@
  */
 package com.civciv.app.auth.welcome.navigation
 
-import androidx.activity.compose.BackHandler
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -31,15 +30,11 @@ fun NavController.navigateToWelcome(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.welcomeScreen(
     onLoginClicked: () -> Unit,
     onServerListClicked: () -> Unit,
-    onExitApp: () -> Unit,
 ) {
     composable(route = welcomeScreenRoute) {
         WelcomeScreen(
             onLoginClicked = onLoginClicked,
             onServerListClicked = onServerListClicked,
         )
-        BackHandler {
-            onExitApp()
-        }
     }
 }

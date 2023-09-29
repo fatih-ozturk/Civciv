@@ -31,6 +31,10 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 androidTestImplementation(kotlin("test"))
                 androidTestImplementation(project(":core:testing"))
 
+                implementation(libs.findLibrary("airbnb.mavericks").get())
+                implementation(libs.findLibrary("airbnb.mavericks.hilt").get())
+                implementation(libs.findLibrary("airbnb.mavericks.compose").get())
+
                 implementation(libs.findLibrary("coil.kt").get())
                 implementation(libs.findLibrary("coil.kt.compose").get())
 
@@ -38,7 +42,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 implementation(libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
                 implementation(libs.findLibrary("androidx.lifecycle.viewmodel.compose").get())
 
-                implementation(libs.findLibrary("kotlin.coroutines.android").get())
+                implementation(libs.findLibrary("kotlinx.coroutines.android").get())
+                implementation(libs.findLibrary("kotlinx.collections.immutable").get())
             }
         }
     }

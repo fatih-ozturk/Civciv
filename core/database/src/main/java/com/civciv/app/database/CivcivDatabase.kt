@@ -19,8 +19,10 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.civciv.app.database.dao.AccountCredentialDao
 import com.civciv.app.database.dao.AccountDao
-import com.civciv.app.database.entities.AccountCredentialEntity
-import com.civciv.app.database.entities.AccountEntity
+import com.civciv.app.database.dao.StatusDao
+import com.civciv.app.database.entities.account.AccountCredentialEntity
+import com.civciv.app.database.entities.account.AccountEntity
+import com.civciv.app.database.entities.status.StatusEntity
 
 @Database(
     version = 1,
@@ -28,9 +30,11 @@ import com.civciv.app.database.entities.AccountEntity
     entities = [
         AccountCredentialEntity::class,
         AccountEntity::class,
+        StatusEntity::class,
     ],
 )
 abstract class CivcivDatabase : RoomDatabase() {
     abstract fun accountCredentialDao(): AccountCredentialDao
     abstract fun accountDao(): AccountDao
+    abstract fun statusDao(): StatusDao
 }

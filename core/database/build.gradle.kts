@@ -36,8 +36,8 @@ dependencies {
     implementation(project(":core:base"))
     implementation(project(":core:model"))
 
-    implementation(libs.kotlin.datetime)
-    implementation(libs.kotlin.coroutines.android)
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.kotlinx.coroutines.android)
 
     androidTestImplementation(project(":core:testing"))
 }

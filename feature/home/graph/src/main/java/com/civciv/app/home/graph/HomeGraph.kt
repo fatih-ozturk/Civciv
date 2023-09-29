@@ -29,14 +29,14 @@ fun NavController.navigateToHomeGraph(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.homeGraph(
-    onNavigateToLoginGraph: () -> Unit,
+    onAddAccount: () -> Unit = {},
 ) {
     navigation(
         route = homeGraph,
         startDestination = homeMainScreenRoute,
     ) {
         homeScreen(
-            onNavigateToLoginGraph = onNavigateToLoginGraph,
+            onAddAccount = onAddAccount,
         )
     }
 }

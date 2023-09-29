@@ -41,9 +41,9 @@ data class AccountResponse(
     @SerialName("statuses_count") val statusesCount: Int,
     @SerialName("last_status_at") val lastStatusAt: String?,
     @SerialName("noindex") val noIndex: Boolean?,
-    @SerialName("source") val source: SourceResponse,
+    @SerialName("source") val source: SourceResponse? = null,
     @SerialName("emojis") val emojis: List<EmojiResponse>,
     @SerialName("roles") val roles: List<RoleResponse>,
     @SerialName("fields") val fields: List<FieldResponse>,
-    @SerialName("role") val role: RoleResponse,
+    @SerialName("role") val role: RoleResponse? = null,
 )

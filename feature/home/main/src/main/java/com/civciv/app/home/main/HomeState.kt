@@ -15,8 +15,15 @@
  */
 package com.civciv.app.home.main
 
-sealed interface HomeAuthUiState {
-    data object Loading : HomeAuthUiState
-    data object Authorized : HomeAuthUiState
-    data object NotAuthorized : HomeAuthUiState
-}
+import com.airbnb.mvrx.MavericksState
+import com.civciv.app.model.Account
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+
+data class HomeState(
+    val currentAccount: Account? = null,
+    val authorizedAccounts: ImmutableList<Account> = persistentListOf(),
+    val isLoading: Boolean = false,
+    val isAccountChanged: Boolean = false,
+    val isAccountLoggedOut: Boolean = false,
+) : MavericksState

@@ -36,19 +36,18 @@ fun NavGraphBuilder.authGraph(
     onBackClicked: () -> Unit,
     onServerClicked: (domain: String) -> Unit,
     onNavigateHome: () -> Unit,
-    onExitApp: () -> Unit,
 ) {
     navigation(
         route = authGraph,
         startDestination = welcomeScreenRoute,
     ) {
-        loginScreen(
-            onNavigateHome = onNavigateHome,
-        )
         welcomeScreen(
             onLoginClicked = onLoginClicked,
             onServerListClicked = onServerListClicked,
-            onExitApp = onExitApp,
+        )
+        loginScreen(
+            onNavigateHome = onNavigateHome,
+            onBackClicked = onBackClicked,
         )
         serverListScreen(
             onBackClicked = onBackClicked,

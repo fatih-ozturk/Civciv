@@ -24,8 +24,8 @@ import android.os.Bundle
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.net.toUri
 import com.civciv.app.model.ApplicationCredentials
-import java.util.concurrent.atomic.AtomicBoolean
 import okhttp3.HttpUrl
+import java.util.concurrent.atomic.AtomicBoolean
 
 class AuthorizationManagementActivity : Activity() {
 
@@ -92,6 +92,7 @@ class AuthorizationManagementActivity : Activity() {
             val customTabsBuilder = CustomTabsIntent.Builder()
                 .setShowTitle(true)
                 .build()
+            customTabsBuilder.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
 
             customTabsBuilder.launchUrl(this, uri)
         }
