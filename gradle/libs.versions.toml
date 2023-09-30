@@ -2,7 +2,7 @@
 accompanist = "0.32.0"
 androidDesugarJdkLibs = "2.0.3"
 androidx-browser = "1.6.0"
-androidxActivity = "1.8.0-alpha07"
+androidxActivity = "1.8.0-rc01"
 androidxComposeMaterial3 = "1.2.0-alpha08"
 androidxComposeRuntimeTracing = "1.0.0-alpha04"
 androidxCore = "1.12.0"
