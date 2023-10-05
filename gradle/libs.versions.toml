@@ -48,7 +48,6 @@ paging = "3.2.1"
 pagingCompose = "3.2.1"
 protobuf = "3.24.4"
 protobufPlugin = "0.9.4"
-retrofit = "2.9.0"
 room = "2.5.2"
 secrets = "2.0.1"
 kotlinx-serialization = "1.6.0"
@@ -171,10 +170,6 @@ okhttp-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.
 okhttp-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
-retrofit-gsonConverter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
-retrofit-mock = { group = "com.squareup.retrofit2", name = "retrofit-mock", version.ref = "retrofit" }
-retrofit-moshiConverter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
-retrofit-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
