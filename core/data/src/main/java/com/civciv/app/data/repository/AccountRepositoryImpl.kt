@@ -33,7 +33,7 @@ class AccountRepositoryImpl @Inject constructor(
         val currentUser = accountCredentialDao.getActiveAccountCredential() ?: throw Exception()
         val request = AccountRequest(currentUser.accountId)
         val account = accountApi.getAccount(request)
-        accountDao.updateAccount(account.toEntityModel())
+        accountDao.update(account.toEntityModel())
     }
 
     override suspend fun getCurrentAccount(): Account {
@@ -53,7 +53,7 @@ class AccountRepositoryImpl @Inject constructor(
         accountCredentialDao.setActiveAccount(accountId)
         val accountRequest = AccountRequest(id = accountId)
         val user = accountApi.getAccount(accountRequest)
-        accountDao.updateAccount(user.toEntityModel())
+        accountDao.update(user.toEntityModel())
     }
 
     override suspend fun logoutCurrentUser() {

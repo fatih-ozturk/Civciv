@@ -34,13 +34,13 @@ interface AccountDao {
     suspend fun getAccountById(accountId: Long): AccountEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAccount(user: AccountEntity): Long
+    suspend fun insert(user: AccountEntity): Long
 
     @Update
-    suspend fun updateAccount(user: AccountEntity)
+    suspend fun update(user: AccountEntity)
 
     @Delete
-    suspend fun deleteAccount(user: AccountEntity)
+    suspend fun delete(user: AccountEntity)
 
     @Query("DELETE FROM account")
     suspend fun deleteAllAccount()

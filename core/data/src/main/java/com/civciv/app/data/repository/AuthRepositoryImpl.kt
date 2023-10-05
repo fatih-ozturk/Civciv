@@ -73,7 +73,7 @@ class AuthRepositoryImpl @Inject constructor(
         accountCredentialDao.clearActiveAccountCredential()
         val userCredentialInsertResult =
             accountCredentialDao.insertAccountCredential(accountCredentialEntity)
-        val userInsertResult = accountDao.insertAccount(accountResponse.toEntityModel())
+        val userInsertResult = accountDao.insert(accountResponse.toEntityModel())
         return userInsertResult > 0 && userCredentialInsertResult > 0
     }
 
