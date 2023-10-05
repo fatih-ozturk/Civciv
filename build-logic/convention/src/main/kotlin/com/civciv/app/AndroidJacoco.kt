@@ -91,11 +91,11 @@ private fun Project.registerCodeCoverageTask(
             } build."
 
         val javaDirectories = fileTree(
-            "${project.buildDir}/intermediates/classes/${sourcePath}",
+            "${project.layout.buildDirectory.asFile.get()}/intermediates/classes/${sourcePath}",
         ) { exclude(excludedFiles) }
 
         val kotlinDirectories = fileTree(
-            "${project.buildDir}/tmp/kotlin-classes/${sourcePath}",
+            "${project.layout.buildDirectory.asFile.get()}/tmp/kotlin-classes/${sourcePath}",
         ) { exclude(excludedFiles) }
 
         val coverageSrcDirectories = listOf(
@@ -111,7 +111,7 @@ private fun Project.registerCodeCoverageTask(
         additionalClassDirs.setFrom(files(coverageSrcDirectories))
         sourceDirectories.setFrom(files(coverageSrcDirectories))
         executionData.setFrom(
-            files("${project.buildDir}/jacoco/${testTaskName}.exec"),
+            files("${project.layout.buildDirectory.asFile.get()}/jacoco/${testTaskName}.exec"),
         )
 
         reports {
