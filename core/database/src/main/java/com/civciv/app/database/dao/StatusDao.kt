@@ -25,7 +25,7 @@ import com.civciv.app.database.entities.status.StatusWithAccount
 @Dao
 interface StatusDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertStatus(user: StatusEntity): Long
+    suspend fun insert(user: StatusEntity): Long
 
     @Query("SELECT * FROM status")
     suspend fun getStatuses(): List<StatusWithAccount>
