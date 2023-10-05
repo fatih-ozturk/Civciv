@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "*********************************************************"
-echo "Running git pre-push hook. Running Static analysis... "
+echo "Running git pre-commit hook. Running Static analysis... "
 echo "*********************************************************"
 
 OUTPUT="/tmp/analysis-result"
@@ -13,7 +13,7 @@ if [ ${EXIT_CODE} -ne 0 ]; then
     rm ${OUTPUT}
     echo "*********************************************"
     echo "            Static Analysis Failed           "
-    echo "Please fix the above issues before pushing   "
+    echo "  Please fix the above issues before commit  "
     echo "          Run ./gradlew ktlintFormat         "
     echo "    or Run ./gradlew spotlessApply to fix    "
     echo "*********************************************"
