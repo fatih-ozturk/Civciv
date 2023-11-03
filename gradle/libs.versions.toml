@@ -1,6 +1,6 @@
 [versions]
 accompanist = "0.32.0"
-androidDesugarJdkLibs = "2.0.3"
+androidDesugarJdkLibs = "2.0.4"
 androidx-browser = "1.6.0"
 androidxActivity = "1.8.0"
 androidxComposeMaterial3 = "1.2.0-alpha10"
