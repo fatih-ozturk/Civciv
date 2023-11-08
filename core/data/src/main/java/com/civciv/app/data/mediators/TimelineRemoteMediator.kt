@@ -37,5 +37,4 @@ class TimelineRemoteMediator @Inject constructor(
     ): MediatorResult {
         TODO("Not yet implemented")
     }
-
 }

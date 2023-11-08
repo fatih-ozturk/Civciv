@@ -70,7 +70,7 @@ fun CivcivTextField(
     isError: Boolean = false,
     readOnly: Boolean = false,
     textStyle: TextStyle = CivcivTheme.typography.textMd.copy(
-        fontWeight = FontWeight.Normal
+        fontWeight = FontWeight.Normal,
     ),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -89,7 +89,7 @@ fun CivcivTextField(
 
     Column(
         modifier = Modifier
-            .background(CivcivTheme.colors.bgPrimary)
+            .background(CivcivTheme.colors.bgPrimary),
     ) {
         label?.let {
             Text(
@@ -126,21 +126,21 @@ fun CivcivTextField(
                         .fillMaxWidth()
                         .background(
                             backgroundColors,
-                            CivcivTheme.shapes.radiusMd
+                            CivcivTheme.shapes.radiusMd,
                         )
                         .then(borderModifier)
                         .padding(sizes.contentPadding),
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     leadingIcon?.let {
                         CompositionLocalProvider(
                             value = LocalContentColor provides colors.leadingIconColor,
-                            content = leadingIcon
+                            content = leadingIcon,
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                     }
                     Box(
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
                     ) {
                         innerTextField()
                         if (value.isEmpty()) {
@@ -158,11 +158,11 @@ fun CivcivTextField(
                         Spacer(modifier = Modifier.width(8.dp))
                         CompositionLocalProvider(
                             value = LocalContentColor provides trailingIconColors,
-                            content = trailingIcon
+                            content = trailingIcon,
                         )
                     }
                 }
-            }
+            },
         )
         hint?.let {
             Text(
@@ -175,7 +175,6 @@ fun CivcivTextField(
                 overflow = TextOverflow.Ellipsis,
             )
         }
-
     }
 }
 
@@ -186,7 +185,7 @@ private fun CivcivTextFieldPreview() {
         Column(
             modifier = Modifier
                 .background(CivcivTheme.colors.bgPrimary)
-                .padding(16.dp)
+                .padding(16.dp),
         ) {
             CivcivTextField(
                 label = "Email",
@@ -211,7 +210,7 @@ private fun CivcivTextFieldPreview() {
                         imageVector = Icons.Rounded.DonutLarge,
                         contentDescription = null,
                     )
-                }
+                },
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -238,7 +237,7 @@ private fun CivcivTextFieldPreview() {
                         imageVector = Icons.Rounded.DonutLarge,
                         contentDescription = null,
                     )
-                }
+                },
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -258,7 +257,6 @@ private fun CivcivTextFieldPreview() {
                         imageVector = Icons.Rounded.AddLocation,
                         contentDescription = null,
                     )
-
                 },
                 leadingIcon = {
                     Icon(
@@ -267,7 +265,7 @@ private fun CivcivTextFieldPreview() {
                         imageVector = Icons.Rounded.DonutLarge,
                         contentDescription = null,
                     )
-                }
+                },
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -293,7 +291,6 @@ private fun CivcivTextFieldPreview() {
                         imageVector = Icons.Rounded.AddLocation,
                         contentDescription = null,
                     )
-
                 },
                 leadingIcon = {
                     Icon(
@@ -302,7 +299,7 @@ private fun CivcivTextFieldPreview() {
                         imageVector = Icons.Rounded.DonutLarge,
                         contentDescription = null,
                     )
-                }
+                },
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -328,7 +325,6 @@ private fun CivcivTextFieldPreview() {
                         imageVector = Icons.Rounded.AddLocation,
                         contentDescription = null,
                     )
-
                 },
                 leadingIcon = {
                     Icon(
@@ -337,7 +333,7 @@ private fun CivcivTextFieldPreview() {
                         imageVector = Icons.Rounded.DonutLarge,
                         contentDescription = null,
                     )
-                }
+                },
             )
         }
     }

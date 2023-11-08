@@ -39,11 +39,11 @@ object CivcivButtonBorders {
     ) = remember(
         width,
         strokeColor,
-        disabledColor
+        disabledColor,
     ) {
         ButtonBorders(
             stroke = BorderStroke(width, strokeColor),
-            disabled = BorderStroke(width, disabledColor)
+            disabled = BorderStroke(width, disabledColor),
         )
     }
 
@@ -55,11 +55,11 @@ object CivcivButtonBorders {
     ) = remember(
         width,
         strokeColor,
-        disabledColor
+        disabledColor,
     ) {
         ButtonBorders(
             stroke = BorderStroke(width, strokeColor),
-            disabled = BorderStroke(width, disabledColor)
+            disabled = BorderStroke(width, disabledColor),
         )
     }
 
@@ -71,11 +71,11 @@ object CivcivButtonBorders {
     ) = remember(
         width,
         strokeColor,
-        disabledColor
+        disabledColor,
     ) {
         ButtonBorders(
             stroke = BorderStroke(width, strokeColor),
-            disabled = BorderStroke(width, disabledColor)
+            disabled = BorderStroke(width, disabledColor),
         )
     }
 

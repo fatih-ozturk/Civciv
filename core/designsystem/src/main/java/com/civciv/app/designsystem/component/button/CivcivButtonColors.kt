@@ -33,7 +33,7 @@ object CivcivButtonColors {
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor
+        disabledContentColor = disabledContentColor,
     )
 
     @Composable
@@ -46,7 +46,7 @@ object CivcivButtonColors {
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor
+        disabledContentColor = disabledContentColor,
     )
 
     @Composable
@@ -59,7 +59,7 @@ object CivcivButtonColors {
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor
+        disabledContentColor = disabledContentColor,
     )
 
     @Composable
@@ -72,7 +72,7 @@ object CivcivButtonColors {
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor
+        disabledContentColor = disabledContentColor,
     )
 
     @Composable
@@ -85,7 +85,7 @@ object CivcivButtonColors {
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor
+        disabledContentColor = disabledContentColor,
     )
 
     @Composable
@@ -98,7 +98,7 @@ object CivcivButtonColors {
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor
+        disabledContentColor = disabledContentColor,
     )
 
     @Composable
@@ -111,7 +111,7 @@ object CivcivButtonColors {
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor
+        disabledContentColor = disabledContentColor,
     )
 
     @Composable
@@ -124,6 +124,6 @@ object CivcivButtonColors {
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor
+        disabledContentColor = disabledContentColor,
     )
 }

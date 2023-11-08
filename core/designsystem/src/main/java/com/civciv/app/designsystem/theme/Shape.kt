@@ -59,6 +59,5 @@ val mdShapes = Shapes(
     small = civcivShapes.radiusSm,
     medium = civcivShapes.radiusMd,
     large = civcivShapes.radiusLg,
-    extraLarge = civcivShapes.radiusXl
+    extraLarge = civcivShapes.radiusXl,
 )
-

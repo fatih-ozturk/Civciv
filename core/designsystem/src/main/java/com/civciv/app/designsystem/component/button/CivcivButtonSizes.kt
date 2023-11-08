@@ -39,140 +39,140 @@ object CivcivButtonSizes {
     @Composable
     fun small(
         textStyle: TextStyle = CivcivTheme.typography.textSm.copy(
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
         ),
         height: Dp = 36.dp,
         iconSize: Dp = 20.dp,
         iconPadding: Dp = 6.dp,
         contentPadding: PaddingValues = PaddingValues(
             vertical = 8.dp,
-            horizontal = 12.dp
+            horizontal = 12.dp,
         ),
     ) = remember(
         textStyle,
         height,
         iconSize,
         iconPadding,
-        contentPadding
+        contentPadding,
     ) {
         ButtonSizes(
             textStyle = textStyle,
             height = height,
             iconSize = iconSize,
             iconPadding = iconPadding,
-            contentPadding = contentPadding
+            contentPadding = contentPadding,
         )
     }
 
     @Composable
     fun medium(
         textStyle: TextStyle = CivcivTheme.typography.textSm.copy(
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
         ),
         height: Dp = 40.dp,
         iconSize: Dp = 20.dp,
         iconPadding: Dp = 6.dp,
         contentPadding: PaddingValues = PaddingValues(
             vertical = 10.dp,
-            horizontal = 14.dp
+            horizontal = 14.dp,
         ),
     ) = remember(
         textStyle,
         height,
         iconSize,
         iconPadding,
-        contentPadding
+        contentPadding,
     ) {
         ButtonSizes(
             textStyle = textStyle,
             height = height,
             iconSize = iconSize,
             iconPadding = iconPadding,
-            contentPadding = contentPadding
+            contentPadding = contentPadding,
         )
     }
 
     @Composable
     fun large(
         textStyle: TextStyle = CivcivTheme.typography.textMd.copy(
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
         ),
         height: Dp = 44.dp,
         iconSize: Dp = 20.dp,
         iconPadding: Dp = 8.dp,
         contentPadding: PaddingValues = PaddingValues(
             vertical = 12.dp,
-            horizontal = 16.dp
+            horizontal = 16.dp,
         ),
     ) = remember(
         textStyle,
         height,
         iconSize,
         iconPadding,
-        contentPadding
+        contentPadding,
     ) {
         ButtonSizes(
             textStyle = textStyle,
             height = height,
             iconSize = iconSize,
             iconPadding = iconPadding,
-            contentPadding = contentPadding
+            contentPadding = contentPadding,
         )
     }
 
     @Composable
     fun xlarge(
         textStyle: TextStyle = CivcivTheme.typography.textMd.copy(
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
         ),
         height: Dp = 48.dp,
         iconSize: Dp = 20.dp,
         iconPadding: Dp = 8.dp,
         contentPadding: PaddingValues = PaddingValues(
             vertical = 14.dp,
-            horizontal = 18.dp
+            horizontal = 18.dp,
         ),
     ) = remember(
         textStyle,
         height,
         iconSize,
         iconPadding,
-        contentPadding
+        contentPadding,
     ) {
         ButtonSizes(
             textStyle = textStyle,
             height = height,
             iconSize = iconSize,
             iconPadding = iconPadding,
-            contentPadding = contentPadding
+            contentPadding = contentPadding,
         )
     }
 
     @Composable
     fun xxlarge(
         textStyle: TextStyle = CivcivTheme.typography.textMd.copy(
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
         ),
         height: Dp = 44.dp,
         iconSize: Dp = 20.dp,
         iconPadding: Dp = 12.dp,
         contentPadding: PaddingValues = PaddingValues(
             vertical = 18.dp,
-            horizontal = 22.dp
+            horizontal = 22.dp,
         ),
     ) = remember(
         textStyle,
         height,
         iconSize,
         iconPadding,
-        contentPadding
+        contentPadding,
     ) {
         ButtonSizes(
             textStyle = textStyle,
             height = height,
             iconSize = iconSize,
             iconPadding = iconPadding,
-            contentPadding = contentPadding
+            contentPadding = contentPadding,
         )
     }
 }

@@ -75,13 +75,13 @@ data class CivcivTextFieldColors(
                 border(
                     2.dp,
                     outerBorderColor,
-                    CivcivTheme.shapes.radiusMd
+                    CivcivTheme.shapes.radiusMd,
                 )
             }
             .border(
                 borderWidth,
                 targetValue,
-                CivcivTheme.shapes.radiusMd
+                CivcivTheme.shapes.radiusMd,
             )
 
         return rememberUpdatedState(modifier)
@@ -91,7 +91,6 @@ data class CivcivTextFieldColors(
     internal fun backgroundColors(
         enabled: Boolean,
     ): State<Color> {
-
         val targetValue = when {
             !enabled -> disabledContainerColor
             else -> containerColor
@@ -103,7 +102,6 @@ data class CivcivTextFieldColors(
     internal fun hintTextColors(
         isError: Boolean,
     ): State<Color> {
-
         val targetValue = when {
             !isError -> hintColor
             else -> errorHintColor
@@ -115,7 +113,6 @@ data class CivcivTextFieldColors(
     internal fun trailingIconColors(
         isError: Boolean,
     ): State<Color> {
-
         val targetValue = when {
             !isError -> trailingIconColor
             else -> errorIconColor
@@ -127,7 +124,6 @@ data class CivcivTextFieldColors(
     internal fun placeholderTextColors(
         enabled: Boolean,
     ): State<Color> {
-
         val targetValue = when {
             !enabled -> disabledPlaceholderTextColor
             else -> placeholderTextColor

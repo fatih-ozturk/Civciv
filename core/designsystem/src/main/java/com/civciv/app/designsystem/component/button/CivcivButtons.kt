@@ -62,7 +62,7 @@ object CivcivButtons {
         modifier = modifier,
         leftIcon = leftIcon,
         rightIcon = rightIcon,
-        borders = borders
+        borders = borders,
     )
 
     @Composable
@@ -85,7 +85,7 @@ object CivcivButtons {
         modifier = modifier,
         leftIcon = leftIcon,
         rightIcon = rightIcon,
-        borders = borders
+        borders = borders,
     )
 
     @Composable
@@ -108,7 +108,7 @@ object CivcivButtons {
         modifier = modifier,
         leftIcon = leftIcon,
         rightIcon = rightIcon,
-        borders = borders
+        borders = borders,
     )
 
     @Composable
@@ -131,7 +131,7 @@ object CivcivButtons {
         modifier = modifier,
         leftIcon = leftIcon,
         rightIcon = rightIcon,
-        borders = borders
+        borders = borders,
     )
 
     @Composable
@@ -154,7 +154,7 @@ object CivcivButtons {
         modifier = modifier,
         leftIcon = leftIcon,
         rightIcon = rightIcon,
-        borders = borders
+        borders = borders,
     )
 
     @Composable
@@ -177,7 +177,7 @@ object CivcivButtons {
         modifier = modifier,
         leftIcon = leftIcon,
         rightIcon = rightIcon,
-        borders = borders
+        borders = borders,
     )
 
     @Composable
@@ -200,7 +200,7 @@ object CivcivButtons {
         modifier = modifier,
         leftIcon = leftIcon,
         rightIcon = rightIcon,
-        borders = borders
+        borders = borders,
     )
 
     @Composable
@@ -223,9 +223,8 @@ object CivcivButtons {
         modifier = modifier,
         leftIcon = leftIcon,
         rightIcon = rightIcon,
-        borders = borders
+        borders = borders,
     )
-
 }
 
 @Composable
@@ -248,14 +247,14 @@ internal fun CivcivButtonImpl(
         shape = CivcivTheme.shapes.radiusMd,
         border = if (enabled) borders.stroke else borders.disabled,
         contentPadding = sizes.contentPadding,
-        onClick = onClick
+        onClick = onClick,
     ) {
         leftIcon?.let {
             Icon(
                 modifier = Modifier.size(sizes.iconSize),
                 painter = it,
                 contentDescription = null,
-                tint = if (enabled) colors.contentColor else colors.disabledContentColor
+                tint = if (enabled) colors.contentColor else colors.disabledContentColor,
             )
             Spacer(modifier = Modifier.width(sizes.iconPadding))
         }
@@ -264,7 +263,7 @@ internal fun CivcivButtonImpl(
             text = text,
             style = sizes.textStyle,
             overflow = TextOverflow.Ellipsis,
-            maxLines = 1
+            maxLines = 1,
         )
         rightIcon?.let {
             Spacer(modifier = Modifier.width(sizes.iconPadding))
@@ -272,7 +271,7 @@ internal fun CivcivButtonImpl(
                 modifier = Modifier.size(sizes.iconSize),
                 painter = it,
                 contentDescription = null,
-                tint = if (enabled) colors.contentColor else colors.disabledContentColor
+                tint = if (enabled) colors.contentColor else colors.disabledContentColor,
             )
         }
     }
@@ -288,14 +287,14 @@ private fun CivcivButtonsPreview() {
                 .fillMaxSize()
                 .background(CivcivTheme.colors.bgPrimary)
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             CivcivButtons.Primary(
                 text = "Button",
                 enabled = true,
                 onClick = {},
                 leftIcon = rememberVectorPainter(image = Icons.Rounded.Add),
-                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add)
+                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add),
             )
 
             CivcivButtons.SecondaryGray(
@@ -303,7 +302,7 @@ private fun CivcivButtonsPreview() {
                 enabled = true,
                 onClick = {},
                 leftIcon = rememberVectorPainter(image = Icons.Rounded.Add),
-                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add)
+                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add),
             )
 
             CivcivButtons.SecondaryColor(
@@ -311,7 +310,7 @@ private fun CivcivButtonsPreview() {
                 enabled = true,
                 onClick = {},
                 leftIcon = rememberVectorPainter(image = Icons.Rounded.Add),
-                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add)
+                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add),
             )
 
             CivcivButtons.TertiaryGray(
@@ -319,7 +318,7 @@ private fun CivcivButtonsPreview() {
                 enabled = true,
                 onClick = {},
                 leftIcon = rememberVectorPainter(image = Icons.Rounded.Add),
-                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add)
+                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add),
             )
 
             CivcivButtons.TertiaryColor(
@@ -327,7 +326,7 @@ private fun CivcivButtonsPreview() {
                 enabled = true,
                 onClick = {},
                 leftIcon = rememberVectorPainter(image = Icons.Rounded.Add),
-                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add)
+                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add),
             )
 
             CivcivButtons.PrimaryDestructive(
@@ -335,7 +334,7 @@ private fun CivcivButtonsPreview() {
                 enabled = true,
                 onClick = {},
                 leftIcon = rememberVectorPainter(image = Icons.Rounded.Add),
-                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add)
+                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add),
             )
 
             CivcivButtons.SecondaryDestructive(
@@ -343,7 +342,7 @@ private fun CivcivButtonsPreview() {
                 enabled = true,
                 onClick = {},
                 leftIcon = rememberVectorPainter(image = Icons.Rounded.Add),
-                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add)
+                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add),
             )
 
             CivcivButtons.TertiaryDestructive(
@@ -351,7 +350,7 @@ private fun CivcivButtonsPreview() {
                 enabled = true,
                 onClick = {},
                 leftIcon = rememberVectorPainter(image = Icons.Rounded.Add),
-                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add)
+                rightIcon = rememberVectorPainter(image = Icons.Rounded.Add),
             )
         }
     }

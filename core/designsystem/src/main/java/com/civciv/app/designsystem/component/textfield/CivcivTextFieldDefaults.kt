@@ -56,7 +56,7 @@ object CivcivTextFieldDefaults {
         errorHintColor,
         trailingIconColor,
         leadingIconColor,
-        errorIconColor
+        errorIconColor,
     ) {
         CivcivTextFieldColors(
             textColor = textColor,
@@ -74,8 +74,7 @@ object CivcivTextFieldDefaults {
             errorHintColor = errorHintColor,
             trailingIconColor = trailingIconColor,
             leadingIconColor = leadingIconColor,
-            errorIconColor = errorIconColor
+            errorIconColor = errorIconColor,
         )
     }
 }
-

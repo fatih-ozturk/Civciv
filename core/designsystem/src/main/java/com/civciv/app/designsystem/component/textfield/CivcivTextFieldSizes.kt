@@ -34,7 +34,7 @@ object CivcivTextFieldSizesDefaults {
     fun small(
         contentPadding: PaddingValues = PaddingValues(
             vertical = 8.dp,
-            horizontal = 12.dp
+            horizontal = 12.dp,
         ),
         textFieldHeight: Dp = 40.dp,
     ) = remember {
@@ -48,7 +48,7 @@ object CivcivTextFieldSizesDefaults {
     fun medium(
         contentPadding: PaddingValues = PaddingValues(
             vertical = 12.dp,
-            horizontal = 14.dp
+            horizontal = 14.dp,
         ),
         textFieldHeight: Dp = 44.dp,
     ) = remember {
