@@ -56,6 +56,8 @@ import com.civciv.app.home.main.navigation.navigateToHome
 import com.civciv.app.notification.graph.notificationGraph
 import com.civciv.app.profile.graph.profileGraph
 import com.civciv.app.search.graph.searchGraph
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
@@ -86,7 +88,7 @@ fun CivcivApp(
             bottomBar = {
                 if (appState.shouldShowBottomBar) {
                     CivcivBottomNavigation(
-                        destinations = appState.topLevelDestinations,
+                        destinations = appState.topLevelDestinations.toImmutableList(),
                         onNavigateToDestination = appState::navigateToTopLevelDestination,
                         currentDestination = appState.currentDestination,
                     )
@@ -182,7 +184,7 @@ fun CivcivNavHost(
 /* ktlint-disable twitter-compose:unstable-collections */
 @Composable
 fun CivcivBottomNavigation(
-    destinations: List<TopLevelDestination>,
+    destinations: ImmutableList<TopLevelDestination>,
     onNavigateToDestination: (TopLevelDestination) -> Unit,
     currentDestination: NavDestination?,
     modifier: Modifier = Modifier,

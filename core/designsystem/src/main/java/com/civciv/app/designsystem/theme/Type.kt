@@ -16,100 +16,110 @@
 package com.civciv.app.designsystem.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.civciv.app.designsystem.R
 
-// TODO need custom typography
-internal val Typography = Typography(
-    displayLarge = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 57.sp,
-        lineHeight = 64.sp,
-        letterSpacing = 0.sp,
+val civcivFonts = FontFamily(
+    Font(R.font.inter_regular, FontWeight.Normal),
+    Font(R.font.inter_medium, FontWeight.Medium),
+    Font(R.font.inter_semibold, FontWeight.SemiBold),
+    Font(R.font.inter_bold, FontWeight.Bold),
+)
+
+data class CivcivTypography(
+    val displayXl: TextStyle,
+    val displayLg: TextStyle,
+    val displayMd: TextStyle,
+    val displaySm: TextStyle,
+    val displayXs: TextStyle,
+    val textXl: TextStyle,
+    val textLg: TextStyle,
+    val textMd: TextStyle,
+    val textSm: TextStyle,
+    val textXs: TextStyle,
+)
+
+internal val civcivTypography = CivcivTypography(
+    displayXl = TextStyle(
+        fontFamily = civcivFonts,
+        fontSize = 60.sp,
+        lineHeight = 72.sp,
+        letterSpacing = (-1.2).sp,
     ),
-    displayMedium = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 45.sp,
-        lineHeight = 52.sp,
-        letterSpacing = 0.sp,
+    displayLg = TextStyle(
+        fontFamily = civcivFonts,
+        fontSize = 48.sp,
+        lineHeight = 60.sp,
+        letterSpacing = (-0.96).sp,
     ),
-    displaySmall = TextStyle(
-        fontWeight = FontWeight.Normal,
+    displayMd = TextStyle(
+        fontFamily = civcivFonts,
         fontSize = 36.sp,
         lineHeight = 44.sp,
-        letterSpacing = 0.sp,
+        letterSpacing = (-0.72).sp,
     ),
-    headlineLarge = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 32.sp,
-        lineHeight = 40.sp,
-        letterSpacing = 0.sp,
+    displaySm = TextStyle(
+        fontFamily = civcivFonts,
+        fontSize = 30.sp,
+        lineHeight = 38.sp,
     ),
-    headlineMedium = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 28.sp,
-        lineHeight = 36.sp,
-        letterSpacing = 0.sp,
-    ),
-    headlineSmall = TextStyle(
-        fontWeight = FontWeight.Normal,
+    displayXs = TextStyle(
+        fontFamily = civcivFonts,
         fontSize = 24.sp,
         lineHeight = 32.sp,
         letterSpacing = 0.sp,
     ),
-    titleLarge = TextStyle(
-        fontWeight = FontWeight.Bold,
-        fontSize = 22.sp,
+    textXl = TextStyle(
+        fontFamily = civcivFonts,
+        fontSize = 20.sp,
+        lineHeight = 30.sp,
+    ),
+    textLg = TextStyle(
+        fontFamily = civcivFonts,
+        fontSize = 18.sp,
         lineHeight = 28.sp,
-        letterSpacing = 0.sp,
     ),
-    titleMedium = TextStyle(
-        fontWeight = FontWeight.Bold,
+    textMd = TextStyle(
+        fontFamily = civcivFonts,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.1.sp,
     ),
-    titleSmall = TextStyle(
-        fontWeight = FontWeight.Medium,
+    textSm = TextStyle(
+        fontFamily = civcivFonts,
         fontSize = 14.sp,
         lineHeight = 20.sp,
-        letterSpacing = 0.1.sp,
     ),
-    labelLarge = TextStyle(
-        fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
-        lineHeight = 20.sp,
-        letterSpacing = 0.1.sp,
-    ),
-    labelMedium = TextStyle(
-        fontWeight = FontWeight.Medium,
+    textXs = TextStyle(
+        fontFamily = civcivFonts,
         fontSize = 12.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp,
+        lineHeight = 18.sp,
     ),
-    labelSmall = TextStyle(
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp,
-    ),
-    bodyLarge = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp,
-    ),
-    bodyMedium = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        lineHeight = 20.sp,
-        letterSpacing = 0.25.sp,
-    ),
-    bodySmall = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.4.sp,
-    ),
+)
+
+internal val LocalCivcivTypographies = compositionLocalOf<CivcivTypography> {
+    error("No typography provided!")
+}
+
+val mdTypography = Typography(
+    displayLarge= civcivTypography.displayXl,
+    displayMedium= civcivTypography.displayLg,
+    displaySmall= civcivTypography.displayMd,
+    headlineLarge= civcivTypography.displayMd,
+    headlineMedium= civcivTypography.displaySm,
+    headlineSmall= civcivTypography.displayXs,
+    titleLarge= civcivTypography.displayXs,
+    titleMedium= civcivTypography.textMd,
+    titleSmall= civcivTypography.textSm,
+    bodyLarge= civcivTypography.textMd,
+    bodyMedium= civcivTypography.textSm,
+    bodySmall= civcivTypography.textXs,
+    labelLarge= civcivTypography.textSm,
+    labelMedium= civcivTypography.textXs,
+    labelSmall= civcivTypography.textXs,
 )
