@@ -33,7 +33,7 @@ hilt = "2.48.1"
 hiltplugin = "2.48.1"
 jacoco = "0.8.10"
 junit4 = "4.13.2"
-kotlin = "1.9.10"
+kotlin = "1.9.20"
 kotlinxDatetime = "0.4.1"
 kotest = "5.8.0"
 ksp = "1.9.10-1.0.13"
@@ -138,6 +138,7 @@ hilt-pluginGradle = { group = "com.google.dagger", name = "hilt-android-gradle-p
 hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 junit = { group = "junit", name = "junit", version.ref = "junit4" }
 kotest = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
+kotest-runner-junit = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
