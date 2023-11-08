@@ -23,6 +23,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:ui"))
+
     api(libs.compose.foundation.foundation)
     api(libs.compose.foundation.layout)
     api(libs.compose.material.iconsext)

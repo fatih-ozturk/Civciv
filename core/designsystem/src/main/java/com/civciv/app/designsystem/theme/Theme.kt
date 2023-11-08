@@ -15,36 +15,59 @@
  */
 package com.civciv.app.designsystem.theme
 
-import android.os.Build
-import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 
 @Composable
 fun CivcivTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    disableDynamicTheming: Boolean = true,
     content: @Composable () -> Unit,
 ) {
-    val colorScheme = when {
-        !disableDynamicTheming && supportsDynamicTheming() -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        else -> if (darkTheme) DarkColors else LightColors
+    val colorScheme = if (darkTheme) darkColors else lightColors
+    ProvideCivcivResources(
+        typography = civcivTypography,
+        colors = colorScheme,
+        shapes = civcivShapes,
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme.asMaterial3Colors(),
+            typography = mdTypography,
+            shapes = mdShapes,
+            content = content,
+        )
     }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content,
-    )
 }
 
-@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S)
-fun supportsDynamicTheming() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+@Composable
+fun ProvideCivcivResources(
+    typography: CivcivTypography,
+    colors: CivcivColors,
+    shapes: CivcivShapes,
+    content: @Composable () -> Unit,
+) {
+    val colorPalette = remember { colors }
+    colorPalette.update(colors)
+    CompositionLocalProvider(
+        LocalCivcivTypographies provides typography,
+        LocalCivcivColors provides colorPalette,
+        LocalCivcivShapes provides shapes,
+    ) {
+        ProvideTextStyle(value = typography.displayMd, content = content)
+    }
+}
+
+object CivcivTheme {
+    val typography: CivcivTypography
+        @Composable
+        get() = LocalCivcivTypographies.current
+    val colors: CivcivColors
+        @Composable
+        get() = LocalCivcivColors.current
+    val shapes: CivcivShapes
+        @Composable
+        get() = LocalCivcivShapes.current
+}
