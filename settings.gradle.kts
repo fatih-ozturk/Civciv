@@ -17,7 +17,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Civciv"
-
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":core:base")
 include(":core:data")
@@ -29,18 +29,5 @@ include(":core:network")
 include(":core:mastodon-api")
 include(":core:testing")
 include(":core:ui")
-include(":feature:splash")
-include(":feature:auth:graph")
-include(":feature:auth:login")
-include(":feature:auth:welcome")
-include(":feature:auth:serverlist")
-include(":feature:home:graph")
-include(":feature:home:main")
-include(":feature:profile:graph")
-include(":feature:profile:main")
-include(":feature:search:graph")
-include(":feature:search:main")
-include(":feature:notification:graph")
-include(":feature:notification:main")
 
 

@@ -15,11 +15,18 @@
  */
 package com.civciv.app.designsystem.component.button
 
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import com.civciv.app.designsystem.theme.CivcivTheme
+
+@Immutable
+class ButtonColors constructor(
+    val containerColor: Color,
+    val contentColor: Color,
+    val disabledContainerColor: Color,
+    val disabledContentColor: Color,
+)
 
 object CivcivButtonColors {
 
@@ -29,7 +36,7 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonPrimaryFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgDisabled,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonDefaults.buttonColors(
+    ): ButtonColors = ButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
@@ -42,7 +49,7 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonSecondaryFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonDefaults.buttonColors(
+    ): ButtonColors = ButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
@@ -55,7 +62,7 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonSecondaryColorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonDefaults.buttonColors(
+    ): ButtonColors = ButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
@@ -68,7 +75,7 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonTertiaryFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonDefaults.buttonColors(
+    ): ButtonColors = ButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
@@ -81,7 +88,7 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonTertiaryColorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonDefaults.buttonColors(
+    ): ButtonColors = ButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
@@ -94,7 +101,7 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.fgWhite,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonDefaults.buttonColors(
+    ): ButtonColors = ButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
@@ -107,7 +114,7 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonSecondaryErrorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonDefaults.buttonColors(
+    ): ButtonColors = ButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
@@ -120,7 +127,7 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonTertiaryErrorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonDefaults.buttonColors(
+    ): ButtonColors = ButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,

@@ -23,24 +23,18 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:ui"))
-
-    api(libs.compose.foundation.foundation)
-    api(libs.compose.foundation.layout)
-    api(libs.compose.material.iconsext)
-    api(libs.compose.animation.animation)
-    api(libs.compose.ui.tooling.preview)
-    debugApi(libs.compose.ui.tooling)
-    api(libs.androidx.metrics)
-    api(libs.compose.runtime)
-    api(libs.compose.runtime.livedata)
-
+    api(libs.androidx.compose.foundation)
+    api(libs.androidx.compose.foundation.layout)
+    api(libs.androidx.compose.material.iconsExtended)
     api(libs.androidx.compose.material3)
-    api(libs.androidx.compose.material3.windowSizeClass)
+    api(libs.androidx.compose.runtime)
+    api(libs.androidx.compose.ui.tooling.preview)
+    api(libs.androidx.compose.ui.util)
 
-    implementation(libs.airbnb.lottie.compose)
-    implementation(libs.accompanist.pager.pager)
+    debugApi(libs.androidx.compose.ui.tooling)
 
-    api(libs.accompanist.navigation.animation)
-    api(libs.accompanist.systemuicontroller)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.coil.kt.compose)
+
+    androidTestImplementation(projects.core.testing)
 }

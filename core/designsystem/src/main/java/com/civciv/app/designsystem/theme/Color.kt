@@ -61,13 +61,13 @@ object CivcivPalette {
     val success400: Color = Color(0xFF47CD89)
     val success500: Color = Color(0xFF17B26A)
     val success600: Color = Color(0xFF079455)
-    val textWhite: Color = Color(0xFFFFFFFF)
+    val textWhite: Color = Color(0xFFF7F7F7)
     val warning50: Color = Color(0xFFFFFAEB)
     val warning100: Color = Color(0xFFFEF0C7)
     val warning400: Color = Color(0xFFFDB022)
     val warning500: Color = Color(0xFFF79009)
     val warning600: Color = Color(0xFFDC6803)
-    val white: Color = Color(0xFFFFFFFF)
+    val white: Color = Color(0xFFFAF4F4)
     val black: Color = Color(0xFF000000)
 }
 

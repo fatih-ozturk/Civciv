@@ -34,6 +34,7 @@ android {
 
     buildTypes {
         debug {
+            isMinifyEnabled = false
             versionNameSuffix = "-dev"
         }
         release {
@@ -59,38 +60,42 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:data"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:designsystem"))
-    implementation(project(":core:database"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:model"))
+    implementation(projects.core.base)
+    implementation(projects.core.data)
+    implementation(projects.core.ui)
+    implementation(projects.core.designsystem)
+    implementation(projects.core.database)
+    implementation(projects.core.domain)
+    implementation(projects.core.model)
 
-    implementation(project(":feature:splash"))
-    implementation(project(":feature:home:graph"))
-    implementation(project(":feature:home:main"))
-    implementation(project(":feature:auth:graph"))
-    implementation(project(":feature:auth:login"))
-    implementation(project(":feature:auth:serverlist"))
-    implementation(project(":feature:auth:welcome"))
-    implementation(project(":feature:notification:graph"))
-    implementation(project(":feature:notification:main"))
-    implementation(project(":feature:profile:graph"))
-    implementation(project(":feature:profile:main"))
-    implementation(project(":feature:search:graph"))
-    implementation(project(":feature:search:main"))
-
+    androidTestImplementation(libs.androidx.navigation.testing)
+    androidTestImplementation(libs.accompanist.testharness)
+    androidTestImplementation(kotlin("test"))
+    debugImplementation(libs.androidx.compose.ui.testManifest)
     implementation(libs.airbnb.mavericks.hilt)
     implementation(libs.airbnb.mavericks)
-    implementation(libs.androidx.core.splashscreen)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.timber)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.lifecycle.runtimeCompose)
+    implementation(libs.androidx.compose.runtime.tracing)
+    implementation(libs.androidx.compose.material3.windowSizeClass)
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.work.ktx)
-
-    implementation(libs.accompanist.navigation)
+    implementation(libs.androidx.window.manager)
+    implementation(libs.androidx.profileinstaller)
+    implementation(libs.kotlinx.coroutines.guava)
+    implementation(libs.coil.kt)
     implementation(libs.kotlinx.collections.immutable)
 
-    implementation(libs.kotlinx.coroutines.android)
+    testImplementation(projects.core.testing)
+    testImplementation(projects.core.network)
+    testImplementation(libs.androidx.navigation.testing)
+    testImplementation(libs.accompanist.testharness)
+    testImplementation(libs.work.testing)
+    testImplementation(kotlin("test"))
+    kspTest(libs.hilt.compiler)
 }

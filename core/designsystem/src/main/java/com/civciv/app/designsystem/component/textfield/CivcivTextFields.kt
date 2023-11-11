@@ -71,6 +71,7 @@ fun CivcivTextField(
     readOnly: Boolean = false,
     textStyle: TextStyle = CivcivTheme.typography.textMd.copy(
         fontWeight = FontWeight.Normal,
+        color = colors.textColor,
     ),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -134,7 +135,7 @@ fun CivcivTextField(
                 ) {
                     leadingIcon?.let {
                         CompositionLocalProvider(
-                            value = LocalContentColor provides colors.leadingIconColor,
+                            LocalContentColor provides colors.leadingIconColor,
                             content = leadingIcon,
                         )
                         Spacer(modifier = Modifier.width(8.dp))
@@ -157,7 +158,7 @@ fun CivcivTextField(
                     trailingIcon?.let {
                         Spacer(modifier = Modifier.width(8.dp))
                         CompositionLocalProvider(
-                            value = LocalContentColor provides trailingIconColors,
+                            LocalContentColor provides trailingIconColors,
                             content = trailingIcon,
                         )
                     }

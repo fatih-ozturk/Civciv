@@ -23,9 +23,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:database"))
-    implementation(project(":core:mastodon-api"))
+    implementation(projects.core.mastodonApi)
+    implementation(projects.core.database)
+    implementation(projects.core.base)
 
     implementation(libs.ktor.core)
     implementation(libs.ktor.auth)
