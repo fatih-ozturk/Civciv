@@ -23,17 +23,16 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:network"))
-    implementation(project(":core:model"))
-    implementation(project(":core:database"))
-    implementation(project(":core:mastodon-api"))
+    implementation(projects.core.base)
+    implementation(projects.core.mastodonApi)
+    implementation(projects.core.database)
+    implementation(projects.core.model)
+    implementation(projects.core.network)
 
-    implementation(libs.androidx.paging.runtime)
-    implementation(libs.room.ktx)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.kotlinx.serialization.json)
 
-    implementation(libs.androidx.datastore)
-    implementation(libs.androidx.datastore.preferences)
-
-    testImplementation(project(":core:testing"))
+    testImplementation(projects.core.testing)
 }

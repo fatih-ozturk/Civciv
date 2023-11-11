@@ -34,11 +34,6 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlin.math.min
 
-inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -> Modifier): Modifier {
-    val modifier = Modifier
-    return then(if (value) modifier.builder() else modifier)
-}
-
 /**
  * A [Modifier] that draws a border around elements that are recomposing. The border increases in
  * size and interpolates from red to green as more recompositions occur before a timeout.

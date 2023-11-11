@@ -17,6 +17,7 @@ package com.civciv.app.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,51 +31,37 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.navOptions
-import com.civciv.app.auth.graph.authGraph
-import com.civciv.app.auth.graph.navigateToAuthGraph
-import com.civciv.app.auth.login.navigation.navigateToLogin
-import com.civciv.app.auth.serverlist.navigation.navigateToServerList
-import com.civciv.app.auth.splash.navigation.splashScreen
-import com.civciv.app.auth.splash.navigation.splashScreenRoute
-import com.civciv.app.auth.welcome.navigation.welcomeScreenRoute
-import com.civciv.app.home.graph.homeGraph
-import com.civciv.app.home.graph.navigateToHomeGraph
-import com.civciv.app.home.main.navigation.navigateToHome
-import com.civciv.app.notification.graph.notificationGraph
-import com.civciv.app.profile.graph.profileGraph
-import com.civciv.app.search.graph.searchGraph
+import androidx.navigation.compose.composable
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 
+@OptIn(ExperimentalLayoutApi::class)
 @SuppressLint("RestrictedApi")
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CivcivApp(
     modifier: Modifier = Modifier,
     appState: CivcivAppState = rememberCivcivAppState(),
 ) {
     LaunchedEffect(Unit) {
-        appState.navController.currentBackStack.onEach { currentBackStack ->
-            Timber.tag("CivcivApp currentBackStack").e(
-                currentBackStack.map { it.destination.route }.toString(),
-            )
-        }.collect()
+        appState.navController.currentBackStack
+            .onEach { currentBackStack ->
+                val backStack = currentBackStack
+                    .mapNotNull { it.destination.route }
+                Timber.tag("CivcivApp currentBackStack").e(backStack.toString())
+            }.collect()
     }
 
     Surface(
@@ -82,8 +69,7 @@ fun CivcivApp(
         color = MaterialTheme.colorScheme.background,
     ) {
         Scaffold(
-            modifier = Modifier
-                .semantics { testTagsAsResourceId = true },
+            modifier = Modifier,
             contentColor = MaterialTheme.colorScheme.onBackground,
             bottomBar = {
                 if (appState.shouldShowBottomBar) {
@@ -114,70 +100,11 @@ fun CivcivNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = splashScreenRoute,
+        startDestination = "test",
     ) {
-        splashScreen(
-            onNavigateToHome = {
-                navController.navigateToHomeGraph(
-                    navOptions = navOptions {
-                        popUpTo(
-                            splashScreenRoute,
-                            popUpToBuilder = {
-                                inclusive = true
-                            },
-                        )
-                    },
-                )
-            },
-            onNavigateToLoginGraph = {
-                navController.navigateToAuthGraph(
-                    navOptions = navOptions {
-                        popUpTo(
-                            splashScreenRoute,
-                            popUpToBuilder = {
-                                inclusive = true
-                            },
-                        )
-                    },
-                )
-            },
-        )
-        homeGraph(
-            onAddAccount = {
-                navController.navigateToAuthGraph()
-            },
-        )
-        authGraph(
-            onLoginClicked = {
-                navController.navigateToLogin()
-            },
-            onServerListClicked = {
-                navController.navigateToServerList()
-            },
-            onBackClicked = {
-                navController.popBackStack()
-            },
-            onServerClicked = {
-                navController.navigateToLogin(
-                    navOptions = navOptions {
-                        popUpTo(welcomeScreenRoute)
-                    },
-                    domain = it,
-                )
-            },
-            onNavigateHome = {
-                navController.navigateToHome(
-                    navOptions {
-                        popUpTo(authGraph) {
-                            inclusive = true
-                        }
-                    },
-                )
-            },
-        )
-        notificationGraph()
-        profileGraph()
-        searchGraph()
+        composable("test") {
+            Text(text = "Test")
+        }
     }
 }
 

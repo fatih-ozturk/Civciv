@@ -25,14 +25,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.civciv.app.home.graph.navigateToHomeGraph
-import com.civciv.app.notification.graph.navigateToNotificationGraph
-import com.civciv.app.profile.graph.navigateToProfileGraph
-import com.civciv.app.search.graph.navigateToSearchGraph
-import com.civciv.app.ui.TopLevelDestination.HOME
-import com.civciv.app.ui.TopLevelDestination.NOTIFICATION
-import com.civciv.app.ui.TopLevelDestination.PROFILE
-import com.civciv.app.ui.TopLevelDestination.SEARCH
 import com.civciv.app.ui.ext.TrackDisposableJank
 
 @Composable
@@ -59,6 +51,7 @@ class CivcivAppState(
         @Composable get() = currentDestination?.route?.uppercase() in
             topLevelDestinations.map { it.name.uppercase() }
 
+    @Suppress("UNUSED_PARAMETER", "UNUSED_VARIABLE")
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
         val topLevelNavOptions = navOptions {
             popUpTo(navController.graph.findStartDestination().id) {
@@ -66,13 +59,6 @@ class CivcivAppState(
             }
             launchSingleTop = true
             restoreState = true
-        }
-
-        when (topLevelDestination) {
-            HOME -> navController.navigateToHomeGraph(topLevelNavOptions)
-            SEARCH -> navController.navigateToSearchGraph(topLevelNavOptions)
-            NOTIFICATION -> navController.navigateToNotificationGraph(topLevelNavOptions)
-            PROFILE -> navController.navigateToProfileGraph(topLevelNavOptions)
         }
     }
 }

@@ -13,14 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("civciv.android.feature")
-    id("civciv.android.library.compose")
+package com.civciv.app.designsystem.ext
+
+import androidx.compose.ui.Modifier
+
+inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -> Modifier): Modifier {
+    val modifier = Modifier
+    return then(if (value) modifier.builder() else modifier)
 }
 
-android {
-    namespace = "com.civciv.app.auth.serverlist"
-}
-
-dependencies {
+@Suppress("unused")
+inline fun Modifier.ifFalse(value: Boolean, builder: Modifier.() -> Modifier): Modifier {
+    val modifier = Modifier
+    return then(if (!value) modifier.builder() else modifier)
 }

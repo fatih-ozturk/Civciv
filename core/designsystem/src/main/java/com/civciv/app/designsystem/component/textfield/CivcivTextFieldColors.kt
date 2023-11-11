@@ -26,8 +26,8 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.civciv.app.designsystem.ext.ifTrue
 import com.civciv.app.designsystem.theme.CivcivTheme
-import com.civciv.app.ui.ext.ifTrue
 
 @Immutable
 data class CivcivTextFieldColors(

@@ -2,6 +2,7 @@
 import com.civciv.app.utils.implementation
 import com.civciv.app.utils.ksp
 import com.civciv.app.utils.kspAndroidTest
+import com.civciv.app.utils.kspTest
 import com.civciv.app.utils.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -16,9 +17,10 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
-                implementation(libs.findLibrary("hilt.library").get())
+                implementation(libs.findLibrary("hilt.android").get())
                 ksp(libs.findLibrary("hilt.compiler").get())
                 kspAndroidTest(libs.findLibrary("hilt.compiler").get())
+                kspTest(libs.findLibrary("hilt.compiler").get())
             }
         }
     }

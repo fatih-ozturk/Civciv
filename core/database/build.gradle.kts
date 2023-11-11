@@ -33,11 +33,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:base"))
-    implementation(project(":core:model"))
+    implementation(projects.core.base)
+    implementation(projects.core.model)
 
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.coroutines.android)
 
-    androidTestImplementation(project(":core:testing"))
+    androidTestImplementation(projects.core.testing)
 }

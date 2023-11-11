@@ -23,10 +23,16 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data"))
-    implementation(project(":core:base"))
-    implementation(project(":core:model"))
+    implementation(projects.core.model)
+    implementation(projects.core.base)
+    implementation(projects.core.data)
 
-    implementation(libs.androidx.paging.runtime)
+    implementation(libs.hilt.android)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.datetime)
+
+    ksp(libs.hilt.compiler)
+
+    testImplementation(projects.core.testing)
     implementation(libs.room.ktx)
 }

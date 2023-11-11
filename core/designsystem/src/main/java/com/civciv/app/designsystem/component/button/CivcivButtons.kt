@@ -28,7 +28,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,9 +45,9 @@ object CivcivButtons {
     @Composable
     fun Primary(
         text: String,
-        enabled: Boolean,
         onClick: () -> Unit,
         modifier: Modifier = Modifier,
+        enabled: Boolean = true,
         leftIcon: Painter? = null,
         rightIcon: Painter? = null,
         colors: ButtonColors = CivcivButtonColors.primary(),
@@ -68,9 +68,9 @@ object CivcivButtons {
     @Composable
     fun SecondaryGray(
         text: String,
-        enabled: Boolean,
         onClick: () -> Unit,
         modifier: Modifier = Modifier,
+        enabled: Boolean = true,
         leftIcon: Painter? = null,
         rightIcon: Painter? = null,
         colors: ButtonColors = CivcivButtonColors.secondaryGray(),
@@ -91,9 +91,9 @@ object CivcivButtons {
     @Composable
     fun SecondaryColor(
         text: String,
-        enabled: Boolean,
         onClick: () -> Unit,
         modifier: Modifier = Modifier,
+        enabled: Boolean = true,
         leftIcon: Painter? = null,
         rightIcon: Painter? = null,
         colors: ButtonColors = CivcivButtonColors.secondaryColor(),
@@ -114,9 +114,9 @@ object CivcivButtons {
     @Composable
     fun TertiaryGray(
         text: String,
-        enabled: Boolean,
         onClick: () -> Unit,
         modifier: Modifier = Modifier,
+        enabled: Boolean = true,
         leftIcon: Painter? = null,
         rightIcon: Painter? = null,
         colors: ButtonColors = CivcivButtonColors.tertiaryGray(),
@@ -137,9 +137,9 @@ object CivcivButtons {
     @Composable
     fun TertiaryColor(
         text: String,
-        enabled: Boolean,
         onClick: () -> Unit,
         modifier: Modifier = Modifier,
+        enabled: Boolean = true,
         leftIcon: Painter? = null,
         rightIcon: Painter? = null,
         colors: ButtonColors = CivcivButtonColors.tertiaryColor(),
@@ -160,9 +160,9 @@ object CivcivButtons {
     @Composable
     fun PrimaryDestructive(
         text: String,
-        enabled: Boolean,
         onClick: () -> Unit,
         modifier: Modifier = Modifier,
+        enabled: Boolean = true,
         leftIcon: Painter? = null,
         rightIcon: Painter? = null,
         colors: ButtonColors = CivcivButtonColors.primaryDestructive(),
@@ -183,9 +183,9 @@ object CivcivButtons {
     @Composable
     fun SecondaryDestructive(
         text: String,
-        enabled: Boolean,
         onClick: () -> Unit,
         modifier: Modifier = Modifier,
+        enabled: Boolean = true,
         leftIcon: Painter? = null,
         rightIcon: Painter? = null,
         colors: ButtonColors = CivcivButtonColors.secondaryDestructive(),
@@ -206,9 +206,9 @@ object CivcivButtons {
     @Composable
     fun TertiaryDestructive(
         text: String,
-        enabled: Boolean,
         onClick: () -> Unit,
         modifier: Modifier = Modifier,
+        enabled: Boolean = true,
         leftIcon: Painter? = null,
         rightIcon: Painter? = null,
         colors: ButtonColors = CivcivButtonColors.tertiaryDestructive(),
@@ -243,7 +243,12 @@ internal fun CivcivButtonImpl(
         enabled = enabled,
         modifier = modifier
             .height(sizes.height),
-        colors = colors,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = colors.containerColor,
+            contentColor = colors.contentColor,
+            disabledContainerColor = colors.disabledContainerColor,
+            disabledContentColor = colors.disabledContentColor,
+        ),
         shape = CivcivTheme.shapes.radiusMd,
         border = if (enabled) borders.stroke else borders.disabled,
         contentPadding = sizes.contentPadding,
@@ -331,16 +336,16 @@ private fun CivcivButtonsPreview() {
 
             CivcivButtons.PrimaryDestructive(
                 text = "Button",
-                enabled = true,
                 onClick = {},
+                enabled = true,
                 leftIcon = rememberVectorPainter(image = Icons.Rounded.Add),
                 rightIcon = rememberVectorPainter(image = Icons.Rounded.Add),
             )
 
             CivcivButtons.SecondaryDestructive(
                 text = "Button",
-                enabled = true,
                 onClick = {},
+                enabled = true,
                 leftIcon = rememberVectorPainter(image = Icons.Rounded.Add),
                 rightIcon = rememberVectorPainter(image = Icons.Rounded.Add),
             )
