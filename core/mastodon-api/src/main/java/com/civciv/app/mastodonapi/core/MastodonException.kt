@@ -17,11 +17,11 @@ package com.civciv.app.mastodonapi.core
 
 import com.civciv.app.mastodonapi.model.MastodonErrorResponse
 
-class MastodonException(
-    mastodonErrorResponse: MastodonErrorResponse,
-    caused: Throwable? = null,
+data class MastodonException(
+    val errorResponse: MastodonErrorResponse,
+    val caused: Throwable? = null,
 ) : IllegalStateException(
-    "Status code: ${mastodonErrorResponse.statusCode}." +
-        " Message: \"${mastodonErrorResponse.errorMessage}\"",
+    "Status code: ${errorResponse.statusCode}." +
+        " Message: \"${errorResponse.message}\"",
     caused,
 )

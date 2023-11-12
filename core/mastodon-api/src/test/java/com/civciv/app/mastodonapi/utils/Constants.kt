@@ -13,25 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("civciv.android.library")
-    id("civciv.android.hilt")
-}
+package com.civciv.app.mastodonapi.utils
 
-android {
-    namespace = "com.civciv.app.mastodonapi"
-}
-
-dependencies {
-    implementation(libs.kotlinx.datetime)
-    implementation(libs.kotlinx.serialization)
-
-    implementation(libs.ktor.core)
-    implementation(libs.ktor.auth)
-    implementation(libs.ktor.logging)
-    implementation(libs.ktor.serialization.json)
-    implementation(libs.ktor.content.negotiation)
-    implementation(libs.ktor.engine.android)
-
-    testImplementation(projects.core.testing)
+object Constants {
+    const val TEST_DOMAIN = "mastodon.social"
+    const val TEST_ACCESS_TOKEN = "TEST_ACCESS_TOKEN"
 }

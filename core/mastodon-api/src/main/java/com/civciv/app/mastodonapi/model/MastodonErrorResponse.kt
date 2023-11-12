@@ -20,6 +20,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MastodonErrorResponse(
-    @SerialName("error") val errorMessage: String,
-    var statusCode: Int,
+    @SerialName("error") val message: String,
+    var statusCode: Int? = null,
 )

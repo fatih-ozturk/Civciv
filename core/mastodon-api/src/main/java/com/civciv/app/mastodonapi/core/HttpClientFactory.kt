@@ -130,7 +130,10 @@ internal object HttpClientFactory {
                 statusCode = response.status.value
             }
         } catch (t: Throwable) {
-            null
+            MastodonErrorResponse(
+                message = t.message ?: "Unknown error",
+                statusCode = response.status.value,
+            )
         }
     }
 
