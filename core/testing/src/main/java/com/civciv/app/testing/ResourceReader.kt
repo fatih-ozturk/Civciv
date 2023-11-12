@@ -13,25 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("civciv.android.library")
-    id("civciv.android.hilt")
-}
+package com.civciv.app.testing
 
-android {
-    namespace = "com.civciv.app.mastodonapi"
-}
+object ResourceReader {
 
-dependencies {
-    implementation(libs.kotlinx.datetime)
-    implementation(libs.kotlinx.serialization)
+    fun readApiResponse(fileName: String): String? = readResource("api-response/$fileName")
 
-    implementation(libs.ktor.core)
-    implementation(libs.ktor.auth)
-    implementation(libs.ktor.logging)
-    implementation(libs.ktor.serialization.json)
-    implementation(libs.ktor.content.negotiation)
-    implementation(libs.ktor.engine.android)
-
-    testImplementation(projects.core.testing)
+    private fun readResource(fileName: String): String? {
+        val inputStream = javaClass.classLoader?.getResourceAsStream(fileName)
+        return inputStream?.bufferedReader().use { it?.readText() }
+    }
 }

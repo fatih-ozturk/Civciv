@@ -44,6 +44,11 @@ dependencies {
     api(libs.roborazzi)
     api(libs.robolectric.shadows)
     api(libs.turbine)
+    api(libs.kotest)
+    api(libs.slf4j.nop)
+    api(libs.ktor.okhttp)
+    api(libs.ktor.logging)
+    api(libs.ktor.client.mock)
 
     debugApi(libs.androidx.compose.ui.testManifest)
 
