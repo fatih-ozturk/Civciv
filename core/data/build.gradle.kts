@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.base)
+    implementation(projects.core.common)
     implementation(projects.core.mastodonApi)
     implementation(projects.core.database)
     implementation(projects.core.model)

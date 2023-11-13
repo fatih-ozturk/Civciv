@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.base
+package com.civciv.app.common
 
 import dagger.Module
 import dagger.Provides

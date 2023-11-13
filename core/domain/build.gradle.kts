@@ -24,7 +24,7 @@ android {
 
 dependencies {
     implementation(projects.core.model)
-    implementation(projects.core.base)
+    implementation(projects.core.common)
     implementation(projects.core.data)
 
     implementation(libs.hilt.android)
