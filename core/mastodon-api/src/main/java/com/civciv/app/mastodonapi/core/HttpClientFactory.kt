@@ -126,6 +126,12 @@ internal object HttpClientFactory {
 
         return try {
             val exceptionResponseText = response.bodyAsText()
+            if (exceptionResponseText.isEmpty()) {
+                return MastodonErrorResponse(
+                    message = "Empty message",
+                    statusCode = response.status.value,
+                )
+            }
             decodeFromString(MastodonErrorResponse.serializer(), exceptionResponseText).apply {
                 statusCode = response.status.value
             }
@@ -140,7 +146,8 @@ internal object HttpClientFactory {
     private val HttpResponse.isMastodonStatusHandled: Boolean
         get() = status == HttpStatusCode.NotFound ||
             status == HttpStatusCode.Unauthorized ||
-            status == HttpStatusCode.InternalServerError
+            status == HttpStatusCode.InternalServerError ||
+            status == HttpStatusCode.Gone
 
     private fun Throwable.isTimeoutException(): Boolean {
         val exception = unwrapCancellationException()

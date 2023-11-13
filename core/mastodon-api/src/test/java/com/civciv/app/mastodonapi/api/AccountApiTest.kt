@@ -22,7 +22,6 @@ import com.civciv.app.mastodonapi.utils.buildMastodon
 import com.civciv.app.testing.CoroutineTestRule
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.matchers.shouldBe
-import io.ktor.client.plugins.ClientRequestException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -91,11 +90,12 @@ class AccountApiTest {
     @Test
     fun getAccountByIdSuspendedError() {
         runTest {
-            val exception = shouldThrowExactly<ClientRequestException> {
+            val exception = shouldThrowExactly<MastodonException> {
                 accountApi.getAccount(AccountRequest(id = "4"))
             }
 
-            exception.response.status.value shouldBe 410
+            exception.errorResponse.message shouldBe ""
+            exception.errorResponse.statusCode shouldBe 410
         }
     }
 }
