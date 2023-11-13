@@ -34,20 +34,20 @@ class AccountApiTest {
 
     private val mastodon = buildMastodon(
         responses = listOf(
-            MastodonResponse("accounts/1", "account.json"),
+            MastodonResponse("accounts/1", "account/account.json"),
             MastodonResponse(
                 "accounts/2",
-                "accountError.json",
+                "account/accountError.json",
                 HttpStatusCode(401, "This API requires an authenticated user"),
             ),
             MastodonResponse(
                 "accounts/3",
-                "accountNotFoundError.json",
+                "account/accountNotFoundError.json",
                 HttpStatusCode(404, "Record not found"),
             ),
             MastodonResponse(
                 "accounts/4",
-                "accountSuspendedError.json",
+                "account/accountSuspendedError.json",
                 HttpStatusCode(410, "Account is suspended"),
             ),
         ),
