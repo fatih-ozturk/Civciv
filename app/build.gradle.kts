@@ -69,7 +69,6 @@ dependencies {
     implementation(projects.core.model)
 
     androidTestImplementation(libs.androidx.navigation.testing)
-    androidTestImplementation(libs.accompanist.testharness)
     androidTestImplementation(kotlin("test"))
     debugImplementation(libs.androidx.compose.ui.testManifest)
     implementation(libs.airbnb.mavericks.hilt)
@@ -94,7 +93,6 @@ dependencies {
     testImplementation(projects.core.testing)
     testImplementation(projects.core.network)
     testImplementation(libs.androidx.navigation.testing)
-    testImplementation(libs.accompanist.testharness)
     testImplementation(libs.work.testing)
     testImplementation(kotlin("test"))
     kspTest(libs.hilt.compiler)
