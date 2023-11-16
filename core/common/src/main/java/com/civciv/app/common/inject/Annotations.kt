@@ -13,16 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("civciv.android.library")
-    id("civciv.android.hilt")
-}
+package com.civciv.app.common.inject
 
-android {
-    namespace = "com.civciv.app.base"
-}
+import javax.inject.Qualifier
 
-dependencies {
-    implementation(libs.kotlinx.coroutines.android)
-    testImplementation(projects.core.testing)
-}
+class Annotations
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+@MustBeDocumented
+annotation class ApplicationId

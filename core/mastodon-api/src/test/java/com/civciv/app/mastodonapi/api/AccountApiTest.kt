@@ -22,7 +22,6 @@ import com.civciv.app.mastodonapi.utils.buildMastodon
 import com.civciv.app.testing.CoroutineTestRule
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.matchers.shouldBe
-import io.ktor.client.plugins.ClientRequestException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -35,20 +34,20 @@ class AccountApiTest {
 
     private val mastodon = buildMastodon(
         responses = listOf(
-            MastodonResponse("accounts/1", "account.json"),
+            MastodonResponse("accounts/1", "account/account.json"),
             MastodonResponse(
                 "accounts/2",
-                "accountError.json",
+                "account/accountError.json",
                 HttpStatusCode(401, "This API requires an authenticated user"),
             ),
             MastodonResponse(
                 "accounts/3",
-                "accountNotFoundError.json",
+                "account/accountNotFoundError.json",
                 HttpStatusCode(404, "Record not found"),
             ),
             MastodonResponse(
                 "accounts/4",
-                "accountSuspendedError.json",
+                "account/accountSuspendedError.json",
                 HttpStatusCode(410, "Account is suspended"),
             ),
         ),
@@ -91,11 +90,12 @@ class AccountApiTest {
     @Test
     fun getAccountByIdSuspendedError() {
         runTest {
-            val exception = shouldThrowExactly<ClientRequestException> {
+            val exception = shouldThrowExactly<MastodonException> {
                 accountApi.getAccount(AccountRequest(id = "4"))
             }
 
-            exception.response.status.value shouldBe 410
+            exception.errorResponse.message shouldBe ""
+            exception.errorResponse.statusCode shouldBe 410
         }
     }
 }

@@ -60,9 +60,9 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.base)
+    implementation(projects.core.common)
     implementation(projects.core.data)
-    implementation(projects.core.ui)
+    implementation(projects.core.commonUi)
     implementation(projects.core.designsystem)
     implementation(projects.core.database)
     implementation(projects.core.domain)

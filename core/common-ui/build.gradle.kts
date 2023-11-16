@@ -19,7 +19,7 @@ plugins {
 }
 
 android {
-    namespace = "com.civciv.app.ui"
+    namespace = "com.civciv.app.commonui"
 }
 
 dependencies {

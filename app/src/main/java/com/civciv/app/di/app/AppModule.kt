@@ -16,7 +16,7 @@
 package com.civciv.app.di.app
 
 import android.app.Application
-import com.civciv.app.base.inject.ApplicationId
+import com.civciv.app.common.inject.ApplicationId
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

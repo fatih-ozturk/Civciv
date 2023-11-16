@@ -25,7 +25,7 @@ android {
 dependencies {
     implementation(projects.core.mastodonApi)
     implementation(projects.core.database)
-    implementation(projects.core.base)
+    implementation(projects.core.common)
 
     implementation(libs.ktor.core)
     implementation(libs.ktor.auth)
