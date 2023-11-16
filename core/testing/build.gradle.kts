@@ -31,7 +31,6 @@ android {
 }
 
 dependencies {
-    api(libs.accompanist.testharness)
     api(libs.androidx.activity.compose)
     api(libs.androidx.compose.ui.test)
     api(libs.androidx.test.core)
