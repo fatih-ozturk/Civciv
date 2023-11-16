@@ -94,7 +94,7 @@ class AccountApiTest {
                 accountApi.getAccount(AccountRequest(id = "4"))
             }
 
-            exception.errorResponse.message shouldBe ""
+            exception.errorResponse.message shouldBe "Empty message"
             exception.errorResponse.statusCode shouldBe 410
         }
     }
