@@ -18,7 +18,6 @@ ktlint_standard_import-ordering = disabled
 ktlint_standard_no-wildcard-imports = disabled
 ktlint_standard_multiline-if-else = disabled
 twitter_compose_allowed_composition_locals = LocalCivcivColors,LocalCivcivShapes,LocalCivcivTypographies
-ktlint_disabled_rules = import-ordering
 
 [*.md]
 trim_trailing_whitespace = false
