@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ import javax.inject.Inject
 class GetMastodonServerListUseCase @Inject constructor(
     private val mastodonRepository: MastodonRepository,
 ) {
-
     suspend operator fun invoke(
         language: String? = null,
         category: String? = null,
-    ): List<MastodonServer> =
-        mastodonRepository.getServerList(language, category)
+    ): List<MastodonServer> {
+        return mastodonRepository.getServerList(language, category)
+    }
 }

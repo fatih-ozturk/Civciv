@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,10 +26,6 @@ import com.civciv.app.mastodonapi.model.account.AccountResponse
 import com.civciv.app.model.ApplicationCredentials
 import com.civciv.app.model.AuthState
 import com.civciv.app.model.auth.AuthorizationResponse
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -38,7 +34,6 @@ class AuthRepositoryImpl @Inject constructor(
     private val authApi: AuthApi,
     private val accountApi: AccountApi,
 ) : AuthRepository {
-
     override suspend fun getApplicationCredentials(domain: String): ApplicationCredentials {
         return authApi.registerApp(domain = domain).toDomainModel()
     }
@@ -49,26 +44,29 @@ class AuthRepositoryImpl @Inject constructor(
         authorizationResult: AuthorizationResponse,
         applicationCredentials: ApplicationCredentials,
     ): Boolean {
-        val accessTokenResponse = authApi.fetchOAuthToken(
-            domain = applicationCredentials.domain,
-            clientId = applicationCredentials.clientId,
-            clientSecret = applicationCredentials.clientSecret,
-            redirectUri = applicationCredentials.redirectUri,
-            code = authorizationResult.code,
-            grantType = "authorization_code",
-        )
-        val accountResponse = accountApi.verifyAccountCredentials(
-            applicationCredentials.domain,
-            accessTokenResponse.accessToken,
-        )
+        val accessTokenResponse =
+            authApi.fetchOAuthToken(
+                domain = applicationCredentials.domain,
+                clientId = applicationCredentials.clientId,
+                clientSecret = applicationCredentials.clientSecret,
+                redirectUri = applicationCredentials.redirectUri,
+                code = authorizationResult.code,
+                grantType = "authorization_code",
+            )
+        val accountResponse =
+            accountApi.verifyAccountCredentials(
+                applicationCredentials.domain,
+                accessTokenResponse.accessToken,
+            )
 
-        val accountCredentialEntity = AccountCredentialEntity(
-            domain = applicationCredentials.domain,
-            accessToken = accessTokenResponse.accessToken,
-            tokenType = accessTokenResponse.tokenType,
-            isActive = true,
-            accountId = accountResponse.id,
-        )
+        val accountCredentialEntity =
+            AccountCredentialEntity(
+                domain = applicationCredentials.domain,
+                accessToken = accessTokenResponse.accessToken,
+                tokenType = accessTokenResponse.tokenType,
+                isActive = true,
+                accountId = accountResponse.id,
+            )
 
         accountCredentialDao.clearActiveAccountCredential()
         val userCredentialInsertResult =
@@ -77,31 +75,33 @@ class AuthRepositoryImpl @Inject constructor(
         return userInsertResult > 0 && userCredentialInsertResult > 0
     }
 
-    override fun getAuthenticateState(): Flow<AuthState> {
-        return accountCredentialDao.getActiveAccountCredentialFlow().map {
-            /*
-             * TODO we can verify account authorization if throws exception,
-             *  we can change current account if there is any available.
-            */
-            if (it?.accessToken.isNullOrEmpty()) {
+    override suspend fun getAuthenticateState(): AuthState {
+        val currentAccount =
+            accountCredentialDao.getActiveAccountCredential()
+                ?: return AuthState.LOGGED_OUT
+
+        val authenticationState =
+            if (currentAccount.accessToken.isEmpty()) {
                 AuthState.LOGGED_OUT
             } else {
                 AuthState.LOGGED_IN
             }
-        }.filterNotNull().distinctUntilChanged()
+        return authenticationState
     }
 }
 
-fun CredentialsResponse.toDomainModel() = ApplicationCredentials(
-    domain = domain,
-    clientId = clientId,
-    clientSecret = clientSecret,
-    scope = scopes,
-    redirectUri = redirectUri,
-)
+fun CredentialsResponse.toDomainModel() =
+    ApplicationCredentials(
+        domain = domain,
+        clientId = clientId,
+        clientSecret = clientSecret,
+        scope = scopes,
+        redirectUri = redirectUri,
+    )
 
-fun AccountResponse.toEntityModel(): AccountEntity = AccountEntity(
-    accountId = id,
-    username = username,
-    profilePictureUrl = avatar,
-)
+fun AccountResponse.toEntityModel(): AccountEntity =
+    AccountEntity(
+        accountId = id,
+        username = username,
+        profilePictureUrl = avatar,
+    )

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,8 @@ import com.civciv.app.database.entities.status.StatusEntity
 )
 abstract class CivcivDatabase : RoomDatabase() {
     abstract fun accountCredentialDao(): AccountCredentialDao
+
     abstract fun accountDao(): AccountDao
+
     abstract fun statusDao(): StatusDao
 }

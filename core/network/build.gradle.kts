@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,10 +27,10 @@ dependencies {
     implementation(projects.core.database)
     implementation(projects.core.common)
 
+    implementation(libs.timber)
     implementation(libs.ktor.core)
     implementation(libs.ktor.auth)
     implementation(libs.ktor.logging)
-    implementation(libs.ktor.serialization.gson)
     implementation(libs.ktor.content.negotiation)
     implementation(libs.ktor.engine.android)
 }

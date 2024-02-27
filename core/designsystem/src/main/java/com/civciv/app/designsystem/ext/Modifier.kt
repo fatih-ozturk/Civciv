@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,19 @@ package com.civciv.app.designsystem.ext
 
 import androidx.compose.ui.Modifier
 
-inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -> Modifier): Modifier {
+inline fun Modifier.ifTrue(
+    value: Boolean,
+    builder: Modifier.() -> Modifier,
+): Modifier {
     val modifier = Modifier
     return then(if (value) modifier.builder() else modifier)
 }
 
 @Suppress("unused")
-inline fun Modifier.ifFalse(value: Boolean, builder: Modifier.() -> Modifier): Modifier {
+inline fun Modifier.ifFalse(
+    value: Boolean,
+    builder: Modifier.() -> Modifier,
+): Modifier {
     val modifier = Modifier
     return then(if (!value) modifier.builder() else modifier)
 }

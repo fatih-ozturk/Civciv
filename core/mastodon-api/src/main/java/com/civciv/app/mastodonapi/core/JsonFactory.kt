@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,12 @@ package com.civciv.app.mastodonapi.core
 import kotlinx.serialization.json.Json
 
 object JsonFactory {
-
-    fun buildJson(): Json = Json {
-        encodeDefaults = false
-        ignoreUnknownKeys = true
-        isLenient = true
-        allowSpecialFloatingPointValues = true
-        prettyPrint = false
-    }
+    fun buildJson(): Json =
+        Json {
+            encodeDefaults = false
+            ignoreUnknownKeys = true
+            isLenient = true
+            allowSpecialFloatingPointValues = true
+            prettyPrint = false
+        }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.civciv.app.ui.ext
+package com.civciv.app.commonui.ext
 
 import android.app.Activity
 import android.content.ComponentName
@@ -22,11 +22,12 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 
-fun Context.getActivity(): Activity? = when (this) {
-    is Activity -> this
-    is ContextWrapper -> baseContext.getActivity()
-    else -> null
-}
+fun Context.getActivity(): Activity? =
+    when (this) {
+        is Activity -> this
+        is ContextWrapper -> baseContext.getActivity()
+        else -> null
+    }
 
 fun Context.restartActivity() {
     val intent = getActivity()?.intent

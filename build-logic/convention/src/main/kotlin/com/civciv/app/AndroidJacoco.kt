@@ -28,7 +28,7 @@ private val excludedFiles = mutableSetOf(
 
 internal fun Project.configureAndroidJacoco(
     extension: CommonExtension<*, *, *, *, *>,
-    jacoco: JacocoPluginExtension
+    jacoco: JacocoPluginExtension,
 ) = afterEvaluate {
 
     val buildTypes = extension.buildTypes.map { type -> type.name }
@@ -76,7 +76,7 @@ private fun Project.registerCodeCoverageTask(
     sourceName: String,
     sourcePath: String,
     flavorName: String,
-    buildTypeName: String
+    buildTypeName: String,
 ) {
     tasks.register("${testTaskName}Coverage", JacocoReport::class.java) {
         dependsOn(testTaskName)

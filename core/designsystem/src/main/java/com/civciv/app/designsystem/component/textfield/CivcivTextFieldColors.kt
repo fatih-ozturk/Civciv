@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,6 @@ data class CivcivTextFieldColors(
     val leadingIconColor: Color,
     val errorIconColor: Color,
 ) {
-
     @Composable
     internal fun borderModifier(
         enabled: Boolean,
@@ -56,78 +55,78 @@ data class CivcivTextFieldColors(
         interactionSource: InteractionSource,
     ): State<Modifier> {
         val focused by interactionSource.collectIsFocusedAsState()
-        val targetValue = when {
-            !enabled -> disabledBorderColor
-            isError -> errorBorderColor
-            focused -> focusedBorderColor
-            else -> borderColor
-        }
-        val borderWidth = when {
-            focused -> 3.dp
-            else -> 1.dp
-        }
-        val outerBorderColor = when {
-            !isError -> borderOuterColor
-            else -> borderErrorOuterColor
-        }
-        val modifier = Modifier
-            .ifTrue(focused) {
-                border(
-                    2.dp,
-                    outerBorderColor,
+        val targetValue =
+            when {
+                !enabled -> disabledBorderColor
+                isError -> errorBorderColor
+                focused -> focusedBorderColor
+                else -> borderColor
+            }
+        val borderWidth =
+            when {
+                focused -> 3.dp
+                else -> 1.dp
+            }
+        val outerBorderColor =
+            when {
+                !isError -> borderOuterColor
+                else -> borderErrorOuterColor
+            }
+        val modifier =
+            Modifier
+                .ifTrue(focused) {
+                    border(
+                        2.dp,
+                        outerBorderColor,
+                        CivcivTheme.shapes.radiusMd,
+                    )
+                }
+                .border(
+                    borderWidth,
+                    targetValue,
                     CivcivTheme.shapes.radiusMd,
                 )
-            }
-            .border(
-                borderWidth,
-                targetValue,
-                CivcivTheme.shapes.radiusMd,
-            )
 
         return rememberUpdatedState(modifier)
     }
 
     @Composable
-    internal fun backgroundColors(
-        enabled: Boolean,
-    ): State<Color> {
-        val targetValue = when {
-            !enabled -> disabledContainerColor
-            else -> containerColor
-        }
+    internal fun backgroundColors(enabled: Boolean): State<Color> {
+        val targetValue =
+            when {
+                !enabled -> disabledContainerColor
+                else -> containerColor
+            }
         return rememberUpdatedState(targetValue)
     }
 
     @Composable
-    internal fun hintTextColors(
-        isError: Boolean,
-    ): State<Color> {
-        val targetValue = when {
-            !isError -> hintColor
-            else -> errorHintColor
-        }
+    internal fun hintTextColors(isError: Boolean): State<Color> {
+        val targetValue =
+            when {
+                !isError -> hintColor
+                else -> errorHintColor
+            }
         return rememberUpdatedState(targetValue)
     }
 
     @Composable
-    internal fun trailingIconColors(
-        isError: Boolean,
-    ): State<Color> {
-        val targetValue = when {
-            !isError -> trailingIconColor
-            else -> errorIconColor
-        }
+    internal fun trailingIconColors(isError: Boolean): State<Color> {
+        val targetValue =
+            when {
+                !isError -> trailingIconColor
+                else -> errorIconColor
+            }
         return rememberUpdatedState(targetValue)
     }
 
     @Composable
-    internal fun placeholderTextColors(
-        enabled: Boolean,
-    ): State<Color> {
-        val targetValue = when {
-            !enabled -> disabledPlaceholderTextColor
-            else -> placeholderTextColor
-        }
+    internal fun placeholderTextColors(enabled: Boolean): State<Color> {
+        val targetValue =
+            when {
+                !enabled -> disabledPlaceholderTextColor
+                else -> placeholderTextColor
+            }
         return rememberUpdatedState(targetValue)
     }
 }

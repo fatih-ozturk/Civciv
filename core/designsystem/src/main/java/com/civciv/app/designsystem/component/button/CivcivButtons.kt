@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,6 @@ import androidx.compose.ui.unit.dp
 import com.civciv.app.designsystem.theme.CivcivTheme
 
 object CivcivButtons {
-
     @Composable
     fun Primary(
         text: String,
@@ -241,9 +240,11 @@ internal fun CivcivButtonImpl(
 ) {
     Button(
         enabled = enabled,
-        modifier = modifier
+        modifier =
+        modifier
             .height(sizes.height),
-        colors = ButtonDefaults.buttonColors(
+        colors =
+        ButtonDefaults.buttonColors(
             containerColor = colors.containerColor,
             contentColor = colors.contentColor,
             disabledContainerColor = colors.disabledContainerColor,
@@ -288,7 +289,8 @@ internal fun CivcivButtonImpl(
 private fun CivcivButtonsPreview() {
     CivcivTheme {
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxSize()
                 .background(CivcivTheme.colors.bgPrimary)
                 .padding(16.dp),

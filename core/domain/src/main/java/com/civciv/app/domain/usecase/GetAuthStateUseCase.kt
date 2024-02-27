@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,10 @@ package com.civciv.app.domain.usecase
 
 import com.civciv.app.data.repository.AuthRepository
 import com.civciv.app.model.AuthState
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetAuthStateUseCase @Inject constructor(
     private val authRepository: AuthRepository,
 ) {
-
-    operator fun invoke(): Flow<AuthState> =
-        authRepository.getAuthenticateState()
+    suspend operator fun invoke(): AuthState = authRepository.getAuthenticateState()
 }

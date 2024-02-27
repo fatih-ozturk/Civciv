@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ import com.civciv.app.model.MastodonServer
 import javax.inject.Inject
 
 class GetFilteredMastodonServerListUseCase @Inject constructor() {
-
     operator fun invoke(
         query: String?,
         serverList: List<MastodonServer>?,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,13 @@ import com.civciv.app.mastodonapi.model.MastodonServerResponse
 import com.civciv.app.model.MastodonCategory
 import com.civciv.app.model.MastodonLanguage
 import com.civciv.app.model.MastodonServer
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
 class MastodonRepositoryImpl @Inject constructor(
     private val mastodonService: MastodonApi,
 ) : MastodonRepository {
-
     override suspend fun getServerList(
         language: String?,
         category: String?,
@@ -46,9 +45,7 @@ class MastodonRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getCategoryList(
-        language: String?,
-    ): List<MastodonCategory> {
+    override suspend fun getCategoryList(language: String?): List<MastodonCategory> {
         val categoryList = mastodonService.getMastodonCategories(language = language)
         return categoryList.map(MastodonCategoryResponse::asExternalModel)
     }
@@ -73,7 +70,8 @@ fun MastodonLanguageResponse.asExternalModel(): MastodonLanguage {
     )
 }
 
-fun MastodonCategoryResponse.asExternalModel(): MastodonCategory = MastodonCategory(
-    category = category,
-    serversCount = serversCount,
-)
+fun MastodonCategoryResponse.asExternalModel(): MastodonCategory =
+    MastodonCategory(
+        category = category,
+        serversCount = serversCount,
+    )

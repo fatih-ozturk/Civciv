@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.Flow
 class GetMastodonLanguageListUseCase @Inject constructor(
     private val mastodonRepository: MastodonRepository,
 ) {
-
-    operator fun invoke(): Flow<List<MastodonLanguage>> =
-        mastodonRepository.getLanguageList()
+    operator fun invoke(): Flow<List<MastodonLanguage>> {
+        return mastodonRepository.getLanguageList()
+    }
 }

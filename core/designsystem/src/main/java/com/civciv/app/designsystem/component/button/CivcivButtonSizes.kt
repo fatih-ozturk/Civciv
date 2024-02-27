@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,19 +35,20 @@ data class ButtonSizes(
 )
 
 object CivcivButtonSizes {
-
     @Composable
     fun small(
-        textStyle: TextStyle = CivcivTheme.typography.textSm.copy(
-            fontWeight = FontWeight.SemiBold,
-        ),
+        textStyle: TextStyle =
+            CivcivTheme.typography.textSm.copy(
+                fontWeight = FontWeight.SemiBold,
+            ),
         height: Dp = 36.dp,
         iconSize: Dp = 20.dp,
         iconPadding: Dp = 6.dp,
-        contentPadding: PaddingValues = PaddingValues(
-            vertical = 8.dp,
-            horizontal = 12.dp,
-        ),
+        contentPadding: PaddingValues =
+            PaddingValues(
+                vertical = 8.dp,
+                horizontal = 12.dp,
+            ),
     ) = remember(
         textStyle,
         height,
@@ -66,16 +67,18 @@ object CivcivButtonSizes {
 
     @Composable
     fun medium(
-        textStyle: TextStyle = CivcivTheme.typography.textSm.copy(
-            fontWeight = FontWeight.SemiBold,
-        ),
+        textStyle: TextStyle =
+            CivcivTheme.typography.textSm.copy(
+                fontWeight = FontWeight.SemiBold,
+            ),
         height: Dp = 40.dp,
         iconSize: Dp = 20.dp,
         iconPadding: Dp = 6.dp,
-        contentPadding: PaddingValues = PaddingValues(
-            vertical = 10.dp,
-            horizontal = 14.dp,
-        ),
+        contentPadding: PaddingValues =
+            PaddingValues(
+                vertical = 10.dp,
+                horizontal = 14.dp,
+            ),
     ) = remember(
         textStyle,
         height,
@@ -94,16 +97,18 @@ object CivcivButtonSizes {
 
     @Composable
     fun large(
-        textStyle: TextStyle = CivcivTheme.typography.textMd.copy(
-            fontWeight = FontWeight.SemiBold,
-        ),
+        textStyle: TextStyle =
+            CivcivTheme.typography.textMd.copy(
+                fontWeight = FontWeight.SemiBold,
+            ),
         height: Dp = 44.dp,
         iconSize: Dp = 20.dp,
         iconPadding: Dp = 8.dp,
-        contentPadding: PaddingValues = PaddingValues(
-            vertical = 12.dp,
-            horizontal = 16.dp,
-        ),
+        contentPadding: PaddingValues =
+            PaddingValues(
+                vertical = 12.dp,
+                horizontal = 16.dp,
+            ),
     ) = remember(
         textStyle,
         height,
@@ -122,16 +127,18 @@ object CivcivButtonSizes {
 
     @Composable
     fun xlarge(
-        textStyle: TextStyle = CivcivTheme.typography.textMd.copy(
-            fontWeight = FontWeight.SemiBold,
-        ),
+        textStyle: TextStyle =
+            CivcivTheme.typography.textMd.copy(
+                fontWeight = FontWeight.SemiBold,
+            ),
         height: Dp = 48.dp,
         iconSize: Dp = 20.dp,
         iconPadding: Dp = 8.dp,
-        contentPadding: PaddingValues = PaddingValues(
-            vertical = 14.dp,
-            horizontal = 18.dp,
-        ),
+        contentPadding: PaddingValues =
+            PaddingValues(
+                vertical = 14.dp,
+                horizontal = 18.dp,
+            ),
     ) = remember(
         textStyle,
         height,
@@ -150,16 +157,18 @@ object CivcivButtonSizes {
 
     @Composable
     fun xxlarge(
-        textStyle: TextStyle = CivcivTheme.typography.textMd.copy(
-            fontWeight = FontWeight.SemiBold,
-        ),
+        textStyle: TextStyle =
+            CivcivTheme.typography.textMd.copy(
+                fontWeight = FontWeight.SemiBold,
+            ),
         height: Dp = 44.dp,
         iconSize: Dp = 20.dp,
         iconPadding: Dp = 12.dp,
-        contentPadding: PaddingValues = PaddingValues(
-            vertical = 18.dp,
-            horizontal = 22.dp,
-        ),
+        contentPadding: PaddingValues =
+            PaddingValues(
+                vertical = 18.dp,
+                horizontal = 22.dp,
+            ),
     ) = remember(
         textStyle,
         height,

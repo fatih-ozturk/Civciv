@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,22 +20,17 @@ import com.civciv.app.R
 
 enum class TopLevelDestination(
     @DrawableRes val selectedIcon: Int,
-    @DrawableRes val unselectedIcon: Int,
 ) {
     HOME(
-        selectedIcon = R.drawable.icon_home_fill,
-        unselectedIcon = R.drawable.icon_home,
+        selectedIcon = R.drawable.ic_home,
     ),
     SEARCH(
-        selectedIcon = R.drawable.icon_home_fill,
-        unselectedIcon = R.drawable.icon_home,
+        selectedIcon = R.drawable.ic_search,
     ),
     NOTIFICATION(
-        selectedIcon = R.drawable.icon_home_fill,
-        unselectedIcon = R.drawable.icon_home,
+        selectedIcon = R.drawable.ic_notification,
     ),
     PROFILE(
-        selectedIcon = R.drawable.icon_home_fill,
-        unselectedIcon = R.drawable.icon_home,
+        selectedIcon = R.drawable.ic_profile,
     ),
 }

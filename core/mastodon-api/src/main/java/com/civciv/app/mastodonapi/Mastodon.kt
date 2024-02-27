@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ fun Mastodon(block: MastodonClientConfig.() -> Unit): Mastodon {
 }
 
 class Mastodon internal constructor(private val config: MastodonClientConfig) {
-
     private val client by lazy {
         HttpClientFactory.buildHttpClient(
             config = config,
@@ -42,6 +41,7 @@ class Mastodon internal constructor(private val config: MastodonClientConfig) {
     val authApi by buildApi(::AuthApi)
     val timelineApi by buildApi(::TimelineApi)
 
-    private inline fun <T> buildApi(crossinline builder: (HttpClient) -> T) =
-        lazy { builder(client) }
+    private inline fun <T> buildApi(
+        crossinline builder: (HttpClient) -> T,
+    ) = lazy { builder(client) }
 }

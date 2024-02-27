@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,12 @@ import com.civciv.app.model.MastodonServer
 import kotlinx.coroutines.flow.Flow
 
 interface MastodonRepository {
-
     suspend fun getServerList(
         language: String?,
         category: String?,
     ): List<MastodonServer>
 
     fun getLanguageList(): Flow<List<MastodonLanguage>>
+
     suspend fun getCategoryList(language: String?): List<MastodonCategory>
 }

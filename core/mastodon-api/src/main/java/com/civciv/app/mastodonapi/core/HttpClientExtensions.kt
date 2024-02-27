@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,6 +63,7 @@ internal suspend inline fun <reified T> HttpClient.putByPaths(
 ): T = put(urlString = buildPaths(*paths), block = block).body()
 
 private fun buildPaths(vararg paths: String): String = paths.joinToString(separator = "/")
+
 private fun buildPaths(paths: Collection<String>): String = paths.joinToString(separator = "/")
 
 typealias RequestInterceptor = suspend (HttpRequestBuilder) -> Unit

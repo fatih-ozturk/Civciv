@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,15 +26,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AddLocation
-import androidx.compose.material.icons.rounded.DonutLarge
-import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -60,8 +55,8 @@ fun CivcivTextField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     colors: CivcivTextFieldColors = CivcivTextFieldDefaults.colors(),
-    sizes: CivcivTextFieldSizes = CivcivTextFieldSizesDefaults.small(),
-    label: String? = null,
+    sizes: CivcivTextFieldSizes = CivcivTextFieldSizesDefaults.medium(),
+    label: String = "",
     placeholder: String? = null,
     hint: String? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
@@ -69,10 +64,11 @@ fun CivcivTextField(
     enabled: Boolean = true,
     isError: Boolean = false,
     readOnly: Boolean = false,
-    textStyle: TextStyle = CivcivTheme.typography.textMd.copy(
-        fontWeight = FontWeight.Normal,
-        color = colors.textColor,
-    ),
+    textStyle: TextStyle =
+        CivcivTheme.typography.textMd.copy(
+            fontWeight = FontWeight.Normal,
+            color = colors.textColor,
+        ),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = false,
@@ -89,10 +85,11 @@ fun CivcivTextField(
     val placeholderTextColors by colors.placeholderTextColors(enabled)
 
     Column(
-        modifier = Modifier
+        modifier =
+        modifier
             .background(CivcivTheme.colors.bgPrimary),
     ) {
-        label?.let {
+        if (label.isNotEmpty()) {
             Text(
                 text = label,
                 style = CivcivTheme.typography.textSm,
@@ -107,7 +104,8 @@ fun CivcivTextField(
             onValueChange = {
                 onValueChange(it)
             },
-            modifier = modifier
+            modifier =
+            Modifier
                 .padding(top = 6.dp),
             enabled = enabled,
             readOnly = readOnly,
@@ -122,7 +120,8 @@ fun CivcivTextField(
             keyboardActions = keyboardActions,
             decorationBox = { innerTextField ->
                 Row(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .height(sizes.textFieldHeight)
                         .fillMaxWidth()
                         .background(
@@ -184,7 +183,8 @@ fun CivcivTextField(
 private fun CivcivTextFieldPreview() {
     CivcivTheme {
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .background(CivcivTheme.colors.bgPrimary)
                 .padding(16.dp),
         ) {
@@ -196,22 +196,6 @@ private fun CivcivTextFieldPreview() {
                 enabled = false,
                 onValueChange = {},
                 modifier = Modifier.fillMaxWidth(),
-                trailingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(16.dp),
-                        imageVector = Icons.Rounded.AddLocation,
-                        contentDescription = null,
-                    )
-                },
-                leadingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(20.dp),
-                        imageVector = Icons.Rounded.DonutLarge,
-                        contentDescription = null,
-                    )
-                },
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -223,22 +207,6 @@ private fun CivcivTextFieldPreview() {
                 enabled = true,
                 onValueChange = {},
                 modifier = Modifier.fillMaxWidth(),
-                trailingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(16.dp),
-                        imageVector = Icons.Rounded.AddLocation,
-                        contentDescription = null,
-                    )
-                },
-                leadingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(20.dp),
-                        imageVector = Icons.Rounded.DonutLarge,
-                        contentDescription = null,
-                    )
-                },
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -251,22 +219,6 @@ private fun CivcivTextFieldPreview() {
                 isError = true,
                 onValueChange = {},
                 modifier = Modifier.fillMaxWidth(),
-                trailingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(16.dp),
-                        imageVector = Icons.Rounded.AddLocation,
-                        contentDescription = null,
-                    )
-                },
-                leadingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(20.dp),
-                        imageVector = Icons.Rounded.DonutLarge,
-                        contentDescription = null,
-                    )
-                },
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -278,29 +230,19 @@ private fun CivcivTextFieldPreview() {
                 value = "",
                 enabled = true,
                 isError = false,
-                interactionSource = object : MutableInteractionSource {
-                    override val interactions: Flow<Interaction> = flowOf(FocusInteraction.Focus())
+                interactionSource =
+                object : MutableInteractionSource {
+                    override val interactions: Flow<Interaction> =
+                        flowOf(
+                            FocusInteraction.Focus(),
+                        )
+
                     override suspend fun emit(interaction: Interaction) = Unit
+
                     override fun tryEmit(interaction: Interaction): Boolean = false
                 },
                 onValueChange = {},
                 modifier = Modifier.fillMaxWidth(),
-                trailingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(16.dp),
-                        imageVector = Icons.Rounded.AddLocation,
-                        contentDescription = null,
-                    )
-                },
-                leadingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(20.dp),
-                        imageVector = Icons.Rounded.DonutLarge,
-                        contentDescription = null,
-                    )
-                },
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -312,29 +254,19 @@ private fun CivcivTextFieldPreview() {
                 value = "",
                 enabled = true,
                 isError = true,
-                interactionSource = object : MutableInteractionSource {
-                    override val interactions: Flow<Interaction> = flowOf(FocusInteraction.Focus())
+                interactionSource =
+                object : MutableInteractionSource {
+                    override val interactions: Flow<Interaction> =
+                        flowOf(
+                            FocusInteraction.Focus(),
+                        )
+
                     override suspend fun emit(interaction: Interaction) = Unit
+
                     override fun tryEmit(interaction: Interaction): Boolean = false
                 },
                 onValueChange = {},
                 modifier = Modifier.fillMaxWidth(),
-                trailingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(16.dp),
-                        imageVector = Icons.Rounded.AddLocation,
-                        contentDescription = null,
-                    )
-                },
-                leadingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .size(20.dp),
-                        imageVector = Icons.Rounded.DonutLarge,
-                        contentDescription = null,
-                    )
-                },
             )
         }
     }

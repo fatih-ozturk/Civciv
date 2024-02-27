@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,13 @@
 package com.civciv.app
 
 import android.app.Application
-import com.airbnb.mvrx.Mavericks
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
 class CivcivApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        Mavericks.initialize(this)
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 import com.civciv.app.designsystem.theme.CivcivTheme
 
 object CivcivTextFieldDefaults {
-
     @Composable
     fun colors(
         textColor: Color = CivcivTheme.colors.textPrimary,
@@ -40,41 +39,42 @@ object CivcivTextFieldDefaults {
         trailingIconColor: Color = CivcivTheme.colors.fgQuinary,
         leadingIconColor: Color = CivcivTheme.colors.fgQuarterary,
         errorIconColor: Color = CivcivTheme.colors.fgErrorSecondary,
-    ): CivcivTextFieldColors = remember(
-        textColor,
-        placeholderTextColor,
-        disabledPlaceholderTextColor,
-        containerColor,
-        disabledContainerColor,
-        borderColor,
-        borderOuterColor,
-        borderErrorOuterColor,
-        focusedBorderColor,
-        errorBorderColor,
-        disabledBorderColor,
-        hintColor,
-        errorHintColor,
-        trailingIconColor,
-        leadingIconColor,
-        errorIconColor,
-    ) {
-        CivcivTextFieldColors(
-            textColor = textColor,
-            placeholderTextColor = placeholderTextColor,
-            disabledPlaceholderTextColor = disabledPlaceholderTextColor,
-            containerColor = containerColor,
-            disabledContainerColor = disabledContainerColor,
-            borderColor = borderColor,
-            borderOuterColor = borderOuterColor,
-            borderErrorOuterColor = borderErrorOuterColor,
-            focusedBorderColor = focusedBorderColor,
-            errorBorderColor = errorBorderColor,
-            disabledBorderColor = disabledBorderColor,
-            hintColor = hintColor,
-            errorHintColor = errorHintColor,
-            trailingIconColor = trailingIconColor,
-            leadingIconColor = leadingIconColor,
-            errorIconColor = errorIconColor,
-        )
-    }
+    ): CivcivTextFieldColors =
+        remember(
+            textColor,
+            placeholderTextColor,
+            disabledPlaceholderTextColor,
+            containerColor,
+            disabledContainerColor,
+            borderColor,
+            borderOuterColor,
+            borderErrorOuterColor,
+            focusedBorderColor,
+            errorBorderColor,
+            disabledBorderColor,
+            hintColor,
+            errorHintColor,
+            trailingIconColor,
+            leadingIconColor,
+            errorIconColor,
+        ) {
+            CivcivTextFieldColors(
+                textColor = textColor,
+                placeholderTextColor = placeholderTextColor,
+                disabledPlaceholderTextColor = disabledPlaceholderTextColor,
+                containerColor = containerColor,
+                disabledContainerColor = disabledContainerColor,
+                borderColor = borderColor,
+                borderOuterColor = borderOuterColor,
+                borderErrorOuterColor = borderErrorOuterColor,
+                focusedBorderColor = focusedBorderColor,
+                errorBorderColor = errorBorderColor,
+                disabledBorderColor = disabledBorderColor,
+                hintColor = hintColor,
+                errorHintColor = errorHintColor,
+                trailingIconColor = trailingIconColor,
+                leadingIconColor = leadingIconColor,
+                errorIconColor = errorIconColor,
+            )
+        }
 }

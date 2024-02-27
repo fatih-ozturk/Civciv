@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,7 @@ import javax.inject.Inject
 class GetMastodonCategoryListUseCase @Inject constructor(
     private val mastodonRepository: MastodonRepository,
 ) {
-
-    suspend operator fun invoke(
-        language: String? = null,
-    ): List<MastodonCategory> = mastodonRepository.getCategoryList(language)
+    suspend operator fun invoke(language: String? = null): List<MastodonCategory> {
+        return mastodonRepository.getCategoryList(language)
+    }
 }

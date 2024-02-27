@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,30 +28,31 @@ import org.junit.Rule
 import org.junit.Test
 
 class AccountApiTest {
-
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
 
-    private val mastodon = buildMastodon(
-        responses = listOf(
-            MastodonResponse("accounts/1", "account/account.json"),
-            MastodonResponse(
-                "accounts/2",
-                "account/accountError.json",
-                HttpStatusCode(401, "This API requires an authenticated user"),
+    private val mastodon =
+        buildMastodon(
+            responses =
+            listOf(
+                MastodonResponse("accounts/1", "account/account.json"),
+                MastodonResponse(
+                    "accounts/2",
+                    "account/accountError.json",
+                    HttpStatusCode(401, "This API requires an authenticated user"),
+                ),
+                MastodonResponse(
+                    "accounts/3",
+                    "account/accountNotFoundError.json",
+                    HttpStatusCode(404, "Record not found"),
+                ),
+                MastodonResponse(
+                    "accounts/4",
+                    "account/accountSuspendedError.json",
+                    HttpStatusCode(410, "Account is suspended"),
+                ),
             ),
-            MastodonResponse(
-                "accounts/3",
-                "account/accountNotFoundError.json",
-                HttpStatusCode(404, "Record not found"),
-            ),
-            MastodonResponse(
-                "accounts/4",
-                "account/accountSuspendedError.json",
-                HttpStatusCode(410, "Account is suspended"),
-            ),
-        ),
-    )
+        )
     private val accountApi: AccountApi = mastodon.accountApi
 
     @Test
@@ -66,9 +67,10 @@ class AccountApiTest {
     @Test
     fun getAccountByIdGetAuthError() {
         runTest {
-            val exception = shouldThrowExactly<MastodonException> {
-                accountApi.getAccount(AccountRequest(id = "2"))
-            }
+            val exception =
+                shouldThrowExactly<MastodonException> {
+                    accountApi.getAccount(AccountRequest(id = "2"))
+                }
 
             exception.errorResponse.message shouldBe "This API requires an authenticated user"
             exception.errorResponse.statusCode shouldBe 401
@@ -78,9 +80,10 @@ class AccountApiTest {
     @Test
     fun getAccountByIdGetNotFoundError() {
         runTest {
-            val exception = shouldThrowExactly<MastodonException> {
-                accountApi.getAccount(AccountRequest(id = "3"))
-            }
+            val exception =
+                shouldThrowExactly<MastodonException> {
+                    accountApi.getAccount(AccountRequest(id = "3"))
+                }
 
             exception.errorResponse.message shouldBe "Record not found"
             exception.errorResponse.statusCode shouldBe 404
@@ -90,9 +93,10 @@ class AccountApiTest {
     @Test
     fun getAccountByIdSuspendedError() {
         runTest {
-            val exception = shouldThrowExactly<MastodonException> {
-                accountApi.getAccount(AccountRequest(id = "4"))
-            }
+            val exception =
+                shouldThrowExactly<MastodonException> {
+                    accountApi.getAccount(AccountRequest(id = "4"))
+                }
 
             exception.errorResponse.message shouldBe "Empty message"
             exception.errorResponse.statusCode shouldBe 410

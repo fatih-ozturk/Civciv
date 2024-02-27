@@ -29,5 +29,11 @@ include(":core:mastodon-api")
 include(":core:model")
 include(":core:network")
 include(":core:testing")
+include(":feature:welcome")
+include(":feature:splash")
+include(":feature:profile")
+include(":feature:home")
+include(":feature:notification")
+include(":feature:search")
 
 

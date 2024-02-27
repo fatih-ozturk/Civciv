@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +18,16 @@ package com.civciv.app.data.repository
 import com.civciv.app.model.ApplicationCredentials
 import com.civciv.app.model.AuthState
 import com.civciv.app.model.auth.AuthorizationResponse
-import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
     suspend fun getApplicationCredentials(domain: String): ApplicationCredentials
+
     suspend fun setActiveAccount(accountId: String)
+
     suspend fun addAccountCredentials(
         authorizationResult: AuthorizationResponse,
         applicationCredentials: ApplicationCredentials,
     ): Boolean
 
-    fun getAuthenticateState(): Flow<AuthState>
+    suspend fun getAuthenticateState(): AuthState
 }

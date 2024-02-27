@@ -1,4 +1,3 @@
-
 import com.android.build.gradle.LibraryExtension
 import com.civciv.app.configureKotlinAndroid
 import com.civciv.app.utils.androidTestImplementation

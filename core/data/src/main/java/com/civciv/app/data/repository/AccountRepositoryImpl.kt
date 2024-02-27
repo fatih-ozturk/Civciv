@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,13 +39,16 @@ class AccountRepositoryImpl @Inject constructor(
     override suspend fun getCurrentAccount(): Account {
         val currentAccountCredential =
             accountCredentialDao.getActiveAccountCredential() ?: throw Exception()
-        val currentUser = accountDao.getAccountById(currentAccountCredential.id)
-            ?: throw Exception()
+        val currentUser =
+            accountDao.getAccountById(currentAccountCredential.id)
+                ?: throw Exception()
         return currentUser.toDomainModel()
     }
 
     override suspend fun getAuthorizedAccounts(): List<Account> {
-        return accountDao.getAllAccountsWithCredential().map(AccountWithCredential::toDomainModel)
+        return accountDao.getAllAccountsWithCredential().map(
+            AccountWithCredential::toDomainModel,
+        )
     }
 
     override suspend fun changeAccount(accountId: String) {

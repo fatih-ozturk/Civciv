@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ fun CivcivTheme(
         typography = civcivTypography,
         colors = colorScheme,
         shapes = civcivShapes,
+        spacing = civcivSpacing,
     ) {
         MaterialTheme(
             colorScheme = colorScheme.asMaterial3Colors(),
@@ -47,6 +48,7 @@ fun ProvideCivcivResources(
     typography: CivcivTypography,
     colors: CivcivColors,
     shapes: CivcivShapes,
+    spacing: CivcivSpacing,
     content: @Composable () -> Unit,
 ) {
     val colorPalette = remember { colors }
@@ -55,6 +57,7 @@ fun ProvideCivcivResources(
         LocalCivcivTypographies provides typography,
         LocalCivcivColors provides colorPalette,
         LocalCivcivShapes provides shapes,
+        LocalCivcivSpacing provides spacing,
     ) {
         ProvideTextStyle(value = typography.displayMd, content = content)
     }
@@ -70,4 +73,7 @@ object CivcivTheme {
     val shapes: CivcivShapes
         @Composable
         get() = LocalCivcivShapes.current
+    val spacing: CivcivSpacing
+        @Composable
+        get() = LocalCivcivSpacing.current
 }

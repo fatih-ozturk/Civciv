@@ -48,6 +48,7 @@ internal fun Project.configureKotlinAndroid(
         add("coreLibraryDesugaring", libs.findLibrary("android.desugarJdkLibs").get())
     }
 }
+
 /**
  * Configure base Kotlin options for JVM (non-Android)
  */
@@ -61,6 +62,7 @@ internal fun Project.configureKotlinJvm() {
 
     configureKotlin()
 }
+
 /**
  * Configure base Kotlin options
  */

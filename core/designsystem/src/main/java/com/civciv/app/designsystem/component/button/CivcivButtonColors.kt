@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import com.civciv.app.designsystem.theme.CivcivTheme
 
 @Immutable
-class ButtonColors constructor(
+class ButtonColors(
     val containerColor: Color,
     val contentColor: Color,
     val disabledContainerColor: Color,
@@ -29,19 +29,19 @@ class ButtonColors constructor(
 )
 
 object CivcivButtonColors {
-
     @Composable
     fun primary(
         containerColor: Color = CivcivTheme.colors.buttonPrimaryBg,
         contentColor: Color = CivcivTheme.colors.buttonPrimaryFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgDisabled,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonColors(
-        containerColor = containerColor,
-        contentColor = contentColor,
-        disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor,
-    )
+    ): ButtonColors =
+        ButtonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = disabledContainerColor,
+            disabledContentColor = disabledContentColor,
+        )
 
     @Composable
     fun secondaryGray(
@@ -49,12 +49,13 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonSecondaryFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonColors(
-        containerColor = containerColor,
-        contentColor = contentColor,
-        disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor,
-    )
+    ): ButtonColors =
+        ButtonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = disabledContainerColor,
+            disabledContentColor = disabledContentColor,
+        )
 
     @Composable
     fun secondaryColor(
@@ -62,12 +63,13 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonSecondaryColorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonColors(
-        containerColor = containerColor,
-        contentColor = contentColor,
-        disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor,
-    )
+    ): ButtonColors =
+        ButtonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = disabledContainerColor,
+            disabledContentColor = disabledContentColor,
+        )
 
     @Composable
     fun tertiaryGray(
@@ -75,12 +77,13 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonTertiaryFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonColors(
-        containerColor = containerColor,
-        contentColor = contentColor,
-        disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor,
-    )
+    ): ButtonColors =
+        ButtonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = disabledContainerColor,
+            disabledContentColor = disabledContentColor,
+        )
 
     @Composable
     fun tertiaryColor(
@@ -88,12 +91,13 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonTertiaryColorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonColors(
-        containerColor = containerColor,
-        contentColor = contentColor,
-        disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor,
-    )
+    ): ButtonColors =
+        ButtonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = disabledContainerColor,
+            disabledContentColor = disabledContentColor,
+        )
 
     @Composable
     fun primaryDestructive(
@@ -101,12 +105,13 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.fgWhite,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonColors(
-        containerColor = containerColor,
-        contentColor = contentColor,
-        disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor,
-    )
+    ): ButtonColors =
+        ButtonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = disabledContainerColor,
+            disabledContentColor = disabledContentColor,
+        )
 
     @Composable
     fun secondaryDestructive(
@@ -114,12 +119,13 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonSecondaryErrorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonColors(
-        containerColor = containerColor,
-        contentColor = contentColor,
-        disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor,
-    )
+    ): ButtonColors =
+        ButtonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = disabledContainerColor,
+            disabledContentColor = disabledContentColor,
+        )
 
     @Composable
     fun tertiaryDestructive(
@@ -127,10 +133,11 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonTertiaryErrorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors = ButtonColors(
-        containerColor = containerColor,
-        contentColor = contentColor,
-        disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor,
-    )
+    ): ButtonColors =
+        ButtonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = disabledContainerColor,
+            disabledContentColor = disabledContentColor,
+        )
 }

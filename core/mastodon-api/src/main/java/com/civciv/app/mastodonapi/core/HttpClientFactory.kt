@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,14 +39,11 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
 import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.serialization.json.Json
 
 internal object HttpClientFactory {
-
-    fun buildHttpClient(
-        config: MastodonClientConfig,
-    ): HttpClient {
+    fun buildHttpClient(config: MastodonClientConfig): HttpClient {
         val defaultConfig: HttpClientConfig<*>.() -> Unit = {
             val json = JsonFactory.buildJson()
 
@@ -80,11 +77,13 @@ internal object HttpClientFactory {
             expectSuccess = true
             HttpResponseValidator {
                 handleResponseExceptionWithRequest { exception, _ ->
-                    val clientException = exception as? ClientRequestException
-                        ?: return@handleResponseExceptionWithRequest
+                    val clientException =
+                        exception as? ClientRequestException
+                            ?: return@handleResponseExceptionWithRequest
                     val exceptionResponse = clientException.response
-                    val mastodonErrorResponse = json.decodeMastodonErrorResponse(exceptionResponse)
-                        ?: return@handleResponseExceptionWithRequest
+                    val mastodonErrorResponse =
+                        json.decodeMastodonErrorResponse(exceptionResponse)
+                            ?: return@handleResponseExceptionWithRequest
                     throw MastodonException(mastodonErrorResponse, exception)
                 }
             }
@@ -144,10 +143,11 @@ internal object HttpClientFactory {
     }
 
     private val HttpResponse.isMastodonStatusHandled: Boolean
-        get() = status == HttpStatusCode.NotFound ||
-            status == HttpStatusCode.Unauthorized ||
-            status == HttpStatusCode.InternalServerError ||
-            status == HttpStatusCode.Gone
+        get() =
+            status == HttpStatusCode.NotFound ||
+                status == HttpStatusCode.Unauthorized ||
+                status == HttpStatusCode.InternalServerError ||
+                status == HttpStatusCode.Gone
 
     private fun Throwable.isTimeoutException(): Boolean {
         val exception = unwrapCancellationException()

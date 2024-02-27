@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,13 +29,13 @@ data class CivcivTextFieldSizes(
 )
 
 object CivcivTextFieldSizesDefaults {
-
     @Composable
     fun small(
-        contentPadding: PaddingValues = PaddingValues(
-            vertical = 8.dp,
-            horizontal = 12.dp,
-        ),
+        contentPadding: PaddingValues =
+            PaddingValues(
+                vertical = 8.dp,
+                horizontal = 12.dp,
+            ),
         textFieldHeight: Dp = 40.dp,
     ) = remember {
         CivcivTextFieldSizes(
@@ -46,10 +46,11 @@ object CivcivTextFieldSizesDefaults {
 
     @Composable
     fun medium(
-        contentPadding: PaddingValues = PaddingValues(
-            vertical = 12.dp,
-            horizontal = 14.dp,
-        ),
+        contentPadding: PaddingValues =
+            PaddingValues(
+                vertical = 12.dp,
+                horizontal = 14.dp,
+            ),
         textFieldHeight: Dp = 44.dp,
     ) = remember {
         CivcivTextFieldSizes(

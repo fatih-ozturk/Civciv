@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,32 +31,28 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-
     @Provides
     @Singleton
     fun provideCivcivDatabase(
         @ApplicationContext context: Context,
-    ): CivcivDatabase = Room.databaseBuilder(
-        context,
-        CivcivDatabase::class.java,
-        "civciv-database",
-    ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
+    ): CivcivDatabase =
+        Room.databaseBuilder(
+            context,
+            CivcivDatabase::class.java,
+            "civciv-database",
+        ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
 
     @Provides
     @Singleton
-    fun provideAccountCredentialDao(
-        database: CivcivDatabase,
-    ): AccountCredentialDao = database.accountCredentialDao()
+    fun provideAccountCredentialDao(database: CivcivDatabase): AccountCredentialDao {
+        return database.accountCredentialDao()
+    }
 
     @Provides
     @Singleton
-    fun provideAccountDao(
-        database: CivcivDatabase,
-    ): AccountDao = database.accountDao()
+    fun provideAccountDao(database: CivcivDatabase): AccountDao = database.accountDao()
 
     @Provides
     @Singleton
-    fun provideStatusDao(
-        database: CivcivDatabase,
-    ): StatusDao = database.statusDao()
+    fun provideStatusDao(database: CivcivDatabase): StatusDao = database.statusDao()
 }

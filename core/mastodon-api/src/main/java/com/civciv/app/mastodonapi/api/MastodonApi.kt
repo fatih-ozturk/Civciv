@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,7 @@ import io.ktor.client.request.host
 class MastodonApi internal constructor(
     private val client: HttpClient,
 ) {
-
-    suspend fun getMastodonCategories(
-        language: String?,
-    ): List<MastodonCategoryResponse> {
+    suspend fun getMastodonCategories(language: String?): List<MastodonCategoryResponse> {
         return client.getByPaths("categories") {
             host = MastodonWebConfig.MASTODON_HOST
             json()

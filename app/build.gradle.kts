@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,11 +68,16 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.core.model)
 
+    implementation(projects.feature.welcome)
+    implementation(projects.feature.splash)
+    implementation(projects.feature.home)
+    implementation(projects.feature.search)
+    implementation(projects.feature.notification)
+    implementation(projects.feature.profile)
+
     androidTestImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(kotlin("test"))
     debugImplementation(libs.androidx.compose.ui.testManifest)
-    implementation(libs.airbnb.mavericks.hilt)
-    implementation(libs.airbnb.mavericks)
     implementation(libs.timber)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

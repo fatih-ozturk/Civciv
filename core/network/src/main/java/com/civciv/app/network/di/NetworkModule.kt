@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,16 +28,14 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import javax.inject.Singleton
+import timber.log.Timber
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
     @Singleton
     @Provides
-    fun provideMastodon(
-        accountCredentialDao: AccountCredentialDao,
-    ): Mastodon {
+    fun provideMastodon(accountCredentialDao: AccountCredentialDao): Mastodon {
         return Mastodon {
             userAuthentication {
                 loadDomain {
@@ -49,11 +47,12 @@ object NetworkModule {
             }
             httpClientConfig {
                 install(Logging) {
-                    logger = object : Logger {
-                        override fun log(message: String) {
-                            // Timber.i(message)
+                    logger =
+                        object : Logger {
+                            override fun log(message: String) {
+                                Timber.i(message)
+                            }
                         }
-                    }
                     level = LogLevel.ALL
                 }
             }

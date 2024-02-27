@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Fatih OZTURK
+ * Copyright 2024 Fatih OZTURK
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,8 +31,10 @@ import io.ktor.http.path
 class AccountApi internal constructor(
     private val client: HttpClient,
 ) {
-
-    suspend fun verifyAccountCredentials(domain: String, accessToken: String): AccountResponse {
+    suspend fun verifyAccountCredentials(
+        domain: String,
+        accessToken: String,
+    ): AccountResponse {
         return client.get {
             url {
                 method = HttpMethod.Get
