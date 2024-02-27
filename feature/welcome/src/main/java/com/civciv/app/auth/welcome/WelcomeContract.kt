@@ -25,6 +25,7 @@ internal interface WelcomeContract {
     data class State(
         val appCredentials: ApplicationCredentials? = null,
         val domain: StringInputField = StringInputField(),
+        val navigateToAuth: Boolean = false,
         val isLoginSuccessful: Boolean = false,
         val isLoading: Boolean = false,
         val error: Error? = null,
@@ -33,6 +34,7 @@ internal interface WelcomeContract {
     sealed interface Event {
         data class HandleLoginResult(val loginResult: AuthorizationResult) : Event
         data class PerformLoginAction(val domain: String) : Event
+        data object NavigateToAuthConsumed : Event
     }
 
     interface Validator {

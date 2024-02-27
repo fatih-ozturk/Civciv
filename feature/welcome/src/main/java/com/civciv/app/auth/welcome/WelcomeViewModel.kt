@@ -40,6 +40,15 @@ internal class WelcomeViewModel @Inject constructor(
         when (event) {
             is Event.HandleLoginResult -> handleLoginResult(event.loginResult)
             is Event.PerformLoginAction -> performLoginAction(event.domain)
+            Event.NavigateToAuthConsumed -> appCredentialConsumed()
+        }
+    }
+
+    private fun appCredentialConsumed() {
+        setState {
+            copy(
+                navigateToAuth = false,
+            )
         }
     }
 
@@ -60,7 +69,7 @@ internal class WelcomeViewModel @Inject constructor(
             setState {
                 copy(
                     appCredentials = appCredentials,
-                    isLoading = false,
+                    navigateToAuth = true,
                 )
             }
         }

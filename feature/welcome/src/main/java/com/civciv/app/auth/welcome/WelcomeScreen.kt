@@ -68,9 +68,10 @@ internal fun WelcomeScreen(viewModel: WelcomeViewModel = hiltViewModel()) {
         },
     )
 
-    state.appCredentials?.let {
+    if (state.navigateToAuth) {
         LaunchedEffect(state) {
             loginLauncher.launch(state.appCredentials)
+            viewModel.event(WelcomeContract.Event.NavigateToAuthConsumed)
         }
     }
 
