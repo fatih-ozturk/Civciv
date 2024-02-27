@@ -16,6 +16,8 @@
 package com.civciv.app.domain.usecase
 
 import androidx.test.filters.SmallTest
+import com.civciv.app.domain.usecase.ValidateDomainUseCase.ValidateDomainError.InvalidDomainAddress
+import com.civciv.app.inputfield.ValidationResult
 import io.kotest.matchers.shouldBe
 import kotlin.test.Test
 
@@ -27,48 +29,48 @@ class ValidateDomainUseCaseTest {
     fun `verify domain`() {
         val domain = "androiddev.social"
         val result = validateDomainUseCase(domain)
-        result shouldBe true
+        result shouldBe ValidationResult.Success
     }
 
     @Test
     fun `verify domain with login returns false`() {
         val domain = "androiddev.social/login"
         val result = validateDomainUseCase(domain)
-        result shouldBe false
+        result shouldBe ValidationResult.Failure(InvalidDomainAddress)
     }
 
     @Test
-    fun `verify domain with www returns false`() {
+    fun `verify domain with www returns success`() {
         val domain = "www.androiddev.social"
         val result = validateDomainUseCase(domain)
-        result shouldBe true
+        result shouldBe ValidationResult.Success
     }
 
     @Test
     fun `verify domain with https and www`() {
         val domain = "https://www.androiddev.social"
         val result = validateDomainUseCase(domain)
-        result shouldBe true
+        result shouldBe ValidationResult.Success
     }
 
     @Test
     fun `verify domain with https`() {
         val domain = "https://androiddev.social"
         val result = validateDomainUseCase(domain)
-        result shouldBe true
+        result shouldBe ValidationResult.Success
     }
 
     @Test
     fun `verify domain with https and login returns false`() {
         val domain = "https://androiddev.social/login"
         val result = validateDomainUseCase(domain)
-        result shouldBe false
+        result shouldBe ValidationResult.Failure(InvalidDomainAddress)
     }
 
     @Test
     fun `verify domain with https and login and query return false`() {
         val domain = "https://androiddev.social/login?query=1"
         val result = validateDomainUseCase(domain)
-        result shouldBe false
+        result shouldBe ValidationResult.Failure(InvalidDomainAddress)
     }
 }
