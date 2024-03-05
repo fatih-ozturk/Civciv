@@ -17,4 +17,8 @@
 <resources>
     <string name="app_name">Civciv</string>
     <string name="oauth_scheme">oauth2callback</string>
+    <string name="label_home">Home</string>
+    <string name="label_search">Search</string>
+    <string name="label_notification">Notification</string>
+    <string name="label_profile">Profile</string>
 </resources>

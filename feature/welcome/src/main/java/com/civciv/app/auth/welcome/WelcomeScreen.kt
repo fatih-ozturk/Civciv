@@ -15,7 +15,6 @@
  */
 package com.civciv.app.auth.welcome
 
-import android.content.res.Configuration
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -43,7 +42,6 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -51,6 +49,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.civciv.app.auth.welcome.mapper.toResourceString
 import com.civciv.app.commonui.R
+import com.civciv.app.commonui.ext.CivcivPreview
 import com.civciv.app.commonui.ext.restartActivity
 import com.civciv.app.designsystem.component.button.CivcivButtons
 import com.civciv.app.designsystem.component.textfield.CivcivTextField
@@ -207,8 +206,7 @@ private fun WelcomeScreenImpl(
     }
 }
 
-@Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@CivcivPreview
 @Composable
 private fun WelcomeScreenPreview(
     @PreviewParameter(WelcomeScreenPreviewProvider::class) state: WelcomeContract.State,

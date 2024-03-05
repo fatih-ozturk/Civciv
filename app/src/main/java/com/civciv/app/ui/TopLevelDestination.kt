@@ -16,21 +16,27 @@
 package com.civciv.app.ui
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import com.civciv.app.R
 
 enum class TopLevelDestination(
     @DrawableRes val selectedIcon: Int,
+    @StringRes val label: Int,
 ) {
     HOME(
         selectedIcon = R.drawable.ic_home,
+        label = R.string.label_home,
     ),
     SEARCH(
         selectedIcon = R.drawable.ic_search,
+        label = R.string.label_search,
     ),
     NOTIFICATION(
         selectedIcon = R.drawable.ic_notification,
+        label = R.string.label_notification,
     ),
     PROFILE(
         selectedIcon = R.drawable.ic_profile,
+        label = R.string.label_profile,
     ),
 }
