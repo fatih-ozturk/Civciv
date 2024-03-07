@@ -27,7 +27,7 @@ private val excludedFiles = mutableSetOf(
 )
 
 internal fun Project.configureAndroidJacoco(
-    extension: CommonExtension<*, *, *, *, *>,
+    extension: CommonExtension<*, *, *, *, *, *>,
     jacoco: JacocoPluginExtension,
 ) = afterEvaluate {
 
