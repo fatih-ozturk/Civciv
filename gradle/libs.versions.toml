@@ -47,7 +47,7 @@ spotless = "6.25.0"
 timberVersion = "5.0.1"
 turbine = "1.1.0"
 ktlint-compose = "0.0.26"
-kotest = "5.8.0"
+kotest = "5.8.1"
 slf4j = "2.0.12"
 
 [libraries]
