@@ -17,33 +17,26 @@ package com.civciv.app.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContent
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -54,6 +47,8 @@ import com.civciv.app.auth.splash.navigation.splashScreen
 import com.civciv.app.auth.splash.navigation.splashScreenRoute
 import com.civciv.app.auth.welcome.navigation.navigateToWelcome
 import com.civciv.app.auth.welcome.navigation.welcomeScreen
+import com.civciv.app.designsystem.component.navbar.CivcivAnimatedNavBar
+import com.civciv.app.designsystem.component.navbar.CivcivNavigationBarItem
 import com.civciv.app.designsystem.theme.CivcivTheme
 import com.civciv.app.designsystem.theme.NoRippleTheme
 import com.civciv.app.home.navigation.homeScreen
@@ -129,8 +124,7 @@ fun CivcivNavHost(
         splashScreen(
             onNavigateToHome = {
                 navController.navigateToHome(
-                    navOptions =
-                    navOptions {
+                    navOptions = navOptions {
                         popUpTo(
                             splashScreenRoute,
                             popUpToBuilder = {
@@ -143,8 +137,7 @@ fun CivcivNavHost(
             },
             onNavigateToLoginGraph = {
                 navController.navigateToWelcome(
-                    navOptions =
-                    navOptions {
+                    navOptions = navOptions {
                         popUpTo(
                             splashScreenRoute,
                             popUpToBuilder = {
@@ -171,55 +164,24 @@ fun CivcivBottomNavigation(
     currentDestination: NavDestination?,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(
-        LocalRippleTheme provides NoRippleTheme,
+    val selectedDestinationIndex = destinations.indexOfFirst {
+        currentDestination.isTopLevelDestinationInHierarchy(it)
+    }
+    CivcivAnimatedNavBar(
+        modifier = modifier
+            .background(CivcivTheme.colors.bgPrimary)
+            .windowInsetsPadding(WindowInsets.navigationBars),
+        selectedIndex = selectedDestinationIndex,
     ) {
-        NavigationBar(
-            modifier =
-            modifier
-                .shadow(8.dp)
-                .fillMaxWidth(),
-        ) {
-            destinations.forEach { destination ->
-                val selected = currentDestination.isTopLevelDestinationInHierarchy(destination)
-                NavigationBarItem(
-                    selected = selected,
-                    onClick = { onNavigateToDestination(destination) },
-                    colors =
-                    NavigationBarItemDefaults.colors(
-                        indicatorColor =
-                        MaterialTheme.colorScheme.surfaceColorAtElevation(
-                            LocalAbsoluteTonalElevation.current,
-                        ),
-                        unselectedIconColor = CivcivTheme.colors.textTertiary,
-                        selectedIconColor = CivcivTheme.colors.textTertiary,
-                        selectedTextColor = CivcivTheme.colors.textSecondary,
-                        unselectedTextColor = CivcivTheme.colors.textSecondary,
-                    ),
-                    icon = {
-                        Box(
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            if (selected) {
-                                Box(
-                                    modifier =
-                                    Modifier
-                                        .height(32.dp)
-                                        .width(62.dp)
-                                        .background(
-                                            color = CivcivTheme.colors.bgTertiary,
-                                            shape = CivcivTheme.shapes.radiusSm,
-                                        ),
-                                )
-                            }
-                            Icon(
-                                painter = painterResource(destination.selectedIcon),
-                                contentDescription = null,
-                            )
-                        }
-                    },
+        destinations.forEach { destination ->
+            CivcivNavigationBarItem(onClick = {
+                onNavigateToDestination(destination)
+            }, icon = {
+                CivcivIcon(
+                    painter = painterResource(destination.selectedIcon),
+                    contentDescription = stringResource(destination.label),
                 )
-            }
+            })
         }
     }
 }
