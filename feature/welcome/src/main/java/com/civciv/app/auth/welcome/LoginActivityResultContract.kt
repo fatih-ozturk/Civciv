@@ -25,17 +25,11 @@ import com.civciv.app.model.auth.AuthorizationResult
 
 internal class LoginActivityResultContract :
     ActivityResultContract<ApplicationCredentials, AuthorizationResult>() {
-    override fun createIntent(
-        context: Context,
-        input: ApplicationCredentials,
-    ): Intent {
+    override fun createIntent(context: Context, input: ApplicationCredentials): Intent {
         return AuthorizationManagementActivity.createIntent(context, input)
     }
 
-    override fun parseResult(
-        resultCode: Int,
-        intent: Intent?,
-    ): AuthorizationResult {
+    override fun parseResult(resultCode: Int, intent: Intent?): AuthorizationResult {
         return AuthorizationResult(
             AuthorizationResponse.fromIntent(intent),
             AuthorizationException.fromIntent(intent),

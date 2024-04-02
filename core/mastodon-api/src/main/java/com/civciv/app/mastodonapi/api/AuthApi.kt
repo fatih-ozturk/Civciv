@@ -31,8 +31,7 @@ class AuthApi internal constructor(
 ) {
     suspend fun registerApp(domain: String): CredentialsResponse {
         return client.submitForm(
-            formParameters =
-            parameters {
+            formParameters = parameters {
                 append("client_name", MastodonWebConfig.APP_NAME)
                 append("redirect_uris", "com.civciv.app://oauth2callback")
                 append("scopes", MastodonWebConfig.AUTH_SCOPES)
@@ -55,8 +54,7 @@ class AuthApi internal constructor(
         grantType: String,
     ): AccessTokenResponse {
         return client.submitForm(
-            formParameters =
-            parameters {
+            formParameters = parameters {
                 append("client_id", clientId)
                 append("client_secret", clientSecret)
                 append("redirect_uri", redirectUri)

@@ -18,12 +18,11 @@ package com.civciv.app.mastodonapi.core
 import kotlinx.serialization.json.Json
 
 object JsonFactory {
-    fun buildJson(): Json =
-        Json {
-            encodeDefaults = false
-            ignoreUnknownKeys = true
-            isLenient = true
-            allowSpecialFloatingPointValues = true
-            prettyPrint = false
-        }
+    fun buildJson(): Json = Json {
+        encodeDefaults = false
+        ignoreUnknownKeys = true
+        isLenient = true
+        allowSpecialFloatingPointValues = true
+        prettyPrint = false
+    }
 }

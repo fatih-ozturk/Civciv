@@ -21,15 +21,15 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.civciv.app.profile.ProfileScreen
 
-const val profileScreenRoute = "profile"
+const val PROFILE_SCREEN_ROUTE = "profile"
 
 fun NavController.navigateToProfile(navOptions: NavOptions? = null) {
-    this.navigate(profileScreenRoute, navOptions)
+    this.navigate(PROFILE_SCREEN_ROUTE, navOptions)
 }
 
 fun NavGraphBuilder.profileScreen() {
     composable(
-        route = profileScreenRoute,
+        route = PROFILE_SCREEN_ROUTE,
     ) {
         ProfileScreen()
     }

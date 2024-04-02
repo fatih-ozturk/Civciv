@@ -21,15 +21,15 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.civciv.app.home.HomeScreen
 
-const val homeScreenRoute = "home"
+const val HOME_SCREEN_ROUTE = "home"
 
 fun NavController.navigateToHome(navOptions: NavOptions? = null) {
-    this.navigate(homeScreenRoute, navOptions)
+    this.navigate(HOME_SCREEN_ROUTE, navOptions)
 }
 
 fun NavGraphBuilder.homeScreen() {
     composable(
-        route = homeScreenRoute,
+        route = HOME_SCREEN_ROUTE,
     ) {
         HomeScreen()
     }

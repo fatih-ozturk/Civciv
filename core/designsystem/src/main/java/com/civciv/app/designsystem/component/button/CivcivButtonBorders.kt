@@ -80,8 +80,7 @@ object CivcivButtonBorders {
     }
 
     @Composable
-    fun none(): ButtonBorders =
-        remember {
-            ButtonBorders()
-        }
+    fun none(): ButtonBorders = remember {
+        ButtonBorders()
+    }
 }

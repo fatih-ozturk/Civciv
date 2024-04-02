@@ -32,6 +32,7 @@ import com.civciv.app.designsystem.theme.CivcivTheme
 @Immutable
 data class CivcivTextFieldColors(
     val textColor: Color,
+    val labelTextColor: Color,
     val placeholderTextColor: Color,
     val disabledPlaceholderTextColor: Color,
     val containerColor: Color,
@@ -72,20 +73,19 @@ data class CivcivTextFieldColors(
                 !isError -> borderOuterColor
                 else -> borderErrorOuterColor
             }
-        val modifier =
-            Modifier
-                .ifTrue(focused) {
-                    border(
-                        2.dp,
-                        outerBorderColor,
-                        CivcivTheme.shapes.radiusMd,
-                    )
-                }
-                .border(
-                    borderWidth,
-                    targetValue,
+        val modifier = Modifier
+            .ifTrue(focused) {
+                border(
+                    2.dp,
+                    outerBorderColor,
                     CivcivTheme.shapes.radiusMd,
                 )
+            }
+            .border(
+                borderWidth,
+                targetValue,
+                CivcivTheme.shapes.radiusMd,
+            )
 
         return rememberUpdatedState(modifier)
     }

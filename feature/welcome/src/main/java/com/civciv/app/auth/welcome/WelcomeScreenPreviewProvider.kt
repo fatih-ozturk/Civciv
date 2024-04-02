@@ -20,21 +20,20 @@ import com.civciv.app.domain.usecase.ValidateDomainUseCase
 import com.civciv.app.inputfield.StringInputField
 
 internal class WelcomeScreenPreviewProvider : PreviewParameterProvider<WelcomeContract.State> {
-    override val values =
-        sequenceOf(
-            WelcomeContract.State(
-                domain = StringInputField(value = "androiddev.social"),
+    override val values = sequenceOf(
+        WelcomeContract.State(
+            domain = StringInputField(value = "androiddev.social"),
+        ),
+        WelcomeContract.State(
+            domain = StringInputField(
+                value = "androiddevsocial",
+                error = ValidateDomainUseCase.ValidateDomainError.InvalidDomainAddress,
             ),
-            WelcomeContract.State(
-                domain = StringInputField(
-                    value = "androiddevsocial",
-                    error = ValidateDomainUseCase.ValidateDomainError.InvalidDomainAddress,
-                ),
+        ),
+        WelcomeContract.State(
+            domain = StringInputField(
+                error = ValidateDomainUseCase.ValidateDomainError.EmptyDomain,
             ),
-            WelcomeContract.State(
-                domain = StringInputField(
-                    error = ValidateDomainUseCase.ValidateDomainError.EmptyDomain,
-                ),
-            ),
-        )
+        ),
+    )
 }

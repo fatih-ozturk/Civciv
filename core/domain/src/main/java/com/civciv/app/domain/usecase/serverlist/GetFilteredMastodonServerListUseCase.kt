@@ -19,10 +19,7 @@ import com.civciv.app.model.MastodonServer
 import javax.inject.Inject
 
 class GetFilteredMastodonServerListUseCase @Inject constructor() {
-    operator fun invoke(
-        query: String?,
-        serverList: List<MastodonServer>?,
-    ): List<MastodonServer>? {
+    operator fun invoke(query: String?, serverList: List<MastodonServer>?): List<MastodonServer>? {
         return if (!query.isNullOrBlank()) {
             serverList?.filter { it.domain.contains(query) }.orEmpty()
         } else {

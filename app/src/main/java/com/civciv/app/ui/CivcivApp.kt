@@ -15,42 +15,33 @@
  */
 package com.civciv.app.ui
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material.ripple.LocalRippleTheme
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
+import com.civciv.app.auth.splash.navigation.SPLASH_SCREEN_ROUTE
 import com.civciv.app.auth.splash.navigation.splashScreen
-import com.civciv.app.auth.splash.navigation.splashScreenRoute
 import com.civciv.app.auth.welcome.navigation.navigateToWelcome
 import com.civciv.app.auth.welcome.navigation.welcomeScreen
+import com.civciv.app.designsystem.component.icon.CivcivIcon
 import com.civciv.app.designsystem.component.navbar.CivcivAnimatedNavBar
 import com.civciv.app.designsystem.component.navbar.CivcivNavigationBarItem
 import com.civciv.app.designsystem.theme.CivcivTheme
-import com.civciv.app.designsystem.theme.NoRippleTheme
 import com.civciv.app.home.navigation.homeScreen
 import com.civciv.app.home.navigation.navigateToHome
 import com.civciv.app.notification.navigation.notificationScreen
@@ -81,14 +72,15 @@ fun CivcivApp(
 
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background,
+        color = CivcivTheme.colors.bgPrimary,
     ) {
         Scaffold(
             modifier = Modifier,
-            contentColor = MaterialTheme.colorScheme.onBackground,
+            contentColor = CivcivTheme.colors.fgPrimary,
             bottomBar = {
                 if (appState.shouldShowBottomBar) {
                     CivcivBottomNavigation(
+                        modifier = Modifier,
                         destinations = appState.topLevelDestinations.toImmutableList(),
                         onNavigateToDestination = appState::navigateToTopLevelDestination,
                         currentDestination = appState.currentDestination,
@@ -98,12 +90,10 @@ fun CivcivApp(
         ) { padding ->
             CivcivNavHost(
                 navController = appState.navController,
-                modifier =
-                modifier
+                modifier = modifier
                     .fillMaxSize()
                     .padding(padding)
-                    .consumeWindowInsets(padding)
-                    .windowInsetsPadding(WindowInsets.safeContent),
+                    .consumeWindowInsets(padding),
                 hideSplashScreen = hideSplashScreen,
             )
         }
@@ -119,14 +109,14 @@ fun CivcivNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = splashScreenRoute,
+        startDestination = SPLASH_SCREEN_ROUTE,
     ) {
         splashScreen(
             onNavigateToHome = {
                 navController.navigateToHome(
                     navOptions = navOptions {
                         popUpTo(
-                            splashScreenRoute,
+                            SPLASH_SCREEN_ROUTE,
                             popUpToBuilder = {
                                 inclusive = true
                             },
@@ -139,7 +129,7 @@ fun CivcivNavHost(
                 navController.navigateToWelcome(
                     navOptions = navOptions {
                         popUpTo(
-                            splashScreenRoute,
+                            SPLASH_SCREEN_ROUTE,
                             popUpToBuilder = {
                                 inclusive = true
                             },

@@ -44,31 +44,30 @@ fun defaultMastodonConfiguration(
     domain: String,
     accessToken: String,
     responses: List<MastodonResponse>,
-): MastodonClientConfig.() -> Unit =
-    {
-        val jsonFiles = mutableMapOf<String, Pair<String, HttpStatusCode>>()
-        responses.forEach {
-            jsonFiles["https://$domain/api/v1/${it.endpoint}"] = Pair(it.response, it.statusCode)
-        }
-        val headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString()))
+): MastodonClientConfig.() -> Unit = {
+    val jsonFiles = mutableMapOf<String, Pair<String, HttpStatusCode>>()
+    responses.forEach {
+        jsonFiles["https://$domain/api/v1/${it.endpoint}"] = Pair(it.response, it.statusCode)
+    }
+    val headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString()))
 
-        userAuthentication {
-            loadAccessToken { accessToken }
-            loadDomain { domain }
-        }
+    userAuthentication {
+        loadAccessToken { accessToken }
+        loadDomain { domain }
+    }
 
-        httpClient(MockEngine) {
-            engine {
-                addHandler { request ->
-                    val url = request.url.toString().decodeURLPart()
-                    val mockRequest = jsonFiles[url] ?: error("Unhandled url $url")
-                    val (fileName, statusCode) = mockRequest
-                    val content =
-                        ResourceReader.readApiResponse(fileName) ?: error(
-                            "File not found $fileName",
-                        )
-                    respond(content = content, headers = headers, status = statusCode)
-                }
+    httpClient(MockEngine) {
+        engine {
+            addHandler { request ->
+                val url = request.url.toString().decodeURLPart()
+                val mockRequest = jsonFiles[url] ?: error("Unhandled url $url")
+                val (fileName, statusCode) = mockRequest
+                val content =
+                    ResourceReader.readApiResponse(fileName) ?: error(
+                        "File not found $fileName",
+                    )
+                respond(content = content, headers = headers, status = statusCode)
             }
         }
     }
+}

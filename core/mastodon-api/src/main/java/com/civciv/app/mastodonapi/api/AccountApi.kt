@@ -31,10 +31,7 @@ import io.ktor.http.path
 class AccountApi internal constructor(
     private val client: HttpClient,
 ) {
-    suspend fun verifyAccountCredentials(
-        domain: String,
-        accessToken: String,
-    ): AccountResponse {
+    suspend fun verifyAccountCredentials(domain: String, accessToken: String): AccountResponse {
         return client.get {
             url {
                 method = HttpMethod.Get

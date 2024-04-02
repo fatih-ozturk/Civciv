@@ -22,9 +22,9 @@ import com.civciv.app.mastodonapi.model.MastodonServerResponse
 import com.civciv.app.model.MastodonCategory
 import com.civciv.app.model.MastodonLanguage
 import com.civciv.app.model.MastodonServer
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 class MastodonRepositoryImpl @Inject constructor(
     private val mastodonService: MastodonApi,
@@ -70,8 +70,7 @@ fun MastodonLanguageResponse.asExternalModel(): MastodonLanguage {
     )
 }
 
-fun MastodonCategoryResponse.asExternalModel(): MastodonCategory =
-    MastodonCategory(
-        category = category,
-        serversCount = serversCount,
-    )
+fun MastodonCategoryResponse.asExternalModel(): MastodonCategory = MastodonCategory(
+    category = category,
+    serversCount = serversCount,
+)

@@ -36,31 +36,26 @@ data class CivcivShapes(
     val radiusFull: RoundedCornerShape,
 )
 
-val civcivShapes =
-    CivcivShapes(
-        radiusNone = RoundedCornerShape(0.dp),
-        radiusXxs = RoundedCornerShape(2.dp),
-        radiusXs = RoundedCornerShape(4.dp),
-        radiusSm = RoundedCornerShape(6.dp),
-        radiusMd = RoundedCornerShape(8.dp),
-        radiusLg = RoundedCornerShape(10.dp),
-        radiusXl = RoundedCornerShape(12.dp),
-        radiusXxl = RoundedCornerShape(16.dp),
-        radius3xl = RoundedCornerShape(20.dp),
-        radius4xl = RoundedCornerShape(24.dp),
-        radiusFull = RoundedCornerShape(9999.dp),
-    )
+val civcivShapes = CivcivShapes(
+    radiusNone = RoundedCornerShape(0.dp),
+    radiusXxs = RoundedCornerShape(2.dp),
+    radiusXs = RoundedCornerShape(4.dp),
+    radiusSm = RoundedCornerShape(6.dp),
+    radiusMd = RoundedCornerShape(8.dp),
+    radiusLg = RoundedCornerShape(10.dp),
+    radiusXl = RoundedCornerShape(12.dp),
+    radiusXxl = RoundedCornerShape(16.dp),
+    radius3xl = RoundedCornerShape(20.dp),
+    radius4xl = RoundedCornerShape(24.dp),
+    radiusFull = RoundedCornerShape(9999.dp),
+)
 
-internal val LocalCivcivShapes =
-    compositionLocalOf<CivcivShapes> {
-        error("No Shapes provided")
-    }
+internal val LocalCivcivShapes = compositionLocalOf<CivcivShapes> { error("No Shapes provided") }
 
-val mdShapes =
-    Shapes(
-        extraSmall = civcivShapes.radiusXs,
-        small = civcivShapes.radiusSm,
-        medium = civcivShapes.radiusMd,
-        large = civcivShapes.radiusLg,
-        extraLarge = civcivShapes.radiusXl,
-    )
+val mdShapes = Shapes(
+    extraSmall = civcivShapes.radiusXs,
+    small = civcivShapes.radiusSm,
+    medium = civcivShapes.radiusMd,
+    large = civcivShapes.radiusLg,
+    extraLarge = civcivShapes.radiusXl,
+)

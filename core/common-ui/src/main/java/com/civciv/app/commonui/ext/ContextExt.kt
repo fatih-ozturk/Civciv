@@ -22,12 +22,11 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 
-fun Context.getActivity(): Activity? =
-    when (this) {
-        is Activity -> this
-        is ContextWrapper -> baseContext.getActivity()
-        else -> null
-    }
+fun Context.getActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.getActivity()
+    else -> null
+}
 
 fun Context.restartActivity() {
     val intent = getActivity()?.intent

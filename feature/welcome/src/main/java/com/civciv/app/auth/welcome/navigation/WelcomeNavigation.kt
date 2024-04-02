@@ -21,14 +21,14 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.civciv.app.auth.welcome.WelcomeScreen
 
-const val welcomeScreenRoute = "welcome"
+const val WELCOME_SCREEN_ROUTE = "welcome"
 
 fun NavController.navigateToWelcome(navOptions: NavOptions? = null) {
-    this.navigate(welcomeScreenRoute, navOptions)
+    this.navigate(WELCOME_SCREEN_ROUTE, navOptions)
 }
 
 fun NavGraphBuilder.welcomeScreen() {
-    composable(route = welcomeScreenRoute) {
+    composable(route = WELCOME_SCREEN_ROUTE) {
         WelcomeScreen()
     }
 }

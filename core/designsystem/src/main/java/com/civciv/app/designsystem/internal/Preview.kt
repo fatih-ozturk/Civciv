@@ -28,10 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.civciv.app.designsystem.theme.CivcivTheme
 
 @Composable
-fun Preview(
-    modifier: Modifier = Modifier,
-    content: @Composable ColumnScope.() -> Unit,
-) {
+fun Preview(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
     CivcivTheme {
         Surface {
             Column(

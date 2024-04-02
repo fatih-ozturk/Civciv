@@ -33,9 +33,7 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Provides
     @Singleton
-    fun provideCivcivDatabase(
-        @ApplicationContext context: Context,
-    ): CivcivDatabase =
+    fun provideCivcivDatabase(@ApplicationContext context: Context): CivcivDatabase =
         Room.databaseBuilder(
             context,
             CivcivDatabase::class.java,

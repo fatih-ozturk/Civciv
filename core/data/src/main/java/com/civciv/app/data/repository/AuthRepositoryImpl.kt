@@ -90,18 +90,16 @@ class AuthRepositoryImpl @Inject constructor(
     }
 }
 
-fun CredentialsResponse.toDomainModel() =
-    ApplicationCredentials(
-        domain = domain,
-        clientId = clientId,
-        clientSecret = clientSecret,
-        scope = scopes,
-        redirectUri = redirectUri,
-    )
+fun CredentialsResponse.toDomainModel() = ApplicationCredentials(
+    domain = domain,
+    clientId = clientId,
+    clientSecret = clientSecret,
+    scope = scopes,
+    redirectUri = redirectUri,
+)
 
-fun AccountResponse.toEntityModel(): AccountEntity =
-    AccountEntity(
-        accountId = id,
-        username = username,
-        profilePictureUrl = avatar,
-    )
+fun AccountResponse.toEntityModel(): AccountEntity = AccountEntity(
+    accountId = id,
+    username = username,
+    profilePictureUrl = avatar,
+)

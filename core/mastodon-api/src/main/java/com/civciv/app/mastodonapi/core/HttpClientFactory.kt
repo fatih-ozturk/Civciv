@@ -39,8 +39,8 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
-import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.serialization.json.Json
+import kotlin.coroutines.cancellation.CancellationException
 
 internal object HttpClientFactory {
     fun buildHttpClient(config: MastodonClientConfig): HttpClient {
@@ -77,13 +77,11 @@ internal object HttpClientFactory {
             expectSuccess = true
             HttpResponseValidator {
                 handleResponseExceptionWithRequest { exception, _ ->
-                    val clientException =
-                        exception as? ClientRequestException
-                            ?: return@handleResponseExceptionWithRequest
+                    val clientException = exception as? ClientRequestException
+                        ?: return@handleResponseExceptionWithRequest
                     val exceptionResponse = clientException.response
-                    val mastodonErrorResponse =
-                        json.decodeMastodonErrorResponse(exceptionResponse)
-                            ?: return@handleResponseExceptionWithRequest
+                    val mastodonErrorResponse = json.decodeMastodonErrorResponse(exceptionResponse)
+                        ?: return@handleResponseExceptionWithRequest
                     throw MastodonException(mastodonErrorResponse, exception)
                 }
             }

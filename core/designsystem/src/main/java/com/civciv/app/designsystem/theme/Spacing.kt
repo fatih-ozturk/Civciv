@@ -41,28 +41,25 @@ data class CivcivSpacing(
     val spacing11Xl: Dp,
 )
 
-val civcivSpacing =
-    CivcivSpacing(
-        spacingNone = 0.dp,
-        spacingXxs = 2.dp,
-        spacingXs = 4.dp,
-        spacingSm = 6.dp,
-        spacingMd = 8.dp,
-        spacingLg = 12.dp,
-        spacingXl = 16.dp,
-        spacing2Xl = 20.dp,
-        spacing3Xl = 24.dp,
-        spacing4Xl = 32.dp,
-        spacing5Xl = 40.dp,
-        spacing6Xl = 48.dp,
-        spacing7Xl = 64.dp,
-        spacing8Xl = 80.dp,
-        spacing9Xl = 96.dp,
-        spacing10Xl = 128.dp,
-        spacing11Xl = 160.dp,
-    )
+val civcivSpacing = CivcivSpacing(
+    spacingNone = 0.dp,
+    spacingXxs = 2.dp,
+    spacingXs = 4.dp,
+    spacingSm = 6.dp,
+    spacingMd = 8.dp,
+    spacingLg = 12.dp,
+    spacingXl = 16.dp,
+    spacing2Xl = 20.dp,
+    spacing3Xl = 24.dp,
+    spacing4Xl = 32.dp,
+    spacing5Xl = 40.dp,
+    spacing6Xl = 48.dp,
+    spacing7Xl = 64.dp,
+    spacing8Xl = 80.dp,
+    spacing9Xl = 96.dp,
+    spacing10Xl = 128.dp,
+    spacing11Xl = 160.dp,
+)
 
 internal val LocalCivcivSpacing =
-    staticCompositionLocalOf<CivcivSpacing> {
-        error("No spacing provided")
-    }
+    staticCompositionLocalOf<CivcivSpacing> { error("No spacing provided") }

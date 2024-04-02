@@ -22,7 +22,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-internal class ProfileViewModel @Inject constructor() : BaseViewModel<State, Event>() {
+internal class ProfileViewModel
+@Inject
+constructor() : BaseViewModel<State, Event>() {
     override fun createInitialState(): State = State()
 
     override fun event(event: Event) {

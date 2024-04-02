@@ -21,7 +21,8 @@ internal interface SplashContract {
         val authState: AuthState? = null,
     ) {
         enum class AuthState {
-            LOGGED_IN, LOGGED_OUT
+            LOGGED_IN,
+            LOGGED_OUT,
         }
     }
 

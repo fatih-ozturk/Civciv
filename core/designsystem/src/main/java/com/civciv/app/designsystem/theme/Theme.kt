@@ -23,10 +23,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 
 @Composable
-fun CivcivTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit,
-) {
+fun CivcivTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colorScheme = if (darkTheme) darkColors else lightColors
     ProvideCivcivResources(
         typography = civcivTypography,
@@ -58,6 +55,7 @@ fun ProvideCivcivResources(
         LocalCivcivColors provides colorPalette,
         LocalCivcivShapes provides shapes,
         LocalCivcivSpacing provides spacing,
+        LocalCivcivContentColor provides colorPalette.fgPrimary,
     ) {
         ProvideTextStyle(value = typography.displayMd, content = content)
     }

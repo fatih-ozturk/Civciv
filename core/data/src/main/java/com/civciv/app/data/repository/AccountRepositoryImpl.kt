@@ -39,9 +39,8 @@ class AccountRepositoryImpl @Inject constructor(
     override suspend fun getCurrentAccount(): Account {
         val currentAccountCredential =
             accountCredentialDao.getActiveAccountCredential() ?: throw Exception()
-        val currentUser =
-            accountDao.getAccountById(currentAccountCredential.id)
-                ?: throw Exception()
+        val currentUser = accountDao.getAccountById(currentAccountCredential.id)
+            ?: throw Exception()
         return currentUser.toDomainModel()
     }
 

@@ -19,13 +19,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.civciv.app.auth.splash.SplashScreen
 
-const val splashScreenRoute = "splash"
+const val SPLASH_SCREEN_ROUTE = "splash"
 
 fun NavGraphBuilder.splashScreen(
     onNavigateToHome: () -> Unit,
     onNavigateToLoginGraph: () -> Unit,
 ) {
-    composable(route = splashScreenRoute) {
+    composable(route = SPLASH_SCREEN_ROUTE) {
         SplashScreen(
             onNavigateToHome = onNavigateToHome,
             onNavigateToLoginGraph = onNavigateToLoginGraph,

@@ -62,14 +62,13 @@ class CivcivAppState(
                 topLevelDestinations.map { it.name.uppercase() }
 
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
-        val topLevelNavOptions =
-            navOptions {
-                popUpTo(navController.graph.findStartDestination().id) {
-                    saveState = true
-                }
-                launchSingleTop = true
-                restoreState = true
+        val topLevelNavOptions = navOptions {
+            popUpTo(navController.graph.findStartDestination().id) {
+                saveState = true
             }
+            launchSingleTop = true
+            restoreState = true
+        }
 
         when (topLevelDestination) {
             HOME -> navController.navigateToHome(topLevelNavOptions)
@@ -83,13 +82,12 @@ class CivcivAppState(
 @Composable
 private fun NavigationTrackingSideEffect(navController: NavHostController) {
     TrackDisposableJank(navController) { metricsHolder ->
-        val listener =
-            NavController.OnDestinationChangedListener { _, destination, _ ->
-                metricsHolder.state?.putState(
-                    "Civciv Jank Navigation",
-                    destination.route.toString(),
-                )
-            }
+        val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
+            metricsHolder.state?.putState(
+                "Civciv Jank Navigation",
+                destination.route.toString(),
+            )
+        }
 
         navController.addOnDestinationChangedListener(listener)
 

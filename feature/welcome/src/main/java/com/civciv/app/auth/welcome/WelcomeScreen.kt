@@ -33,6 +33,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,15 +68,15 @@ internal fun WelcomeScreen(viewModel: WelcomeViewModel = hiltViewModel()) {
         },
     )
 
-    if (state.navigateToAuth) {
-        LaunchedEffect(state) {
+    LaunchedEffect(state.navigateToAuth) {
+        if (state.navigateToAuth) {
             loginLauncher.launch(state.appCredentials)
             viewModel.event(WelcomeContract.Event.NavigateToAuthConsumed)
         }
     }
 
-    if (state.isLoginSuccessful) {
-        LaunchedEffect(state) {
+    LaunchedEffect(state.isLoginSuccessful) {
+        if (state.isLoginSuccessful) {
             context.restartActivity()
         }
     }
@@ -91,7 +92,7 @@ private fun WelcomeScreenImpl(
     state: WelcomeContract.State,
     dispatch: (WelcomeContract.Event) -> Unit,
 ) {
-    var domain by remember { mutableStateOf("") }
+    var domain by rememberSaveable { mutableStateOf("") }
 
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current

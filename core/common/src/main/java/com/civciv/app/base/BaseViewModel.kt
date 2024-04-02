@@ -37,10 +37,7 @@ abstract class BaseViewModel<State, Event> : ViewModel() {
         _state.update(reducer)
     }
 
-    protected fun handleOneTimeEvent(
-        event: Event,
-        block: () -> Unit,
-    ) {
+    protected fun handleOneTimeEvent(event: Event, block: () -> Unit) {
         if (event !in handledOneTimeEvents) {
             handledOneTimeEvents.add(event)
             block()

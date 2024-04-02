@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -35,7 +36,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextLayoutResult
@@ -85,16 +88,17 @@ fun CivcivTextField(
     val placeholderTextColors by colors.placeholderTextColors(enabled)
 
     Column(
-        modifier =
-        modifier
+        modifier = modifier
             .background(CivcivTheme.colors.bgPrimary),
     ) {
         if (label.isNotEmpty()) {
-            Text(
+            BasicText(
                 text = label,
-                style = CivcivTheme.typography.textSm,
-                fontWeight = FontWeight.Medium,
-                color = CivcivTheme.colors.textSecondary,
+                style =
+                CivcivTheme.typography.textSm.copy(
+                    fontWeight = FontWeight.Medium,
+                ),
+                color = { colors.labelTextColor },
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
@@ -104,9 +108,7 @@ fun CivcivTextField(
             onValueChange = {
                 onValueChange(it)
             },
-            modifier =
-            Modifier
-                .padding(top = 6.dp),
+            modifier = Modifier.padding(top = 6.dp),
             enabled = enabled,
             readOnly = readOnly,
             singleLine = singleLine,
@@ -120,8 +122,7 @@ fun CivcivTextField(
             keyboardActions = keyboardActions,
             decorationBox = { innerTextField ->
                 Row(
-                    modifier =
-                    Modifier
+                    modifier = Modifier
                         .height(sizes.textFieldHeight)
                         .fillMaxWidth()
                         .background(
@@ -165,12 +166,11 @@ fun CivcivTextField(
             },
         )
         hint?.let {
-            Text(
+            BasicText(
                 modifier = Modifier.padding(top = 6.dp),
                 text = hint,
                 style = CivcivTheme.typography.textSm,
-                fontWeight = FontWeight.Normal,
-                color = hintTextColors,
+                color = { hintTextColors },
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
@@ -183,18 +183,20 @@ fun CivcivTextField(
 private fun CivcivTextFieldPreview() {
     CivcivTheme {
         Column(
-            modifier =
-            Modifier
+            modifier = Modifier
                 .background(CivcivTheme.colors.bgPrimary)
                 .padding(16.dp),
         ) {
+            var value by remember { mutableStateOf("") }
             CivcivTextField(
                 label = "Email",
                 placeholder = "Enter your email",
                 hint = "This is a hint text to help user.",
-                value = "",
+                value = value,
                 enabled = false,
-                onValueChange = {},
+                onValueChange = {
+                    value = it
+                },
                 modifier = Modifier.fillMaxWidth(),
             )
 
@@ -203,9 +205,11 @@ private fun CivcivTextFieldPreview() {
                 label = "Email",
                 placeholder = "Enter your email",
                 hint = "This is a hint text to help user.",
-                value = "",
+                value = value,
                 enabled = true,
-                onValueChange = {},
+                onValueChange = {
+                    value = it
+                },
                 modifier = Modifier.fillMaxWidth(),
             )
 
@@ -214,10 +218,12 @@ private fun CivcivTextFieldPreview() {
                 label = "Email",
                 placeholder = "Enter your email",
                 hint = "This is a hint text to help user.",
-                value = "",
+                value = value,
                 enabled = true,
                 isError = true,
-                onValueChange = {},
+                onValueChange = {
+                    value = it
+                },
                 modifier = Modifier.fillMaxWidth(),
             )
 
@@ -227,7 +233,7 @@ private fun CivcivTextFieldPreview() {
                 label = "Email",
                 placeholder = "Enter your email",
                 hint = "This is a hint text to help user.",
-                value = "",
+                value = value,
                 enabled = true,
                 isError = false,
                 interactionSource =
@@ -241,7 +247,9 @@ private fun CivcivTextFieldPreview() {
 
                     override fun tryEmit(interaction: Interaction): Boolean = false
                 },
-                onValueChange = {},
+                onValueChange = {
+                    value = it
+                },
                 modifier = Modifier.fillMaxWidth(),
             )
 
@@ -251,7 +259,7 @@ private fun CivcivTextFieldPreview() {
                 label = "Email",
                 placeholder = "Enter your email",
                 hint = "This is a hint text to help user.",
-                value = "",
+                value = value,
                 enabled = true,
                 isError = true,
                 interactionSource =
@@ -265,7 +273,9 @@ private fun CivcivTextFieldPreview() {
 
                     override fun tryEmit(interaction: Interaction): Boolean = false
                 },
-                onValueChange = {},
+                onValueChange = {
+                    value = it
+                },
                 modifier = Modifier.fillMaxWidth(),
             )
         }

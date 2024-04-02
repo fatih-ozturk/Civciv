@@ -35,13 +35,12 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonPrimaryFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgDisabled,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors =
-        ButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun secondaryGray(
@@ -49,13 +48,12 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonSecondaryFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors =
-        ButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun secondaryColor(
@@ -63,13 +61,12 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonSecondaryColorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors =
-        ButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun tertiaryGray(
@@ -77,13 +74,12 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonTertiaryFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors =
-        ButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun tertiaryColor(
@@ -91,13 +87,12 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonTertiaryColorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors =
-        ButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun primaryDestructive(
@@ -105,13 +100,12 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.fgWhite,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors =
-        ButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun secondaryDestructive(
@@ -119,13 +113,12 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonSecondaryErrorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors =
-        ButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun tertiaryDestructive(
@@ -133,11 +126,10 @@ object CivcivButtonColors {
         contentColor: Color = CivcivTheme.colors.buttonTertiaryErrorFg,
         disabledContainerColor: Color = CivcivTheme.colors.bgPrimary,
         disabledContentColor: Color = CivcivTheme.colors.fgDisabled,
-    ): ButtonColors =
-        ButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): ButtonColors = ButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 }

@@ -23,9 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-internal fun SearchScreen(
-    viewModel: SearchViewModel = hiltViewModel(),
-) {
+internal fun SearchScreen(viewModel: SearchViewModel = hiltViewModel()) {
     Box(modifier = Modifier.fillMaxSize()) {
         Text(text = "Search")
     }

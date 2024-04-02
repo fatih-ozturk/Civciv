@@ -48,10 +48,7 @@ fun rememberMetricsStateHolder(): Holder {
  * @see TrackDisposableJank if you need to work with DisposableEffect to cleanup added state.
  */
 @Composable
-fun TrackJank(
-    vararg keys: Any?,
-    reportMetric: suspend CoroutineScope.(state: Holder) -> Unit,
-) {
+fun TrackJank(vararg keys: Any?, reportMetric: suspend CoroutineScope.(state: Holder) -> Unit) {
     val metrics = rememberMetricsStateHolder()
     LaunchedEffect(metrics, *keys) {
         reportMetric(metrics)
@@ -77,10 +74,7 @@ fun TrackDisposableJank(
  * Track jank while scrolling anything that's scrollable.
  */
 @Composable
-fun TrackScrollJank(
-    scrollableState: ScrollableState,
-    stateName: String,
-) {
+fun TrackScrollJank(scrollableState: ScrollableState, stateName: String) {
     TrackJank(scrollableState) { metricsHolder ->
         snapshotFlow { scrollableState.isScrollInProgress }.collect { isScrollInProgress ->
             metricsHolder.state?.apply {

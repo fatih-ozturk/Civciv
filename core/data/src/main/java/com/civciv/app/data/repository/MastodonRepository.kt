@@ -21,10 +21,7 @@ import com.civciv.app.model.MastodonServer
 import kotlinx.coroutines.flow.Flow
 
 interface MastodonRepository {
-    suspend fun getServerList(
-        language: String?,
-        category: String?,
-    ): List<MastodonServer>
+    suspend fun getServerList(language: String?, category: String?): List<MastodonServer>
 
     fun getLanguageList(): Flow<List<MastodonLanguage>>
 

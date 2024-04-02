@@ -41,7 +41,9 @@ class Mastodon internal constructor(private val config: MastodonClientConfig) {
     val authApi by buildApi(::AuthApi)
     val timelineApi by buildApi(::TimelineApi)
 
-    private inline fun <T> buildApi(
-        crossinline builder: (HttpClient) -> T,
-    ) = lazy { builder(client) }
+    private inline fun <T> buildApi(crossinline builder: (HttpClient) -> T) = lazy {
+        builder(
+            client,
+        )
+    }
 }

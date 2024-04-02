@@ -21,15 +21,15 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.civciv.app.search.SearchScreen
 
-const val searchScreenRoute = "search"
+const val SEARCH_SCREEN_ROUTE = "search"
 
 fun NavController.navigateToSearch(navOptions: NavOptions? = null) {
-    this.navigate(searchScreenRoute, navOptions)
+    this.navigate(SEARCH_SCREEN_ROUTE, navOptions)
 }
 
 fun NavGraphBuilder.searchScreen() {
     composable(
-        route = searchScreenRoute,
+        route = SEARCH_SCREEN_ROUTE,
     ) {
         SearchScreen()
     }

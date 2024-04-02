@@ -17,19 +17,13 @@ package com.civciv.app.designsystem.ext
 
 import androidx.compose.ui.Modifier
 
-inline fun Modifier.ifTrue(
-    value: Boolean,
-    builder: Modifier.() -> Modifier,
-): Modifier {
+inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -> Modifier): Modifier {
     val modifier = Modifier
     return then(if (value) modifier.builder() else modifier)
 }
 
 @Suppress("unused")
-inline fun Modifier.ifFalse(
-    value: Boolean,
-    builder: Modifier.() -> Modifier,
-): Modifier {
+inline fun Modifier.ifFalse(value: Boolean, builder: Modifier.() -> Modifier): Modifier {
     val modifier = Modifier
     return then(if (!value) modifier.builder() else modifier)
 }

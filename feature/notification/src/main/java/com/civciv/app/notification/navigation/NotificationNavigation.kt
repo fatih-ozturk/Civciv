@@ -21,15 +21,15 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.civciv.app.notification.NotificationScreen
 
-const val notificationScreenRoute = "notification"
+const val NOTIFICATION_SCREEN_ROUTE = "notification"
 
 fun NavController.navigateToNotification(navOptions: NavOptions? = null) {
-    this.navigate(notificationScreenRoute, navOptions)
+    this.navigate(NOTIFICATION_SCREEN_ROUTE, navOptions)
 }
 
 fun NavGraphBuilder.notificationScreen() {
     composable(
-        route = notificationScreenRoute,
+        route = NOTIFICATION_SCREEN_ROUTE,
     ) {
         NotificationScreen()
     }

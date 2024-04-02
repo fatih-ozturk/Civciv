@@ -13,11 +13,12 @@ indent_style = space
 ij_kotlin_allow_trailing_comma = true
 ij_kotlin_allow_trailing_comma_on_call_site = true
 ij_kotlin_code_style_defaults = KOTLIN_OFFICIAL
+ktlint_code_style = android_studio
 ktlint_standard_no-empty-first-line-in-method-block = disabled
 ktlint_standard_import-ordering = disabled
 ktlint_standard_no-wildcard-imports = disabled
 ktlint_standard_multiline-if-else = disabled
+ktlint_standard_function-naming = disabled
 twitter_compose_allowed_composition_locals = LocalCivcivColors,LocalCivcivShapes,LocalCivcivTypographies,LocalCivcivSpacing
-
 [*.md]
 trim_trailing_whitespace = false
