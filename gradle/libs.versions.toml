@@ -48,7 +48,7 @@ timberVersion = "5.0.1"
 turbine = "1.1.0"
 ktlint-compose = "0.0.26"
 kotest = "5.8.1"
-slf4j = "2.0.12"
+slf4j = "2.0.13"
 
 [libraries]
 airbnb-lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottieVersion" }
