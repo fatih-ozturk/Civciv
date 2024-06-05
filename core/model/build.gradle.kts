@@ -23,5 +23,5 @@ android {
 }
 
 dependencies {
-    compileOnly("com.github.skydoves:compose-stable-marker:1.0.4")
+    compileOnly("com.github.skydoves:compose-stable-marker:1.0.5")
 }
